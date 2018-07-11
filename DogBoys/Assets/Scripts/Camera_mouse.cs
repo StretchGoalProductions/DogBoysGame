@@ -17,11 +17,11 @@ public class Camera_mouse : MonoBehaviour {
 	private GameObject nully;
 	private GameController gc;	//game controller
 
-    public static Camera_mouse instance { get; set; }
+    public static Camera_mouse instance { get; set; } //this makes it easier for other scripts to reference public variables here.
     public Transform GoalTile;
 
 	void Start() {
-        instance = this;
+        instance = this; //this sets the instance to make it easier for other scripts to reference public variables here.
 		highlighted = false;
 		gc = GameController.Instance;
 	}
@@ -77,7 +77,7 @@ public class Camera_mouse : MonoBehaviour {
 				currentHighlight.transform.position = new Vector3(currentHighlight.transform.position.x,-10,currentHighlight.transform.position.z);
 			}
 		}
-        if (currentTile != null)
+        if (currentTile != null)//this part is for setting the tile for the NavAgent to move to. It's made into a separate variable so as to not interfere with the code above.
         { GoalTile = currentTile; }
 	}
 		
