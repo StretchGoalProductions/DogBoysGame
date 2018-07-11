@@ -230,6 +230,9 @@ MonoBehaviour:
   wallMask:
     serializedVersion: 2
     m_Bits: 1024
+  playerMask:
+    serializedVersion: 2
+    m_Bits: 256
   gridWorldSize: {x: 30, y: 30}
   nodeRadius: 0.5
   nodeDistance: 0
@@ -719,7 +722,7 @@ GameObject:
   - component: {fileID: 1798641071}
   - component: {fileID: 1798641070}
   - component: {fileID: 1798641069}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: startPosition
   m_TagString: Untagged
   m_Icon: {fileID: 0}

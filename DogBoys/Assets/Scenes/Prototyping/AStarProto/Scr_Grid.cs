@@ -6,6 +6,7 @@ public class Scr_Grid : MonoBehaviour {
 
 	public Transform startPosition;
 	public LayerMask wallMask;
+	public LayerMask playerMask;
 	public Vector2 gridWorldSize;
 	public float nodeRadius;
 	public float nodeDistance;
@@ -32,8 +33,9 @@ public class Scr_Grid : MonoBehaviour {
 			for (int x = 0; x < gridSizeX; x++) {
 				Vector3 worldPoint = bottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
 				bool isWall = Physics.CheckSphere(worldPoint, nodeRadius, wallMask);
+				bool isPlayer = Physics.CheckSphere(worldPoint, nodeRadius, playerMask);
 
-				grid[x,y] = new Cls_Node(isWall, worldPoint, x, y);
+				grid[x,y] = new Cls_Node(isWall, isPlayer, worldPoint, x, y);
 			}
 		}
 	}
@@ -99,6 +101,9 @@ public class Scr_Grid : MonoBehaviour {
 			foreach (Cls_Node node in grid) {
 				if( node.isWall ) {
 					Gizmos.color = Color.red;
+				}
+				else if (node.isPlayer) {
+					Gizmos.color = Color.magenta;
 				}
 				else {
 					Gizmos.color = Color.gray;
