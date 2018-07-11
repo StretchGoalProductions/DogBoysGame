@@ -490,6 +490,13 @@ public class GameController : MonoBehaviour {
         currentlySelectedCharacter.GetComponent<Character>().UnselectCharacter();
     }
 
+    public void skipTurn()
+    {
+        currentlySelectedCharacter.GetComponent<Character>().useMove();
+        currentlySelectedCharacter.GetComponent<Character>().useMove();
+        currentlySelectedCharacter.GetComponent<Character>().UnselectCharacter();
+    }
+
     #endregion
 
     #region Unity Overrides
@@ -508,6 +515,24 @@ public class GameController : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
+        //Using hotkeys that XCOM uses.  1 for attack, 2 for overwatch, backspace for skip turn
+        //Hotkey for entering attackmode
+        if (Input.GetKeyDown(KeyCode.Alpha1)){
+            toggleAttackMode();
+        }
+        //Hotkey for Unselecting a Character
+        if (Input.GetKeyDown(KeyCode.Escape)){
+            UnselectCharacter();
+        }
+        //HotKey for overwatch(setGuardDog)
+        if (Input.GetKeyDown(KeyCode.Alpha2)){
+            setGuardDog();
+        }
+        //Hotkey for skip turn
+        if (Input.GetKeyDown(KeyCode.Backspace)){
+            skipTurn();
+        }
+
         //lineOfSight();
         //winGame();
         if (currentlySelectedCharacter && Input.GetMouseButtonDown(1)) {

@@ -50936,10 +50936,9 @@ MonoBehaviour:
   scrollSpeed: 5
   minY: 10
   maxY: 16
+  rotateSpeed: 75
   toggle: 0
   p1: 1
-  velocity: 0.3
-  smoothTime: 0.3
 --- !u!1 &1352332863
 GameObject:
   m_ObjectHideFlags: 0

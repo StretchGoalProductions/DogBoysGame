@@ -14,6 +14,8 @@ public class Camera_Movement : MonoBehaviour {
 	public float minY = 10f;					// Min zoom of camera
 	public float maxY = 16f;					// Max zoom of camera
 
+	public float rotateSpeed = 75f;
+
 	public bool toggle = false;
 	public bool p1 = true;
 
@@ -56,7 +58,7 @@ public class Camera_Movement : MonoBehaviour {
 			transform.position = pos;
 		} else {
 			if (p1) {
-				float smoothTime = Mathf.Sin(progress);
+				float smoothTime = Mathf.Sin(progress) * rotateSpeed * Time.deltaTime;
 				float newPosX = Mathf.Lerp(transform.position.x, 13f, smoothTime);
 				float newPosY = Mathf.Lerp(transform.position.y, 13f, smoothTime);
 				float newPosZ = Mathf.Lerp(transform.position.z, 40f, smoothTime);
@@ -71,7 +73,7 @@ public class Camera_Movement : MonoBehaviour {
 					progress = 0f;
 				}
 			} else {
-				float smoothTime = Mathf.Sin(progress);
+				float smoothTime = Mathf.Sin(progress) * rotateSpeed * Time.deltaTime;
 				float newPosX = Mathf.Lerp(transform.position.x, 13f, smoothTime);
 				float newPosY = Mathf.Lerp(transform.position.y, 13f, smoothTime);
 				float newPosZ = Mathf.Lerp(transform.position.z, -10f, smoothTime);
