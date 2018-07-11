@@ -1523,6 +1523,8 @@ GameObject:
   - component: {fileID: 95530186620787670}
   - component: {fileID: 136966595910733704}
   - component: {fileID: 114497718626775578}
+  - component: {fileID: 114834219408038398}
+  - component: {fileID: 195406657312064180}
   m_Layer: 0
   m_Name: Rifle_dog_Blue
   m_TagString: Untagged
@@ -2846,7 +2848,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 33dee629b7c20824c99ac06f28638c53, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -3835,6 +3837,24 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114834219408038398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1975320116539714}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac94db94c384b149bf40ef5da136fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {fileID: 0}
+  currentPos: {fileID: 0}
+  AtDestination: 0
+  myAgent: {fileID: 0}
+  myAnim: {fileID: 0}
+  NavIsOnGround: 0
+  TestingScript: 0
 --- !u!114 &114836599284591506
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4020,10 +4040,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.5027922
+  m_Height: 1.168903
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: -0.002045155, y: 0.5897474, z: 0}
 --- !u!137 &137991795142191044
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -4093,6 +4113,27 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0025399327, y: 0.03422782, z: 0.0076725185}
     m_Extent: {x: 0.575143, y: 0.6856532, z: 0.44174558}
   m_DirtyAABB: 0
+--- !u!195 &195406657312064180
+NavMeshAgent:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1975320116539714}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 1.15
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!198 &198676467060760988
 ParticleSystem:
   m_ObjectHideFlags: 1

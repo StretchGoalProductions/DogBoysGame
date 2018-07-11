@@ -1317,6 +1317,7 @@ GameObject:
   - component: {fileID: 114260752700136408}
   - component: {fileID: 136192407940960630}
   - component: {fileID: 195087091212996798}
+  - component: {fileID: 114578040391477206}
   m_Layer: 0
   m_Name: Revolver_Dog_Blue
   m_TagString: Untagged
@@ -2111,7 +2112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1667939285346304}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12, y: 0.507, z: 0}
+  m_LocalPosition: {x: 9.71, y: 0, z: 1.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4625479462382860}
@@ -2652,7 +2653,7 @@ MeshCollider:
   m_GameObject: {fileID: 1433857027902874}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Convex: 0
   m_CookingOptions: 14
@@ -2670,7 +2671,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: fec0561c29913ff438f4719963a3f5c4, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -3438,6 +3439,24 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Movement:'
+--- !u!114 &114578040391477206
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1667939285346304}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5ac94db94c384b149bf40ef5da136fa9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  targetPos: {fileID: 0}
+  currentPos: {fileID: 0}
+  AtDestination: 0
+  myAgent: {fileID: 0}
+  myAnim: {fileID: 0}
+  NavIsOnGround: 0
+  TestingScript: 0
 --- !u!114 &114654240734939764
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3832,10 +3851,10 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 2
+  m_Radius: 0.50279224
+  m_Height: 1.1689029
   m_Direction: 1
-  m_Center: {x: 0, y: 0.5, z: 0}
+  m_Center: {x: -0.0020451546, y: 0.5897474, z: 0}
 --- !u!137 &137655989286548262
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
@@ -3923,7 +3942,7 @@ NavMeshAgent:
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
-  m_Height: 2
+  m_Height: 1.15
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
