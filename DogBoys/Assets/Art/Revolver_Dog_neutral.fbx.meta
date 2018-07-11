@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: cb4010ea8a74de34ca8e0347d3aa1013
-timeCreated: 1525984190
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -164,6 +162,7 @@ ModelImporter:
     7400034: RDcoverStand
     9500000: //RootNode
     13700000: DogBoi
+    2186277476908879412: ImportLogs
   externalObjects:
   - first:
       type: UnityEngine:Material
@@ -193,6 +192,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -244,7 +244,7 @@ ModelImporter:
       loopBlend: 1
       loopBlendOrientation: 1
       loopBlendPositionY: 1
-      loopBlendPositionXZ: 0
+      loopBlendPositionXZ: 1
       keepOriginalOrientation: 0
       keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
@@ -291,7 +291,7 @@ ModelImporter:
       firstFrame: 91
       lastFrame: 145
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: 20
       level: 0
       cycleOffset: 0
       loop: 0
@@ -447,7 +447,7 @@ ModelImporter:
       firstFrame: 88
       lastFrame: 169
       wrapMode: 0
-      orientationOffsetY: 0
+      orientationOffsetY: 3
       level: 0
       cycleOffset: 0
       loop: 0
