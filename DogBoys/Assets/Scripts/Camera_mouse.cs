@@ -12,13 +12,16 @@ public class Camera_mouse : MonoBehaviour {
 	// Keep track of where the player clicks in the game world
 	private RaycastHit hit;
 	private bool highlighted;
-	private Transform currentTile;
+	Transform currentTile;
 	private GameObject currentHighlight;
 	private GameObject nully;
 	private GameController gc;	//game controller
 
+    public static Camera_mouse instance { get; set; }
+    public Transform GoalTile;
 
 	void Start() {
+        instance = this;
 		highlighted = false;
 		gc = GameController.Instance;
 	}
@@ -74,6 +77,8 @@ public class Camera_mouse : MonoBehaviour {
 				currentHighlight.transform.position = new Vector3(currentHighlight.transform.position.x,-10,currentHighlight.transform.position.z);
 			}
 		}
+        if (currentTile != null)
+        { GoalTile = currentTile; }
 	}
 		
 }
