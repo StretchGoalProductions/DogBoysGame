@@ -1,7 +1,5 @@
 fileFormatVersion: 2
 guid: a0d5f9408eaa16744bfeaa98dde61eac
-timeCreated: 1527605951
-licenseType: Free
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -194,6 +192,7 @@ ModelImporter:
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
+    importConstraints: 0
     animationCompression: 3
     animationRotationError: 0.5
     animationPositionError: 0.5
@@ -264,7 +263,7 @@ ModelImporter:
       firstFrame: 100
       lastFrame: 130
       wrapMode: 0
-      orientationOffsetY: -31
+      orientationOffsetY: -35
       level: 0
       cycleOffset: 0
       loop: 0
@@ -327,7 +326,7 @@ ModelImporter:
       firstFrame: 87
       lastFrame: 136
       wrapMode: 0
-      orientationOffsetY: 16
+      orientationOffsetY: -31
       level: 0
       cycleOffset: 0
       loop: 0
@@ -362,7 +361,7 @@ ModelImporter:
       firstFrame: 111
       lastFrame: 227
       wrapMode: 0
-      orientationOffsetY: -50.8
+      orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
