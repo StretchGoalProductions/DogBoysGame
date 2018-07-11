@@ -279,9 +279,12 @@ public class GameController : MonoBehaviour {
 	public void updateTurns(){
 		if (turn == "Blue Bandits" && !p1CanMove ()) {
 			StartP2Turn ();
+            Camera.main.gameObject.GetComponent<Camera_Movement>().toggle = true;
 		} else if (turn == "Red Rovers" && !p2CanMove ()) {
 			StartP1Turn ();
+            Camera.main.gameObject.GetComponent<Camera_Movement>().toggle = true;
 		}
+        
 	}
 
 	private void StartP1Turn() {
