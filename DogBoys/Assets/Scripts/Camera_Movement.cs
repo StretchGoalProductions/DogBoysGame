@@ -21,52 +21,88 @@ public class Camera_Movement : MonoBehaviour {
 
 	// Private Variables
 	private float progress = 0f;
+	private float ang;
+
+	private bool vert = true;
+	private bool rotating = false;
 
 	void Update () {
 		if (!toggle) {
 			// Current possition of the Camera
-			Vector3 pos = transform.position;
+			Vector3 pos = Vector3.zero;
+				
+			if (!rotating) {
+				// Get new pos based on input
+				if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panborderThickness) {
+					pos.z = panSpeed * Time.deltaTime;
+				}
+				if (Input.GetKey("s") || Input.mousePosition.y <= panborderThickness) {
+					pos.z = -panSpeed * Time.deltaTime;
+				}
+				if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panborderThickness) {
+					pos.x = panSpeed * Time.deltaTime;
+				}
+				if (Input.GetKey("a") || Input.mousePosition.x <= panborderThickness) {
+					pos.x = -panSpeed * Time.deltaTime;
+				}
 
-			// Get new pos based on input
-			if (Input.GetKey("w") || Input.mousePosition.y >= Screen.height - panborderThickness) {
-				pos.z += panSpeed * dir * Time.deltaTime;
-			}
-			if (Input.GetKey("s") || Input.mousePosition.y <= panborderThickness) {
-				pos.z -= panSpeed * dir * Time.deltaTime;
-			}
-			if (Input.GetKey("d") || Input.mousePosition.x >= Screen.width - panborderThickness) {
-				pos.x += panSpeed * dir * Time.deltaTime;
-			}
-			if (Input.GetKey("a") || Input.mousePosition.x <= panborderThickness) {
-				pos.x -= panSpeed * dir * Time.deltaTime;
+				// Get new rotation based on input
+				if (Input.GetKeyDown("q")) {
+					vert = !vert;
+					ang = transform.localEulerAngles.y + 90f;
+					rotating = true;
+				} 
 			}
 
 			// Check Scroll for zoom
 			float scroll = Input.GetAxis("Mouse ScrollWheel");
 			pos.y -= scroll * scrollSpeed * 100f * Time.deltaTime;
 
+			
 			// Clamp camera movement
 			pos.y = Mathf.Clamp(pos.y, minY, maxY);
 
-			if (p1)
-				pos.z = Mathf.Clamp(pos.z, panLimit.z, panLimit.w);
-			else
-				pos.z = Mathf.Clamp(pos.z, panLimit.z + 23f, panLimit.w + 23f);
-			pos.x = Mathf.Clamp(pos.x, panLimit.x, panLimit.y);
+			if (vert) {
+				if (transform.position.z + pos.z > panLimit.w || transform.position.z + pos.z < panLimit.z) {
+					pos.z = 0f;
+				}
+				if (transform.position.x + pos.x > panLimit.y || transform.position.x + pos.x < panLimit.x) {
+					pos.x = 0f;
+				}
+			} else {
+				if (transform.position.z + pos.z > panLimit.w || transform.position.z + pos.z < panLimit.z) {
+					pos.x = 0f;
+				}
+				if (transform.position.x + pos.x > panLimit.y || transform.position.x + pos.x < panLimit.x) {
+					pos.z = 0f;
+				}
+			}
 
 			// Transform camera
-			transform.position = pos;
+			transform.Translate(pos.x, 0, pos.z);
+
+			// Rotate camera
+			if (rotating) {
+				float smoothTime = Mathf.Sin(progress) * rotateSpeed * Time.deltaTime;
+				float newRotY = Mathf.Lerp(transform.eulerAngles.y, ang, smoothTime);
+				transform.localEulerAngles = new Vector3(transform.eulerAngles.x, newRotY, transform.eulerAngles.z);
+				if (transform.localEulerAngles.y > ang - 0.1f && transform.localEulerAngles.y < ang + 0.1f) {
+						progress = 0f;
+						rotating = false;
+						Debug.Log(ang);
+				}
+			}
 		} else {
 			if (p1) {
 				float smoothTime = Mathf.Sin(progress) * rotateSpeed * Time.deltaTime;
 				float newPosX = Mathf.Lerp(transform.position.x, 13f, smoothTime);
 				float newPosY = Mathf.Lerp(transform.position.y, 13f, smoothTime);
-				float newPosZ = Mathf.Lerp(transform.position.z, 40f, smoothTime);
+				float newPosZ = Mathf.Lerp(transform.position.z, 53f, smoothTime);
 				float newRotY = Mathf.Lerp(transform.eulerAngles.y, 180, smoothTime);
 				transform.position = new Vector3(newPosX, newPosY, newPosZ);
 				transform.localEulerAngles = new Vector3(transform.eulerAngles.x, newRotY, transform.eulerAngles.z);
 				progress += 0.01f * Time.deltaTime;
-				if (Vector3.Distance(transform.position, new Vector3(13f, 13f, 40f)) <= 0.1f) {
+				if (Vector3.Distance(transform.position, new Vector3(13f, 13f, 53f)) <= 0.1f) {
 					dir = -1;
 					p1 = false;
 					toggle = false;
@@ -76,12 +112,12 @@ public class Camera_Movement : MonoBehaviour {
 				float smoothTime = Mathf.Sin(progress) * rotateSpeed * Time.deltaTime;
 				float newPosX = Mathf.Lerp(transform.position.x, 13f, smoothTime);
 				float newPosY = Mathf.Lerp(transform.position.y, 13f, smoothTime);
-				float newPosZ = Mathf.Lerp(transform.position.z, -10f, smoothTime);
+				float newPosZ = Mathf.Lerp(transform.position.z, 3f, smoothTime);
 				float newRotY = Mathf.Lerp(transform.eulerAngles.y, 0, smoothTime);
 				transform.position = new Vector3(newPosX, newPosY, newPosZ);
 				transform.localEulerAngles = new Vector3(transform.eulerAngles.x, newRotY, transform.eulerAngles.z);
 				progress += 0.01f * Time.deltaTime;
-				if (Vector3.Distance(transform.position, new Vector3(13f, 13f, -10f)) <= 0.1f) {
+				if (Vector3.Distance(transform.position, new Vector3(13f, 13f, 3f)) <= 0.1f) {
 					dir = 1;
 					p1 = true;
 					toggle = false;
