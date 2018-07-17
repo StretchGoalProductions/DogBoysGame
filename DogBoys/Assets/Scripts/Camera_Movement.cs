@@ -27,7 +27,6 @@ public class Camera_Movement : MonoBehaviour {
 	private bool rotating = false;
 
 	void Update () {
-		Debug.Log(dir);
 		if (!toggle) {
 			// Current possition of the Camera
 			Vector3 pos = new Vector3(0, transform.position.y, 0);
@@ -147,7 +146,6 @@ public class Camera_Movement : MonoBehaviour {
 			if (rotating) {
 				float smoothTime = Mathf.Sin(progress) * rotateSpeed * Time.deltaTime;
 				float newRotY = Mathf.Lerp(transform.eulerAngles.y, ang, smoothTime);
-				Debug.Log("newRotY:" + newRotY);
 				transform.localEulerAngles = new Vector3(transform.eulerAngles.x, newRotY, transform.eulerAngles.z);
 				progress += 0.01f * Time.deltaTime;
 				if (transform.localEulerAngles.y > ang - 0.1f && transform.localEulerAngles.y < ang + 0.1f) {
@@ -173,7 +171,6 @@ public class Camera_Movement : MonoBehaviour {
 					}
 					progress = 0f;
 					rotating = false;
-					Debug.Log("Rotating Complete");
 				}
 			}
 		} else {
