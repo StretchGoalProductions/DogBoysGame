@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour {
     public GameObject currentlySelectedCharacter = null;
 	public List<GameObject> p1Chars = new List<GameObject>();
 	public List<GameObject> p2Chars = new List<GameObject>();
+    public GameObject cameraPivot;
 	public string turn = "";
 	public bool attackMode = false;
     private bool gameOver = false;
@@ -279,10 +280,10 @@ public class GameController : MonoBehaviour {
 	public void updateTurns(){
 		if (turn == "Blue Bandits" && !p1CanMove ()) {
 			StartP2Turn ();
-            Camera.main.gameObject.GetComponent<Camera_Movement>().toggle = true;
+            cameraPivot.GetComponent<Camera_Movement>().toggle = true;
 		} else if (turn == "Red Rovers" && !p2CanMove ()) {
 			StartP1Turn ();
-            Camera.main.gameObject.GetComponent<Camera_Movement>().toggle = true;
+            cameraPivot.GetComponent<Camera_Movement>().toggle = true;
 		}
         
 	}

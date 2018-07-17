@@ -178,15 +178,17 @@ public class Camera_Movement : MonoBehaviour {
 			}
 		} else {
 			if (p1) {
+				GameObject Red = GameObject.FindGameObjectWithTag("Average_Red");
 				float smoothTime = Mathf.Sin(progress) * flipSpeed * Time.deltaTime;
-				float newPosX = Mathf.Lerp(transform.position.x, 13f, smoothTime);
-				float newPosY = Mathf.Lerp(transform.position.y, 13f, smoothTime);
-				float newPosZ = Mathf.Lerp(transform.position.z, 30f, smoothTime);
+				float newPosX = Mathf.Lerp(transform.position.x, Red.transform.position.x, smoothTime);
+				float newPosY = Mathf.Lerp(transform.position.y, Red.transform.position.y, smoothTime);
+				float newPosZ = Mathf.Lerp(transform.position.z, Red.transform.position.z, smoothTime);
 				float newRotY = Mathf.Lerp(transform.eulerAngles.y, 180, smoothTime);
 				transform.position = new Vector3(newPosX, newPosY, newPosZ);
 				transform.localEulerAngles = new Vector3(transform.eulerAngles.x, newRotY, transform.eulerAngles.z);
 				progress += 0.01f * Time.deltaTime;
-				if (Vector3.Distance(transform.position, new Vector3(13f, 13f, 30f)) <= 0.1f) {
+				if (Vector3.Distance(transform.position, new Vector3(Red.transform.position.x, Red.transform.position.y, Red.transform.position.z)) <= 0.1f) {
+					transform.position = new Vector3(Red.transform.position.x, Red.transform.position.y, Red.transform.position.z);
 					transform.localEulerAngles = new Vector3(transform.eulerAngles.x, 180f, transform.eulerAngles.z);
 					dir = Direction.South;
 					p1 = false;
@@ -194,15 +196,17 @@ public class Camera_Movement : MonoBehaviour {
 					progress = 0f;
 				}
 			} else {
+				GameObject Blue = GameObject.FindGameObjectWithTag("Average_Blue");
 				float smoothTime = Mathf.Sin(progress) * flipSpeed * Time.deltaTime;
-				float newPosX = Mathf.Lerp(transform.position.x, 13f, smoothTime);
-				float newPosY = Mathf.Lerp(transform.position.y, 13f, smoothTime);
-				float newPosZ = Mathf.Lerp(transform.position.z, 5f, smoothTime);
+				float newPosX = Mathf.Lerp(transform.position.x, Blue.transform.position.x, smoothTime);
+				float newPosY = Mathf.Lerp(transform.position.y, Blue.transform.position.y, smoothTime);
+				float newPosZ = Mathf.Lerp(transform.position.z, Blue.transform.position.z, smoothTime);
 				float newRotY = Mathf.Lerp(transform.eulerAngles.y, 0, smoothTime);
 				transform.position = new Vector3(newPosX, newPosY, newPosZ);
 				transform.localEulerAngles = new Vector3(transform.eulerAngles.x, newRotY, transform.eulerAngles.z);
 				progress += 0.01f * Time.deltaTime;
-				if (Vector3.Distance(transform.position, new Vector3(13f, 13f, 5f)) <= 0.1f) {
+				if (Vector3.Distance(transform.position, new Vector3(Blue.transform.position.x, Blue.transform.position.y, Blue.transform.position.z)) <= 0.1f) {
+					transform.position = new Vector3(Blue.transform.position.x, Blue.transform.position.y, Blue.transform.position.z);
 					transform.localEulerAngles = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
 					dir = Direction.North;
 					p1 = true;
