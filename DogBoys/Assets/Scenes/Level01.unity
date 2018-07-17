@@ -44163,7 +44163,7 @@ GameObject:
   m_Layer: 0
   m_Name: Camera_Pivot
   m_TagString: Untagged
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -44178,14 +44178,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7af7b107fa29dbe42ba70f4420c1c9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dir: 1
   panSpeed: 10
   panborderThickness: 10
   panLimit: {x: 4, y: 20, z: 3, w: 31}
   scrollSpeed: 5
   minY: 10
   maxY: 16
-  rotateSpeed: 75
+  flipSpeed: 2000
+  rotateSpeed: 5000
   toggle: 0
   p1: 1
 --- !u!4 &1174886543
