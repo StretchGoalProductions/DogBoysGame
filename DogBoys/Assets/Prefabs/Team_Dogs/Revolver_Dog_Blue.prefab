@@ -2907,7 +2907,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 0
   weapon: {fileID: 114342948607440156}
-  characterHUD: {fileID: 1944780130443888}
+  characterHUD: {fileID: 1714535465841492, guid: c60c25fc91b899a499ac7678e7ef1058,
+    type: 2}
   xPosInGrid: 0
   yPosInGrid: 0
   hitParticles: {fileID: 198100426751667532}
