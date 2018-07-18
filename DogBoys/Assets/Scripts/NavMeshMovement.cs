@@ -20,7 +20,8 @@ public class NavMeshMovement : MonoBehaviour
          as it will be merged with Matt's script and added to the Character controller,
          this will hopefully not be a problem as I imagine the code will be edited when they're combined.
          */
-    public Transform targetPos, currentPos;
+    public Vector3 targetPos, currentPos;
+    public Scr_Grid testGrid;
 
     public bool AtDestination;
     public UnityEngine.AI.NavMeshAgent myAgent;
@@ -47,7 +48,7 @@ public class NavMeshMovement : MonoBehaviour
         if (!TestingScript)
         {
             if (Camera_mouse.instance.GoalTile != null) //If the goal tile isn't null, sets the target position to move to that position
-            { targetPos = Camera_mouse.instance.GoalTile; }
+            { targetPos = Camera_mouse.instance.GoalTile.position; }
         }
         if (NavIsOnGround)
         {
@@ -59,16 +60,17 @@ public class NavMeshMovement : MonoBehaviour
             if (!AtDestination)
             {
                 myAgent.isStopped = false;
-                myAgent.destination = targetPos.position;
+                myAgent.destination = targetPos;
                 myAnim.SetBool("a_isRunning", true);
                 //currentPos = targetPos;
             }
-            if (myAgent.transform.position.x == targetPos.position.x && myAgent.transform.position.z == targetPos.position.z)
+            if (myAgent.transform.position.x == targetPos.x && myAgent.transform.position.z == targetPos.z)
             {
                 AtDestination = true;
                 myAgent.isStopped = true;
                 myAnim.SetBool("a_isRunning", false);
                 currentPos = targetPos;
+                //testGrid.CreateGrid();
             }
         }
     }
