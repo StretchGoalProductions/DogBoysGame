@@ -99,6 +99,8 @@ public class Scr_Pathfinding : MonoBehaviour {
 		finalPath.Reverse();
 
 		grid.finalPath = finalPath;
-		//startPosition.GetComponent<NavMeshMovement>().targetPos = finalPath[finalPath.Count - 1].position;
+		if(finalPath.Count > 0) {
+			startPosition.GetComponent<NavMeshMovement>().setDestination(finalPath[0].position);
+		}
 	}
 }
