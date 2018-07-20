@@ -11,6 +11,9 @@ public class Scr_Grid : MonoBehaviour {
 	public float nodeRadius;
 	public float nodeDistance;
 
+	public bool drawGizmos;
+	public bool onlyDrawPath;
+
 	public Cls_Node[,] grid;
 	public List<Cls_Node> finalPath;
 
@@ -25,7 +28,7 @@ public class Scr_Grid : MonoBehaviour {
 	}
 
 
-	private void CreateGrid()
+	public void CreateGrid()
 	{
 		grid = new Cls_Node[gridSizeX, gridSizeY];
 		Vector3 bottomLeft = transform.position - (Vector3.right * gridWorldSize.x / 2) - (Vector3.forward * gridWorldSize.y / 2);
@@ -35,7 +38,17 @@ public class Scr_Grid : MonoBehaviour {
 				bool isWall = Physics.CheckSphere(worldPoint, nodeRadius, wallMask);
 				bool isPlayer = Physics.CheckSphere(worldPoint, nodeRadius, playerMask);
 
-				grid[x,y] = new Cls_Node(isWall, isPlayer, worldPoint, x, y);
+				Cls_Node.nodeState currentState = Cls_Node.nodeState.empty;
+				if (isWall) {
+					currentState = Cls_Node.nodeState.wall;
+				}
+				else if (isPlayer) {
+					currentState = Cls_Node.nodeState.player;
+					Collider[] playersOnNode = Physics.OverlapSphere(worldPoint, nodeRadius, playerMask);
+					playersOnNode[0].GetComponent<NavMeshMovement>().currentPos = worldPoint;
+				}
+
+				grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
 			}
 		}
 	}
@@ -79,6 +92,27 @@ public class Scr_Grid : MonoBehaviour {
 		xCheck = node.gridX;
 		yCheck = node.gridY - 1;
 		neighboringNodes = CheckAndAddNeighborNode(xCheck, yCheck, neighboringNodes);
+
+		// Diagonals
+		// Top Left
+		xCheck = node.gridX - 1;
+		yCheck = node.gridY + 1;
+		neighboringNodes = CheckAndAddNeighborNode(xCheck, yCheck, neighboringNodes);
+
+		// Top Right
+		xCheck = node.gridX + 1;
+		yCheck = node.gridY + 1;
+		neighboringNodes = CheckAndAddNeighborNode(xCheck, yCheck, neighboringNodes);
+
+		// Bottom Left
+		xCheck = node.gridX - 1;
+		yCheck = node.gridY - 1;
+		neighboringNodes = CheckAndAddNeighborNode(xCheck, yCheck, neighboringNodes);
+
+		// Bottom Right
+		xCheck = node.gridX + 1;
+		yCheck = node.gridY - 1;
+		neighboringNodes = CheckAndAddNeighborNode(xCheck, yCheck, neighboringNodes);
 		
 		return neighboringNodes;
 	}
@@ -95,26 +129,34 @@ public class Scr_Grid : MonoBehaviour {
 
 
 	private void OnDrawGizmos() {
-		Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
-		
-		if (grid != null) {
-			foreach (Cls_Node node in grid) {
-				if( node.isWall ) {
-					Gizmos.color = Color.red;
+		if (drawGizmos) { 
+			Gizmos.DrawWireCube(transform.position, new Vector3(gridWorldSize.x, 1, gridWorldSize.y));
+			
+			if (finalPath != null && onlyDrawPath) {
+				foreach (Cls_Node node in finalPath) {
+							Gizmos.color = Color.blue;
+							Gizmos.DrawCube(node.position, Vector3.one * (nodeDiameter - nodeDistance));
 				}
-				else if (node.isPlayer) {
-					Gizmos.color = Color.magenta;
-				}
-				else {
-					Gizmos.color = Color.gray;
-				}
+			}
+			else if (grid != null && !onlyDrawPath) {
+				foreach (Cls_Node node in grid) {
+					if( node.currentState == Cls_Node.nodeState.wall) {
+							Gizmos.color = Color.red;
+						}
+						else if (node.currentState == Cls_Node.nodeState.player) {
+							Gizmos.color = Color.magenta;
+						}
+						else {
+							Gizmos.color = Color.gray;
+						}
 
-				if (finalPath != null && finalPath.Contains(node)) {
-					Gizmos.color = Color.blue;
+						if (finalPath != null && finalPath.Contains(node)) {
+							Gizmos.color = Color.blue;
+						}
+
+
+					Gizmos.DrawCube(node.position, Vector3.one * (nodeDiameter - nodeDistance));
 				}
-
-
-				Gizmos.DrawCube(node.position, Vector3.one * (nodeDiameter - nodeDistance));
 			}
 		}
 	}

@@ -8,6 +8,9 @@ public class Scr_Pathfinding : MonoBehaviour {
 	public Transform startPosition;
 	public Transform targetPosition;
 
+	public int maxRange;
+	public int currentRange;
+
 	private void Awake() {
 		grid = GetComponent<Scr_Grid>();
 	}
@@ -43,15 +46,15 @@ public class Scr_Pathfinding : MonoBehaviour {
 			}
 
 			foreach (Cls_Node neighborNode in grid.GetNeighboringNodes(currentNode)) {
-				if(neighborNode.isWall || ClosedList.Contains(neighborNode)) {
-					continue; // Skip if wall or in closed list
+				if((neighborNode.currentState == Cls_Node.nodeState.wall) || ClosedList.Contains(neighborNode)) {
+					continue; // Skip if node is wall or in closed list
 				}
 
-				int moveCost = currentNode.gCost + GetManhattanDistance(currentNode, neighborNode);
+				int moveCost = currentNode.gCost + GetDistance(currentNode, neighborNode);
 
 				if (moveCost < neighborNode.gCost || !OpenList.Contains(neighborNode)) {
 					neighborNode.gCost = moveCost;
-					neighborNode.hCost = GetManhattanDistance(neighborNode, targetNode);
+					neighborNode.hCost = GetDistance(neighborNode, targetNode);
 					neighborNode.parent = currentNode;
 
 					if(!OpenList.Contains(neighborNode)) {
@@ -59,6 +62,20 @@ public class Scr_Pathfinding : MonoBehaviour {
 					}
 				}
 			}
+		}
+	}
+
+	private int GetDistance(Cls_Node nodeA, Cls_Node nodeB) {
+		int iX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
+		int iY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
+
+		const int DIAGONAL_DISTANCE = (int) 1.4 * 10;
+
+		if( iX > iY ) {
+			return DIAGONAL_DISTANCE * iY + (10 * (iX - iY));
+		}
+		else {
+			return DIAGONAL_DISTANCE * iX + (10 * (iY - iX));
 		}
 	}
 
@@ -82,5 +99,8 @@ public class Scr_Pathfinding : MonoBehaviour {
 		finalPath.Reverse();
 
 		grid.finalPath = finalPath;
+		if(finalPath.Count > 0) {
+			startPosition.GetComponent<NavMeshMovement>().setDestination(finalPath[0].position);
+		}
 	}
 }

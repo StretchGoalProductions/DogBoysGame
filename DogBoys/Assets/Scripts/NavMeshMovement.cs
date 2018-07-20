@@ -20,7 +20,8 @@ public class NavMeshMovement : MonoBehaviour
          as it will be merged with Matt's script and added to the Character controller,
          this will hopefully not be a problem as I imagine the code will be edited when they're combined.
          */
-    public Transform targetPos, currentPos;
+    public Vector3 targetPos, currentPos;
+    public Scr_Grid testGrid;
 
     public bool AtDestination;
     public UnityEngine.AI.NavMeshAgent myAgent;
@@ -43,34 +44,41 @@ public class NavMeshMovement : MonoBehaviour
 
     private void Update()
     {
-        NavIsOnGround = myAgent.isOnNavMesh; //Checks if NavMesh Agent is on ground. If this bool is false, the agent won't move and there will be tons of "Set Destination" errors
-        if (!TestingScript)
-        {
-            if (Camera_mouse.instance.GoalTile != null) //If the goal tile isn't null, sets the target position to move to that position
-            { targetPos = Camera_mouse.instance.GoalTile; }
-        }
-        if (NavIsOnGround)
-        {
-            if (currentPos != targetPos)
-            {
-                AtDestination = false;
-            }
-            //targetPos = Camera_mouse.instance.GoalTile;
-            if (!AtDestination)
-            {
-                myAgent.isStopped = false;
-                myAgent.destination = targetPos.position;
-                myAnim.SetBool("a_isRunning", true);
-                //currentPos = targetPos;
-            }
-            if (myAgent.transform.position.x == targetPos.position.x && myAgent.transform.position.z == targetPos.position.z)
+        // NavIsOnGround = myAgent.isOnNavMesh; //Checks if NavMesh Agent is on ground. If this bool is false, the agent won't move and there will be tons of "Set Destination" errors
+        // if (!TestingScript)
+        // {
+        //     if (Camera_mouse.instance.GoalTile != null) //If the goal tile isn't null, sets the target position to move to that position
+        //     { targetPos = Camera_mouse.instance.GoalTile.position; }
+        // }
+        // if (NavIsOnGround)
+        // {
+        //     if (currentPos != targetPos)
+        //     {
+        //         AtDestination = false;
+        //     }
+        //     //targetPos = Camera_mouse.instance.GoalTile;
+        //     if (!AtDestination)
+        //     {
+        //         myAgent.isStopped = false;
+        //         myAgent.destination = targetPos;
+        //         myAnim.SetBool("a_isRunning", true);
+        //         //currentPos = targetPos;
+        //     }
+            if (!AtDestination && myAgent.transform.position.x == myAgent.destination.x && myAgent.transform.position.z == myAgent.destination.z)
             {
                 AtDestination = true;
-                myAgent.isStopped = true;
+                // myAgent.isStopped = true;
                 myAnim.SetBool("a_isRunning", false);
-                currentPos = targetPos;
+                // currentPos = targetPos;
+                testGrid.CreateGrid();
             }
-        }
+        // }
+    }
+
+    public void setDestination(Vector3 destination) {
+        AtDestination = false;
+        myAgent.destination = destination;
+        myAnim.SetBool("a_isRunning", true);
     }
 
     /*public bool IsAgentOnNavMesh(GameObject agentObject)
