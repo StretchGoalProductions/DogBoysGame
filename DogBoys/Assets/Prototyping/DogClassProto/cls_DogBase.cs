@@ -7,7 +7,7 @@ public class cls_DogBase : MonoBehaviour {
 	[SerializeField]
 	protected int health;
 	[SerializeField]
-	protected Weapon weapon;
+	protected Cls_Weapon weapon;
 	[SerializeField]
 	private GameObject characterHUD;
 	[SerializeField]
@@ -48,7 +48,7 @@ public class cls_DogBase : MonoBehaviour {
 	#endregion
 
 	#region Getters/Setters
-	public Weapon getWeapon()
+	public Cls_Weapon getWeapon()
 	{
 		return weapon;
 	}
