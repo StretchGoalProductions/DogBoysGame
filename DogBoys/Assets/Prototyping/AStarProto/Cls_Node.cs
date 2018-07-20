@@ -12,7 +12,7 @@ public class Cls_Node {
 	public int hCost;
 	public int fCost { get { return gCost + hCost; } }
 
-	public enum nodeState {empty, player, wall};
+	public enum nodeState {empty, player, wall, cover};
 	public nodeState currentState;
 
 	public Cls_Node (nodeState a_currentState, Vector3 b_position, int c_gridX, int d_gridY) {

@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class Scr_Pathfinding : MonoBehaviour {
 
-	private Scr_Grid grid;
+	private Cls_Node[,] grid;
 	public Transform startPosition;
 	public Transform targetPosition;
 
 	public int maxRange;
 	public int currentRange;
 
-	private void Awake() {
-		grid = GetComponent<Scr_Grid>();
+	private void Start() {
+		grid = Scr_Grid.grid;
 	}
 
 	private void Update() {
@@ -21,8 +21,8 @@ public class Scr_Pathfinding : MonoBehaviour {
 
 
 	private void FindPath(Vector3 a_startPosition, Vector3 b_targetPosition) {
-		Cls_Node startNode = grid.NodeFromWorldPosition(a_startPosition);
-		Cls_Node targetNode = grid.NodeFromWorldPosition(b_targetPosition);
+		Cls_Node startNode = Scr_Grid.NodeFromWorldPosition(a_startPosition);
+		Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(b_targetPosition);
 
 		List<Cls_Node> OpenList = new List<Cls_Node>();
 		List<Cls_Node> ClosedList = new List<Cls_Node>(); // Tutorial uses HashSet since you don't need to access the closed list anymore for A* algorithm, I'm going to use a List to avoid confusion
@@ -45,7 +45,7 @@ public class Scr_Pathfinding : MonoBehaviour {
 				GetFinalPath(startNode, targetNode);
 			}
 
-			foreach (Cls_Node neighborNode in grid.GetNeighboringNodes(currentNode)) {
+			foreach (Cls_Node neighborNode in Scr_Grid.GetNeighboringNodes(currentNode)) {
 				if((neighborNode.currentState == Cls_Node.nodeState.wall) || ClosedList.Contains(neighborNode)) {
 					continue; // Skip if node is wall or in closed list
 				}
@@ -98,9 +98,9 @@ public class Scr_Pathfinding : MonoBehaviour {
 
 		finalPath.Reverse();
 
-		grid.finalPath = finalPath;
+		Scr_Grid.finalPath = finalPath;
 		if(finalPath.Count > 0) {
-			startPosition.GetComponent<NavMeshMovement>().setDestination(finalPath[0].position);
+			GetComponent<NavMeshMovement>().setDestination(finalPath[0].position);
 		}
 	}
 }

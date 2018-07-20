@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class Scr_Grid : MonoBehaviour {
 
-	public Transform startPosition;
 	public LayerMask wallMask;
 	public LayerMask playerMask;
-	public Vector2 gridWorldSize;
+	public Vector2 inspectGridWorldSize;
+	public static Vector2 gridWorldSize;
 	public float nodeRadius;
 	public float nodeDistance;
 
 	public bool drawGizmos;
 	public bool onlyDrawPath;
 
-	public Cls_Node[,] grid;
-	public List<Cls_Node> finalPath;
+	public static Cls_Node[,] grid;
+	public static List<Cls_Node> finalPath;
 
 	private float nodeDiameter;
-	private int gridSizeX, gridSizeY;
+	private static int gridSizeX, gridSizeY;
 
-	private void Start() {
+	private void Awake() {
+		gridWorldSize = inspectGridWorldSize;
 		nodeDiameter = nodeRadius * 2;
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
 		gridSizeY = Mathf.RoundToInt(gridWorldSize.y / nodeDiameter);
@@ -44,8 +45,6 @@ public class Scr_Grid : MonoBehaviour {
 				}
 				else if (isPlayer) {
 					currentState = Cls_Node.nodeState.player;
-					Collider[] playersOnNode = Physics.OverlapSphere(worldPoint, nodeRadius, playerMask);
-					playersOnNode[0].GetComponent<NavMeshMovement>().currentPos = worldPoint;
 				}
 
 				grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
@@ -54,7 +53,7 @@ public class Scr_Grid : MonoBehaviour {
 	}
 
 
-	public Cls_Node NodeFromWorldPosition(Vector3 worldPosition) {
+	public static Cls_Node NodeFromWorldPosition(Vector3 worldPosition) {
 		float xPoint = ((worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x);
 		float yPoint = ((worldPosition.z + gridWorldSize.y / 2) / gridWorldSize.y);
 
@@ -68,7 +67,7 @@ public class Scr_Grid : MonoBehaviour {
 	}
 
 
-	public List<Cls_Node> GetNeighboringNodes(Cls_Node node) {
+	public static List<Cls_Node> GetNeighboringNodes(Cls_Node node) {
 		List<Cls_Node> neighboringNodes = new List<Cls_Node>();
 		int xCheck;
 		int yCheck;
@@ -117,7 +116,7 @@ public class Scr_Grid : MonoBehaviour {
 		return neighboringNodes;
 	}
 
-	private List<Cls_Node> CheckAndAddNeighborNode(int xCheck, int yCheck, List<Cls_Node> neighboringNodes) {
+	private static List<Cls_Node> CheckAndAddNeighborNode(int xCheck, int yCheck, List<Cls_Node> neighboringNodes) {
 		if (xCheck >= 0 && xCheck < gridSizeX) {
 			if (yCheck >= 0 && yCheck < gridSizeY) {
 				neighboringNodes.Add(grid[xCheck, yCheck]);
