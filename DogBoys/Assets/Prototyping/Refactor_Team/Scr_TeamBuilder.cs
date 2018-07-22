@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TeamBuilder_v2 : MonoBehaviour
+public class Scr_TeamBuilder : MonoBehaviour
 {
     #region variables
     #region prefabs
@@ -45,9 +45,8 @@ public class TeamBuilder_v2 : MonoBehaviour
         //create the teams from the list-of-strings from draft
         Spawner(redTeamProto, blueTeamProto);
         //send team info to team controller
-        teamController = GameObject.Find("TeamController");
-        teamController.GetComponent<TeamController>().setRed(redTeam);
-        teamController.GetComponent<TeamController>().setBlue(blueTeam);
+        Scr_TeamController.redTeam = redTeam;
+        Scr_TeamController.blueTeam = blueTeam;
 	}
 	
 	// Update is called once per frame
@@ -55,12 +54,12 @@ public class TeamBuilder_v2 : MonoBehaviour
 		
 	}
 
-    List<GameObject> getRed()
+    List<GameObject> GetRed()
     {
         return redTeam;
     }
 
-    List<GameObject> getBlue()
+    List<GameObject> GetBlue()
     {
         return blueTeam;
     }
@@ -72,18 +71,18 @@ public class TeamBuilder_v2 : MonoBehaviour
         //create red team
         foreach (string n in red)
         {
-            buildRed(n, redSpawn[i].transform.position);
+           BuildRed(n, redSpawn[i].transform.position);
             i++;
         }
         //create blue team
         foreach (string m in blue)
         {
-            buildBlue(m, blueSpawn[j].transform.position);
+            BuildBlue(m, blueSpawn[j].transform.position);
             j++;
         }
     }
 
-    void buildRed(string type, Vector3 location)
+    void BuildRed(string type, Vector3 location)
     {
         location.y = 0.5f;	//offset so dogs are on the tiles properly
         switch (type)
@@ -106,7 +105,7 @@ public class TeamBuilder_v2 : MonoBehaviour
         }
     }
 
-    void buildBlue(string type, Vector3 location)
+    void BuildBlue(string type, Vector3 location)
     {
         location.y = 0.5f;	//offset so dogs are on the tiles properly
         switch (type)

@@ -1011,7 +1011,7 @@ GameObject:
   - component: {fileID: 114182940580126242}
   - component: {fileID: 195752107292548356}
   m_Layer: 0
-  m_Name: proto_Rifle_dog_Red 1
+  m_Name: proto_Rifle_dog_Red
   m_TagString: Red_Team
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2938,8 +2938,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ac94db94c384b149bf40ef5da136fa9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetPos: {fileID: 0}
-  currentPos: {fileID: 0}
+  targetPos: {x: 0, y: 0, z: 0}
+  currentPos: {x: 0, y: 0, z: 0}
+  testGrid: {fileID: 0}
   AtDestination: 0
   myAgent: {fileID: 0}
   myAnim: {fileID: 0}
@@ -3615,7 +3616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
-  weapon: {fileID: 114517268736625004, guid: 152de90f6ccba7642af916ad7875c2a7, type: 2}
+  weapon: {fileID: 0}
   characterHUD: {fileID: 1565282504201524}
   xPosInGrid: 0
   yPosInGrid: 0

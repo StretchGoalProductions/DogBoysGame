@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class Scr_Pathfinding : MonoBehaviour {
 
-	private Cls_Node[,] grid;
 	public Transform startPosition;
 	public Transform targetPosition;
 
 	public int maxRange;
 	public int currentRange;
 
+	private Scr_DogMovement dogMovement;
+
 	private void Start() {
-		grid = Scr_Grid.grid;
+		dogMovement = GetComponent<Scr_DogMovement>();
+
 	}
 
 	private void Update() {
@@ -100,7 +102,7 @@ public class Scr_Pathfinding : MonoBehaviour {
 
 		Scr_Grid.finalPath = finalPath;
 		if(finalPath.Count > 0) {
-			GetComponent<NavMeshMovement>().setDestination(finalPath[0].position);
+			dogMovement.SetDestination();
 		}
 	}
 }
