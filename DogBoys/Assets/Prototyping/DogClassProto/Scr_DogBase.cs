@@ -8,6 +8,7 @@ public class Scr_DogBase : MonoBehaviour {
 	public int health;
 	public int movesLeft;
 	public Cls_Node currentNode;
+	public float selectCooldown;
 
 	public ParticleSystem hitParticles;
 	public ParticleSystem shootParticles;
@@ -26,6 +27,7 @@ public class Scr_DogBase : MonoBehaviour {
 	void Start() {
 		health = 100;
 		movesLeft = 2;
+		selectCooldown = 0.2f;
 
 		animator = GetComponent<Animator>();
 
@@ -35,10 +37,14 @@ public class Scr_DogBase : MonoBehaviour {
 		gameController = Scr_GameController.Instance;
 		gunEffects = GunEffects.Instance();
 		UIController = GetComponent<Scr_UIController>();
+
+		currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
+		currentNode.currentState = Cls_Node.nodeState.player;
+		currentNode.dog = this;
 	}
 
 	void Update() {
-
+		selectCooldown -= Time.deltaTime;
 	}
 	
 	void OnMouseOver() {
@@ -82,6 +88,8 @@ public class Scr_DogBase : MonoBehaviour {
 		UIController.CharacterHudSet(true);
 		selectParticles.Play();
 		Scr_GameController.selectedDog_ = gameObject;
+		selectCooldown = 0.2f;
+		GetComponent<Scr_Pathfinding>().enabled = true;
 	}
 
 	// public void Shoot() { }
@@ -109,6 +117,7 @@ public class Scr_DogBase : MonoBehaviour {
 		Scr_GameController.selectedDog_ = null;
 		Scr_GameController.attackMode_ = false;
 		Scr_GameController.CheckTurn();
+		GetComponent<Scr_Pathfinding>().enabled = false;
 	}
 
 	public void UseMove() {

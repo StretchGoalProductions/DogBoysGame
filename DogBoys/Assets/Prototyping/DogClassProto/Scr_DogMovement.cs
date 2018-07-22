@@ -45,7 +45,7 @@ public class Scr_DogMovement : MonoBehaviour {
 				}
 			}
 		}
-		else if(Input.GetMouseButtonDown(0) && dog.currentState == Scr_DogBase.dogState.selected && dog.movesLeft > 0) {
+		else if(Input.GetMouseButtonDown(0) && dog.currentState == Scr_DogBase.dogState.selected && dog.movesLeft > 0 && dog.selectCooldown <= 0) {
 			Vector3 mouse = Input.mousePosition;
 			Ray castPoint = mainCamera.ScreenPointToRay(mouse);
 
@@ -54,6 +54,7 @@ public class Scr_DogMovement : MonoBehaviour {
 			if(Physics.Raycast(castPoint, out hit, Mathf.Infinity, hitLayers)) {
 				Debug.Log(hit.point);
 				pathfinder.targetPosition = hit.point;
+				dog.UseMove();
 			}
 		}
 	}

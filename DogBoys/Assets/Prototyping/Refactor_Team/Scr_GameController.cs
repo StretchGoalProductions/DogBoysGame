@@ -23,7 +23,7 @@ public class Scr_GameController : MonoBehaviour
         Instance = this;
         teamInfo_ = this.gameObject.GetComponent<Scr_TeamController>();
         cameraPivot_ = GameObject.FindGameObjectsWithTag("MainCamera")[0]; //There should only be one object that is set to MainCamera
-        displayTeamName_ = "";
+        displayTeamName_ = "Blue Bandits";
         blueTeamTurn_ = true;
         redTeamTurn_ = false;
         attackMode_ = false;
@@ -51,16 +51,16 @@ public class Scr_GameController : MonoBehaviour
     {
         if (blueTeamTurn_)
         {
-            int coutNoActionsLeft = 0;
+            int countNoActionsLeft = 0;
             foreach (GameObject dog in Scr_TeamController.blueTeam)
             {
                 if (dog.GetComponent<Scr_DogBase>().movesLeft <= 0)
                 {
-                    coutNoActionsLeft += 1;
+                    countNoActionsLeft += 1;
                 }
             }
 
-            if (Scr_TeamController.blueTeam.Count <= coutNoActionsLeft)
+            if (Scr_TeamController.blueTeam.Count <= countNoActionsLeft)
             {
                 RoundUpdate();
             }
@@ -68,16 +68,16 @@ public class Scr_GameController : MonoBehaviour
 
         if (redTeamTurn_)
         {
-            int coutNoActionsLeft = 0;
+            int countNoActionsLeft = 0;
             foreach (GameObject dog in Scr_TeamController.redTeam)
             {
                 if(dog.GetComponent<Scr_DogBase>().movesLeft <= 0)
                 {
-                    coutNoActionsLeft += 1;
+                    countNoActionsLeft += 1;
                 }
             }
 
-            if (Scr_TeamController.redTeam.Count == coutNoActionsLeft)
+            if (Scr_TeamController.redTeam.Count == countNoActionsLeft)
             {
                 RoundUpdate();
             }
@@ -87,7 +87,7 @@ public class Scr_GameController : MonoBehaviour
     //Update all information related to the start of a new round
     private static void RoundUpdate()
     {
-        if ((roundCount_ % 2 == 1))
+        if (redTeamTurn_)
         {
             blueTeamTurn_ = true;
             redTeamTurn_ = false;

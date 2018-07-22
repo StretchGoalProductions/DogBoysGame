@@ -21,6 +21,8 @@ public class Scr_Grid : MonoBehaviour {
 	private static int gridSizeX, gridSizeY;
 
 	private void Awake() {
+		wallMask = LayerMask.GetMask("Wall");
+		playerMask = LayerMask.GetMask("Player");
 		gridWorldSize = inspectGridWorldSize;
 		nodeDiameter = nodeRadius * 2;
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);

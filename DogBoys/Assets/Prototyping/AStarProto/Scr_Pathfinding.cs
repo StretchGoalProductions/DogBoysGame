@@ -104,7 +104,6 @@ public class Scr_Pathfinding : MonoBehaviour {
 		Scr_Grid.finalPath = finalPath;
 		if(finalPath.Count > 0 && dogMovement.dog.currentState == Scr_DogBase.dogState.selected) {
 			dogMovement.SetDestination();
-			Debug.Log("path calls setDest");
 		}
 	}
 }
