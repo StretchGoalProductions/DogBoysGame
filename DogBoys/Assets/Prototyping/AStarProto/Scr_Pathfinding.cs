@@ -4,27 +4,28 @@ using UnityEngine;
 
 public class Scr_Pathfinding : MonoBehaviour {
 
-	public Transform startPosition;
-	public Transform targetPosition;
+	public Vector3 targetPosition;
 
-	public int maxRange;
+	public int maxMoveRange;
 	public int currentRange;
 
 	private Scr_DogMovement dogMovement;
 
 	private void Start() {
 		dogMovement = GetComponent<Scr_DogMovement>();
-
+		targetPosition = transform.position;
 	}
 
 	private void Update() {
-		FindPath(startPosition.position, targetPosition.position);
+		if (targetPosition != transform.position) {
+			FindPath(transform.position, targetPosition);
+		}
 	}
 
 
-	private void FindPath(Vector3 a_startPosition, Vector3 b_targetPosition) {
-		Cls_Node startNode = Scr_Grid.NodeFromWorldPosition(a_startPosition);
-		Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(b_targetPosition);
+	private void FindPath(Vector3 startPosition, Vector3 targetPosition) {
+		Cls_Node startNode = Scr_Grid.NodeFromWorldPosition(startPosition);
+		Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(targetPosition);
 
 		List<Cls_Node> OpenList = new List<Cls_Node>();
 		List<Cls_Node> ClosedList = new List<Cls_Node>(); // Tutorial uses HashSet since you don't need to access the closed list anymore for A* algorithm, I'm going to use a List to avoid confusion
@@ -54,7 +55,7 @@ public class Scr_Pathfinding : MonoBehaviour {
 
 				int moveCost = currentNode.gCost + GetDistance(currentNode, neighborNode);
 
-				if (moveCost < neighborNode.gCost || !OpenList.Contains(neighborNode)) {
+				if ( (moveCost < neighborNode.gCost || !OpenList.Contains(neighborNode))) {
 					neighborNode.gCost = moveCost;
 					neighborNode.hCost = GetDistance(neighborNode, targetNode);
 					neighborNode.parent = currentNode;
@@ -89,11 +90,11 @@ public class Scr_Pathfinding : MonoBehaviour {
 	}
 
 
-	private void GetFinalPath(Cls_Node a_startNode, Cls_Node b_targetNode) {
+	private void GetFinalPath(Cls_Node startNode, Cls_Node targetNode) {
 		List<Cls_Node> finalPath = new List<Cls_Node>();
-		Cls_Node currentNode = b_targetNode;
+		Cls_Node currentNode = targetNode;
 
-		while (currentNode != a_startNode) {
+		while (currentNode != startNode) {
 			finalPath.Add(currentNode);
 			currentNode = currentNode.parent;
 		}
@@ -101,8 +102,9 @@ public class Scr_Pathfinding : MonoBehaviour {
 		finalPath.Reverse();
 
 		Scr_Grid.finalPath = finalPath;
-		if(finalPath.Count > 0) {
+		if(finalPath.Count > 0 && dogMovement.dog.currentState == Scr_DogBase.dogState.selected) {
 			dogMovement.SetDestination();
+			Debug.Log("path calls setDest");
 		}
 	}
 }

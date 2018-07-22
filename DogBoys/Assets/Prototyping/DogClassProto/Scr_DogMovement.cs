@@ -11,30 +11,51 @@ public class Scr_DogMovement : MonoBehaviour {
     public UnityEngine.AI.NavMeshAgent myAgent;
     public Animator myAnim;
 	public Scr_DogBase dog;
+	public Scr_Pathfinding pathfinder;
+	public Camera mainCamera;
+	public LayerMask hitLayers;
+
+	public int maxMoveRange;
 
 	void Start () {
 		myAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         myAnim = GetComponent<Animator>();
 		dog = GetComponent<Scr_DogBase>();
+		pathfinder = GetComponent<Scr_Pathfinding>();
+		mainCamera = GameObject.FindGameObjectsWithTag("MainCamera")[0].GetComponentInChildren<Camera>();
+		hitLayers = LayerMask.GetMask("Environment");
+		
+		pathfinder.maxMoveRange = maxMoveRange;
 	}
 	
 	void Update () {
-		if (dog.currentState == Scr_DogBase.dogState.moving && myAgent.transform.position.x >= myAgent.destination.x - 0.05 && myAgent.transform.position.x <= myAgent.destination.x + 0.05 && myAgent.transform.position.z >= myAgent.destination.z - 0.05 && myAgent.transform.position.z <= myAgent.destination.z + 0.05)
-            {
-				myAgent.transform.position = new Vector3(myAgent.destination.x, myAgent.transform.position.y, myAgent.nextPosition.z);
-				if(finalPath.Count == 1) {
+		if (dog.currentState == Scr_DogBase.dogState.moving && myAgent.transform.position.x >= myAgent.destination.x - 0.05 && myAgent.transform.position.x <= myAgent.destination.x + 0.05 && myAgent.transform.position.z >= myAgent.destination.z - 0.05 && myAgent.transform.position.z <= myAgent.destination.z + 0.05) {
+			myAgent.transform.position = new Vector3(myAgent.destination.x, myAgent.transform.position.y, myAgent.nextPosition.z);
+			if(finalPath.Count == 1) {
+				UpdateNodesAfterMove();
+				dog.UnselectCharacter();
+				pathfinder.targetPosition = transform.position;
+				myAnim.SetBool("a_isRunning", false);
+				//myAgent.autoBraking = true;
+			}
+			else if (finalPath.Count > 1){
+				if(finalPath[0] == Scr_Grid.NodeFromWorldPosition(myAgent.transform.position)) {
 					UpdateNodesAfterMove();
-					dog.currentState = Scr_DogBase.dogState.unselected;
-					myAnim.SetBool("a_isRunning", false);
-					//myAgent.autoBraking = true;
+					myAgent.destination = finalPath[0].position;
 				}
-				else if (finalPath.Count > 1){
-					if(finalPath[0] == Scr_Grid.NodeFromWorldPosition(myAgent.transform.position)) {
-						UpdateNodesAfterMove();
-						myAgent.destination = finalPath[0].position;
-					}
-				}
-            }
+			}
+		}
+		else if(Input.GetMouseButtonDown(0) && dog.currentState == Scr_DogBase.dogState.selected && dog.movesLeft > 0) {
+			Vector3 mouse = Input.mousePosition;
+			Ray castPoint = mainCamera.ScreenPointToRay(mouse);
+
+			RaycastHit hit;
+			
+			if(Physics.Raycast(castPoint, out hit, Mathf.Infinity, hitLayers)) {
+				Debug.Log(hit.point);
+				pathfinder.targetPosition = hit.point;
+			}
+		}
 	}
 
 

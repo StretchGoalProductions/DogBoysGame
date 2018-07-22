@@ -8,13 +8,13 @@ public class Scr_GameController : MonoBehaviour
 {
     #region Variables
     private Scr_TeamController teamInfo_;
-    public GameObject selectedDog_;
-    public bool redTeamTurn_;
-    public bool blueTeamTurn_;
-    public bool attackMode_;
-    public int roundCount_;
-    private GameObject cameraPivot_;
-    private Text displayTeamName_;
+    public static GameObject selectedDog_;
+    public static bool redTeamTurn_;
+    public static bool blueTeamTurn_;
+    public static bool attackMode_;
+    public static int roundCount_;
+    private static GameObject cameraPivot_;
+    public static string displayTeamName_;
     public static Scr_GameController Instance;
     #endregion
 
@@ -23,7 +23,7 @@ public class Scr_GameController : MonoBehaviour
         Instance = this;
         teamInfo_ = this.gameObject.GetComponent<Scr_TeamController>();
         cameraPivot_ = GameObject.FindGameObjectsWithTag("MainCamera")[0]; //There should only be one object that is set to MainCamera
-        //displayTeamName_ = this.gameObject.GetComponentInChildren<Text>();
+        displayTeamName_ = "";
         blueTeamTurn_ = true;
         redTeamTurn_ = false;
         attackMode_ = false;
@@ -31,7 +31,7 @@ public class Scr_GameController : MonoBehaviour
     }
 
     //Check for an elimination win case
-    public void WinGameCheck()
+    public static void WinGameCheck()
     {
         if (Scr_TeamController.blueTeam.Count <= 0)
         {
@@ -47,7 +47,7 @@ public class Scr_GameController : MonoBehaviour
 
     #region Functions for updating round
     //Check for the start of a new round
-    public void CheckTurn()
+    public static void CheckTurn()
     {
         if (blueTeamTurn_)
         {
@@ -85,7 +85,7 @@ public class Scr_GameController : MonoBehaviour
     }
 
     //Update all information related to the start of a new round
-    private void RoundUpdate()
+    private static void RoundUpdate()
     {
         if ((roundCount_ % 2 == 1))
         {
@@ -94,6 +94,7 @@ public class Scr_GameController : MonoBehaviour
             ResetActionCount(Scr_TeamController.blueTeam);
             ChangeCameraPivot();
             roundCount_ += 1;
+            displayTeamName_ = "Blue Bandits";
         }
         else
         {
@@ -102,11 +103,12 @@ public class Scr_GameController : MonoBehaviour
             ResetActionCount(Scr_TeamController.redTeam);
             ChangeCameraPivot();
             roundCount_ += 1;
+            displayTeamName_ = "Red Rovers";
         }
     }
 
     //On new round, reset the dogs available actions back to 2
-    private void ResetActionCount(List<GameObject> allDogs)
+    private static void ResetActionCount(List<GameObject> allDogs)
     {
         foreach (GameObject dog in allDogs)
         {
@@ -115,13 +117,13 @@ public class Scr_GameController : MonoBehaviour
     }
 
     //On new round, force the camera to move   
-    private void ChangeCameraPivot()
+    private static void ChangeCameraPivot()
     {
         cameraPivot_.GetComponent<Camera_Movement>().toggle = true;
     }
 
     //If there will be a gloabl canvas this function will handle updating the canvas information
-    private void UpdateDisplay()
+    private static void UpdateDisplay()
     {
         return;
     }

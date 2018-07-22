@@ -5,12 +5,12 @@ using UnityEngine;
 public class Scr_MoveTargetPosition : MonoBehaviour {
     
 	public Camera mainCamera;
+	public LayerMask hitLayers;
     
 	public void Start() {
 		mainCamera = GameObject.FindGameObjectsWithTag("MainCamera")[0].GetComponentInChildren<Camera>();
 	}
 
-	public LayerMask hitLayers;
 	void Update () {
 		if(Input.GetMouseButtonDown(0)) {
 			Vector3 mouse = Input.mousePosition;

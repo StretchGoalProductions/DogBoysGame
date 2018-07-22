@@ -30,8 +30,8 @@ public class Scr_UIController : MonoBehaviour {
 
 
 
-	public void CharacterHudToggle() {
-		characterHud.SetActive(!characterHud.activeSelf);
+	public void CharacterHudSet(bool setActive) {
+		characterHud.SetActive(setActive);
 	}
 
     public void updateCurrentHealthBar(int currentHealth, int maxHealth) {
@@ -62,9 +62,9 @@ public class Scr_UIController : MonoBehaviour {
     }
 
     public void OnClickAttackButton() {
-		gameController.attackMode_ = !gameController.attackMode_;
+		Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
 		dog.currentState = Scr_DogBase.dogState.attack;
-        attackMode_.enabled = gameController.attackMode_;
+        attackMode_.enabled = Scr_GameController.attackMode_;
     }
 
     public void OnClickOverwatchButton() {

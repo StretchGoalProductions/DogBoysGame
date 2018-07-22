@@ -35,7 +35,6 @@ public class Scr_DogBase : MonoBehaviour {
 		gameController = Scr_GameController.Instance;
 		gunEffects = GunEffects.Instance();
 		UIController = GetComponent<Scr_UIController>();
-		Debug.Log(transform.parent);
 	}
 
 	void Update() {
@@ -46,7 +45,7 @@ public class Scr_DogBase : MonoBehaviour {
 		if(currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0) {
 			SelectCharacter();
 		}
-		else if (currentState != dogState.attack && gameController.attackMode_ ) {
+		else if (currentState != dogState.attack && Scr_GameController.attackMode_ ) {
 			// Do shooting here
 			// Check if same or different team
 			// Check if in range
@@ -69,7 +68,7 @@ public class Scr_DogBase : MonoBehaviour {
 		
 		animator.SetBool ("a_isAlive", false);
 		animator.SetBool ("a_isDead", true);
-        gameController.WinGameCheck();
+        Scr_GameController.WinGameCheck();
 
 		Destroy(gameObject);
     }
@@ -80,9 +79,9 @@ public class Scr_DogBase : MonoBehaviour {
 
 	public void SelectCharacter() {
 		currentState = Scr_DogBase.dogState.selected;
-		UIController.CharacterHudToggle();
+		UIController.CharacterHudSet(true);
 		selectParticles.Play();
-		gameController.selectedDog_ = gameObject;
+		Scr_GameController.selectedDog_ = gameObject;
 	}
 
 	// public void Shoot() { }
@@ -104,12 +103,12 @@ public class Scr_DogBase : MonoBehaviour {
 	}
 
 	public void UnselectCharacter() {
-		currentState = Scr_DogBase.dogState.selected;
-		UIController.CharacterHudToggle();
+		currentState = Scr_DogBase.dogState.unselected;
+		UIController.CharacterHudSet(false);
 		selectParticles.Stop();
-		gameController.selectedDog_ = null;
-		gameController.attackMode_ = false;
-		gameController.CheckTurn();
+		Scr_GameController.selectedDog_ = null;
+		Scr_GameController.attackMode_ = false;
+		Scr_GameController.CheckTurn();
 	}
 
 	public void UseMove() {

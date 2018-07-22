@@ -917,7 +917,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4647675184582830, guid: 7e0ed43180103144fb7ea438a4c01fa4, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 1973944253432702, guid: 7e0ed43180103144fb7ea438a4c01fa4, type: 2}
       propertyPath: m_IsActive
@@ -3106,7 +3106,7 @@ GameObject:
   m_Layer: 0
   m_Name: Average_Blue
   m_TagString: Average_Blue
-  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -3782,7 +3782,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &566524616
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3794,10 +3794,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef377fff9f0b3e243aa5b900e75a510c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  redTeamTurn_: 0
-  blueTeamTurn_: 0
-  attackMode_: 0
-  roundCount_: 0
 --- !u!4 &566524617
 Transform:
   m_ObjectHideFlags: 0
@@ -3808,8 +3804,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1694394321}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &574024244
 GameObject:
@@ -10960,9 +10956,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87104db96fbc4eb4d8564a84c45128e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {fileID: 917020120}
-  targetPosition: {fileID: 1411371632}
-  maxRange: 6
+  targetPosition: {x: 0, y: 0, z: 0}
+  maxMoveRange: 0
   currentRange: 0
 --- !u!114 &917020115
 MonoBehaviour:
@@ -10980,6 +10975,12 @@ MonoBehaviour:
   myAgent: {fileID: 0}
   myAnim: {fileID: 0}
   dog: {fileID: 0}
+  pathfinder: {fileID: 0}
+  mainCamera: {fileID: 0}
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  maxMoveRange: 0
 --- !u!195 &917020116
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -11020,6 +11021,9 @@ MonoBehaviour:
   selectParticles: {fileID: 0}
   currentState: 0
   enemiesSeen: []
+  gameController: {fileID: 0}
+  gunEffects: {fileID: 0}
+  UIController: {fileID: 0}
 --- !u!95 &917020118
 Animator:
   serializedVersion: 3
@@ -11071,7 +11075,7 @@ Transform:
   - {fileID: 1591038024}
   - {fileID: 1339009473}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &922878427
 GameObject:
@@ -11085,7 +11089,7 @@ GameObject:
   m_Layer: 0
   m_Name: Average_Red
   m_TagString: Average_Red
-  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -16477,7 +16481,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1073701934
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16524,8 +16528,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_Father: {fileID: 1694394321}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1076162418
 Prefab:
@@ -17539,7 +17543,6 @@ GameObject:
   - component: {fileID: 1211758756}
   - component: {fileID: 1211758759}
   - component: {fileID: 1211758758}
-  - component: {fileID: 1211758757}
   - component: {fileID: 1211758760}
   m_Layer: 5
   m_Name: Text
@@ -17566,17 +17569,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -100}
   m_SizeDelta: {x: 800, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1211758757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1211758755}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 720fbb60694851e48acf7b4f69e4e978, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1211758758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17752,6 +17744,7 @@ GameObject:
   - component: {fileID: 1236516315}
   - component: {fileID: 1236516309}
   - component: {fileID: 1236516314}
+  - component: {fileID: 1236516316}
   m_Layer: 8
   m_Name: proto_Rifle_dog_Red
   m_TagString: Red_Team
@@ -17777,7 +17770,7 @@ Transform:
   - {fileID: 935766376}
   - {fileID: 1930548329}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1236516309
 MonoBehaviour:
@@ -17790,9 +17783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87104db96fbc4eb4d8564a84c45128e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPosition: {fileID: 1236516308}
-  targetPosition: {fileID: 1411371632}
-  maxRange: 6
+  targetPosition: {x: 0, y: 0, z: 0}
+  maxMoveRange: 0
   currentRange: 0
 --- !u!114 &1236516310
 MonoBehaviour:
@@ -17812,6 +17804,9 @@ MonoBehaviour:
   selectParticles: {fileID: 1930548331}
   currentState: 0
   enemiesSeen: []
+  gameController: {fileID: 0}
+  gunEffects: {fileID: 0}
+  UIController: {fileID: 0}
 --- !u!195 &1236516311
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -17887,6 +17882,7 @@ MonoBehaviour:
   attackMode_: {fileID: 1685019707}
   outOfRange_: {fileID: 1148944298}
   needToReload_: {fileID: 115090131}
+  characterHud: {fileID: 0}
 --- !u!114 &1236516315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17903,6 +17899,23 @@ MonoBehaviour:
   myAgent: {fileID: 0}
   myAnim: {fileID: 0}
   dog: {fileID: 0}
+  pathfinder: {fileID: 0}
+  mainCamera: {fileID: 0}
+  hitLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  maxMoveRange: 6
+--- !u!114 &1236516316
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1236516307}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1ff17285a82957d45a411265c25e6668, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1254580878
 GameObject:
   m_ObjectHideFlags: 0
@@ -28343,7 +28356,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &1411371629
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -28409,7 +28422,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 2, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1411371633
 MonoBehaviour:
@@ -29159,7 +29172,7 @@ Transform:
   - {fileID: 2157259}
   - {fileID: 2022586647}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1497396838 stripped
 Transform:
@@ -29536,7 +29549,7 @@ Transform:
   - {fileID: 863760643}
   - {fileID: 685956517}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1566286195
 GameObject:
@@ -30992,8 +31005,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1918902244}
+  - {fileID: 566524617}
+  - {fileID: 1073701935}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1696109283 stripped
 Transform:
@@ -42026,8 +42041,6 @@ GameObject:
   - component: {fileID: 1961648845}
   - component: {fileID: 1961648844}
   - component: {fileID: 1961648843}
-  - component: {fileID: 1961648848}
-  - component: {fileID: 1961648847}
   m_Layer: 9
   m_Name: Plane
   m_TagString: Untagged
@@ -42104,40 +42117,6 @@ Transform:
   m_Father: {fileID: 1562734231}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1961648847
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1961648842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32011f696001e1944ab8e321f87d6ab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentlySelectedCharacter: {fileID: 0}
-  p1Chars: []
-  p2Chars: []
-  cameraPivot: {fileID: 0}
-  turn: 
-  attackMode: 0
---- !u!114 &1961648848
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1961648842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32011f696001e1944ab8e321f87d6ab1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentlySelectedCharacter: {fileID: 0}
-  p1Chars: []
-  p2Chars: []
-  cameraPivot: {fileID: 0}
-  turn: 
-  attackMode: 0
 --- !u!4 &1972286740 stripped
 Transform:
   m_PrefabParentObject: {fileID: 400000, guid: 81641fc45740aae49ae4e59fdb2b9484, type: 3}
