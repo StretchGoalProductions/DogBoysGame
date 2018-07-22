@@ -48,7 +48,7 @@ public class Scr_DogBase : MonoBehaviour {
 	}
 	
 	void OnMouseOver() {
-		if(currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0) {
+		if(currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0 && Scr_GameController.selectedDog_ == null) {
 			SelectCharacter();
 		}
 		else if (currentState != dogState.attack && Scr_GameController.attackMode_ ) {
