@@ -15,11 +15,13 @@ public class Cls_Node {
 	public enum nodeState {empty, player, wall, cover};
 	public nodeState currentState;
 
-	public Cls_Node (nodeState a_currentState, Vector3 b_position, int c_gridX, int d_gridY) {
-		currentState = a_currentState;
-		position = b_position;
-		gridX = c_gridX;
-		gridY = d_gridY;
+	public Scr_DogBase dog;
+
+	public Cls_Node (nodeState currentState, Vector3 position, int gridX, int gridY) {
+		this.currentState = currentState;
+		this.position = position;
+		this.gridX = gridX;
+		this.gridY = gridY;
 	}
 
 

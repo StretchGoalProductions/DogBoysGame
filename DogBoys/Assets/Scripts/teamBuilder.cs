@@ -25,7 +25,7 @@ public class teamBuilder : MonoBehaviour {
 	private List<string> blueTeam = new List<string>();
 	//team spawn positions
 	[SerializeField]
-	private GameObject[] redSpawn;
+	public GameObject[] redSpawn;
 	[SerializeField]
 	private GameObject[] blueSpawn;
 	//game controller

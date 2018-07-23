@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4674750066614342}
   - component: {fileID: 136453868300170052}
   - component: {fileID: 23567557550806572}
-  - component: {fileID: 114517268736625004}
   - component: {fileID: 82108075635615004}
   - component: {fileID: 82623701094512898}
+  - component: {fileID: 114390775245570326}
   m_Layer: 0
   m_Name: Rifle
   m_TagString: Untagged
@@ -269,7 +269,7 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 0
---- !u!114 &114517268736625004
+--- !u!114 &114390775245570326
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -277,9 +277,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1511762686972636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 05d0440807c54dc418bb9d8e4cc8731f, type: 3}
+  m_Script: {fileID: 11500000, guid: 95ed4d0c7c5d926468be34d725668353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxShots: 1
+  shotsRemaining: 1
+  shootRange: 10
+  shootDamage: 40
+  movesUsed: 1
 --- !u!136 &136453868300170052
 CapsuleCollider:
   m_ObjectHideFlags: 1

@@ -21,6 +21,8 @@ public class Scr_Grid : MonoBehaviour {
 	private static int gridSizeX, gridSizeY;
 
 	private void Awake() {
+		wallMask = LayerMask.GetMask("Wall");
+		playerMask = LayerMask.GetMask("Player");
 		gridWorldSize = inspectGridWorldSize;
 		nodeDiameter = nodeRadius * 2;
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
@@ -42,12 +44,19 @@ public class Scr_Grid : MonoBehaviour {
 				Cls_Node.nodeState currentState = Cls_Node.nodeState.empty;
 				if (isWall) {
 					currentState = Cls_Node.nodeState.wall;
+					grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
 				}
 				else if (isPlayer) {
 					currentState = Cls_Node.nodeState.player;
-				}
+					grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
 
-				grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
+					Scr_DogBase thisDog = Physics.OverlapSphere(worldPoint, nodeRadius, playerMask)[0].gameObject.GetComponent<Scr_DogBase>();
+					thisDog.currentNode = grid[x,y];
+					grid[x,y].dog = thisDog;
+				}
+				else {
+					grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
+				}
 			}
 		}
 	}
