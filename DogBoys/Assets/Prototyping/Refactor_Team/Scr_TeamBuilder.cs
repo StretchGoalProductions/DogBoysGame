@@ -26,12 +26,13 @@ public class Scr_TeamBuilder : MonoBehaviour
     void Awake() {
         if(Scr_TeamController.Instance == null) {
             Instantiate(tcPrefab);
+            Scr_TeamController.menuBlueDogs.Add("rv");
             Scr_TeamController.menuBlueDogs.Add("rf");
-            Scr_TeamController.menuBlueDogs.Add("rf");
-            Scr_TeamController.menuBlueDogs.Add("rf");
+            Scr_TeamController.menuBlueDogs.Add("sg");
+            
+            Scr_TeamController.menuRedDogs.Add("rv");
             Scr_TeamController.menuRedDogs.Add("rf");
-            Scr_TeamController.menuRedDogs.Add("rf");
-            Scr_TeamController.menuRedDogs.Add("rf");
+            Scr_TeamController.menuRedDogs.Add("sg");
         }
     }
 

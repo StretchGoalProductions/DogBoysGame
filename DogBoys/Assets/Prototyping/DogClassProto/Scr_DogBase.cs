@@ -6,6 +6,7 @@ public class Scr_DogBase : MonoBehaviour {
 
 	private const int MAX_HEALTH = 100;
 	public int health;
+	public Scr_DogStats.weaponStats weaponStats;
 	public int movesLeft;
 	public Cls_Node currentNode;
 	public float selectCooldown;
@@ -52,7 +53,7 @@ public class Scr_DogBase : MonoBehaviour {
 			SelectCharacter();
 		}
 		else if (currentState != dogState.attack && Scr_GameController.attackMode_ ) {
-			// Do shooting here
+			// Do shooting here (see methods fire and reload)
 			// Check if same or different team
 			// Check if in range
 			// Check if shot will pass through wall, cover, partial cover, or nothing
@@ -79,8 +80,23 @@ public class Scr_DogBase : MonoBehaviour {
 		Destroy(gameObject);
     }
 
+	public void Fire(Scr_DogBase targetDog, float accuracy = 1.0f, float damageReduction = 0.0f) {
+		if(weaponStats.shotsRemaining > 0 && Random.value <= accuracy) {
+			targetDog.TakeDamage( weaponStats.shootDamage - (int) (weaponStats.shootDamage * damageReduction));
+			weaponStats.shotsRemaining--;
+			UseMove();
+			UnselectCharacter();
+		}
+		else {
+			Reload();
+		}
+	}
+
 	public void Reload() {
 		animator.SetTrigger ("a_isReloading");
+		weaponStats.shotsRemaining = weaponStats.maxShots;
+		UseMove();
+		UnselectCharacter();
 	}
 
 	public void SelectCharacter() {
@@ -91,8 +107,6 @@ public class Scr_DogBase : MonoBehaviour {
 		selectCooldown = 0.2f;
 		GetComponent<Scr_Pathfinding>().enabled = true;
 	}
-
-	// public void Shoot() { }
 	
 	public void SkipTurn() {
 		movesLeft = 0;
