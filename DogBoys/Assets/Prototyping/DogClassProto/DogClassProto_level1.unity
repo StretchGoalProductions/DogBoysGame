@@ -2417,6 +2417,7 @@ GameObject:
   - component: {fileID: 935807485}
   - component: {fileID: 935807484}
   - component: {fileID: 935807483}
+  - component: {fileID: 935807487}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Tile
@@ -2500,6 +2501,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &935807487
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 935807482}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 311c518fc6526fd46b607d489eab8bad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  percent: {fileID: 1530428579098108, guid: 6d0fcad46e8905b4195c427e6d56bc23, type: 2}
 --- !u!1001 &976025966
 Prefab:
   m_ObjectHideFlags: 0
@@ -3166,7 +3179,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panSpeed: 10
   panborderThickness: 10
-  panLimit: {x: -9, y: 20, z: -24, w: 31}
+  panLimit: {x: -7, y: 6, z: -12, w: 15}
   scrollSpeed: 5
   minY: 10
   maxY: 16
@@ -3558,7 +3571,7 @@ GameObject:
   - component: {fileID: 1351920337}
   m_Layer: 0
   m_Name: Camera
-  m_TagString: Untagged
+  m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

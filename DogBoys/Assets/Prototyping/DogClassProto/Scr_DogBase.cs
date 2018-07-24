@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Scr_DogBase : MonoBehaviour {
 
@@ -24,8 +25,9 @@ public class Scr_DogBase : MonoBehaviour {
 	public GunEffects gunEffects;
 	public Scr_UIController UIController;
 
+    public GameObject accuracyDisplay;
 
-	void Start() {
+    void Start() {
 		health = 100;
 		movesLeft = 2;
 		selectCooldown = 0.2f;
@@ -44,25 +46,56 @@ public class Scr_DogBase : MonoBehaviour {
 		currentNode.dog = this;
 	}
 
-	void Update() {
-		selectCooldown -= Time.deltaTime;
-	}
+    void Update() {
+        selectCooldown -= Time.deltaTime;
+
+        // Display Accuracy
+        if (Scr_GameController.attackMode_ && (Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team")) {
+            accuracyDisplay.SetActive(true);
+            GameObject attacker = Scr_GameController.selectedDog_;
+            int hitChance = (int)(ChanceToHit(attacker, gameObject) * 100.0f);
+            accuracyDisplay.GetComponentInChildren<Text>().text = hitChance.ToString() + "%";
+        } else {
+            accuracyDisplay.SetActive(false);
+        }
+    }
 	
 	void OnMouseOver() {
 		if(currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0 && Scr_GameController.selectedDog_ == null) {
 			SelectCharacter();
 		}
-		else if (currentState != dogState.attack && Scr_GameController.attackMode_ ) {
-			// Do shooting here (see methods fire and reload)
-			// Check if same or different team
-			// Check if in range
-			// Check if shot will pass through wall, cover, partial cover, or nothing
-			// Probably have a seperate script with a function that does these things an call function here
-		}
+		else if (currentState != dogState.attack && Scr_GameController.attackMode_) {
+            // Do shooting here (see methods fire and reload)
+            // Check if same or different team
+            // Check if in range
+            // Check if shot will pass through wall, cover, partial cover, or nothing
+            // Probably have a seperate script with a function that does these things an call function here
 
+            if (Input.GetMouseButtonDown(0) && (Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team")) {
+                GameObject attacker = Scr_GameController.selectedDog_;
+                float hitChance = ChanceToHit(attacker, gameObject);
+                attacker.GetComponent<Scr_DogBase>().Fire(this, hitChance);
+            }
+        }
 	}
 
+    public float ChanceToHit(GameObject attacker, GameObject defender) {
+        float range = attacker.GetComponent<Scr_DogStats>().thisWeapon.shootRange;
+        float rangeFalloff = attacker.GetComponent<Scr_DogStats>().thisWeapon.shootFalloff;
+        float distance = Vector3.Distance(attacker.transform.position, defender.transform.position);
 
+        float chanceToHit = 1.0f;
+
+        if (distance <= rangeFalloff && distance >= range) {
+            chanceToHit = (rangeFalloff - distance) / (rangeFalloff - range);
+        } else if (distance > rangeFalloff) {
+            chanceToHit = 0.0f;
+        }
+
+        // add cover mod here
+
+        return chanceToHit;
+    }
 
 	public void Die()
 	{
