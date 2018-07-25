@@ -14,6 +14,11 @@ TagManager:
   - redSpawn
   - CoverTile
   - Menu_door
+  - Blue_Team
+  - Red_Team
+  - Average_Red
+  - Average_Blue
+  - Percent
   layers:
   - Default
   - TransparentFX
@@ -26,7 +31,7 @@ TagManager:
   - Player
   - Environment
   - Wall
-  - 
+  - Cover
   - 
   - 
   - 

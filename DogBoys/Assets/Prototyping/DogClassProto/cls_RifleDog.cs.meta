@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: a1ecb1fbd0a3bc14e98dae287763996f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - weapon: {fileID: 114517268736625004, guid: 152de90f6ccba7642af916ad7875c2a7, type: 2}
+  - characterHUD: {instanceID: 0}
+  - hitParticles: {instanceID: 0}
+  - shootParticles: {instanceID: 0}
+  - selectParticles: {instanceID: 0}
+  - anim: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

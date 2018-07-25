@@ -1525,7 +1525,7 @@ GameObject:
   - component: {fileID: 195748251094611298}
   m_Layer: 0
   m_Name: Rifle_dog_Red
-  m_TagString: Untagged
+  m_TagString: Red_Team
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

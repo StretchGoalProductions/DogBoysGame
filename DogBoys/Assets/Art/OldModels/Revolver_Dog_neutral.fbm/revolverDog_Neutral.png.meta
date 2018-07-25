@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: f8ce5cd0221dc9a41b59c6c7decee245
+=======
+<<<<<<< HEAD
+guid: 05807f8a4e366b9439d31b0b46d2af29
+=======
+guid: f8ce5cd0221dc9a41b59c6c7decee245
+>>>>>>> HUD_Revision
+>>>>>>> HUD_Revision
 TextureImporter:
   fileIDToRecycleName: {}
   externalObjects: {}

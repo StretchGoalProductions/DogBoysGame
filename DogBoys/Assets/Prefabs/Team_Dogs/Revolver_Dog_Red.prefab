@@ -1303,7 +1303,7 @@ GameObject:
   - component: {fileID: 195069390611590158}
   m_Layer: 0
   m_Name: Revolver_Dog_Red
-  m_TagString: Untagged
+  m_TagString: Red_Team
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
