@@ -7,7 +7,8 @@ public class Scr_Rifle : MonoBehaviour {
 	public int maxShots;
 	public int shotsRemaining;
 	public int shootRange;
-	public int shootDamage;
+    public int shootFalloff;
+    public int shootDamage;
 	public int movesUsed;
 
 	private Scr_DogStats.weaponStats Rifle;
@@ -19,6 +20,7 @@ public class Scr_Rifle : MonoBehaviour {
 		Rifle.maxShots = maxShots;
 		Rifle.shotsRemaining = maxShots;
 		Rifle.shootRange = shootRange;
+        Rifle.shootFalloff = shootFalloff;
 		Rifle.shootDamage = shootDamage;
 		Rifle.movesUsed = movesUsed;
 
