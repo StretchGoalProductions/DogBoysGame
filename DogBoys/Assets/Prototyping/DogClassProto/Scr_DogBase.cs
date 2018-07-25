@@ -48,7 +48,7 @@ public class Scr_DogBase : MonoBehaviour {
 
     void Update() {
         selectCooldown -= Time.deltaTime;
-
+        
         // Display Accuracy
         if (Scr_GameController.attackMode_ && (Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team")) {
             accuracyDisplay.SetActive(true);
@@ -92,9 +92,41 @@ public class Scr_DogBase : MonoBehaviour {
             chanceToHit = 0.0f;
         }
 
-        // add cover mod here
+        // Line of site / Cover
+        float coverMod = 1.0f;
+        int x0, y0, x1, y1;
+        if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX < defender.GetComponent<Scr_DogBase>().currentNode.gridX) {
+            x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+            y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+            x1 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
+            y1 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
+        } else {
+            x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+            y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+            x0 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
+            y0 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
+        }
+        float dx = x1 - x0;
+        float dy = y1 - y0;
+        float derr = Mathf.Abs(dy / dx);
+        float err = 0.0f;
+        int y = y0;
 
-        return chanceToHit;
+        for (int x = x0; x <= x1; x++) {
+            if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
+                coverMod = 0.0f;
+                break;
+            } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
+                coverMod = 0.5f;
+            }
+            err = err + derr;
+            if (err >= 0.5) {
+                y += (int) Mathf.Sign(dy) * 1;
+                err -= 1.0f;
+            }
+        }
+        
+        return chanceToHit * coverMod;
     }
 
 	public void Die()
