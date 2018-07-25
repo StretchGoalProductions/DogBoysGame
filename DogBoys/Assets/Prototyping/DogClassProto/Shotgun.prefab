@@ -103,5 +103,6 @@ MonoBehaviour:
   maxShots: 2
   shotsRemaining: 2
   shootRange: 5
+  shootFalloff: 10
   shootDamage: 34
   movesUsed: 1

@@ -7,6 +7,7 @@ public class Scr_Shotgun : MonoBehaviour {
 	public int maxShots;
 	public int shotsRemaining;
 	public int shootRange;
+    public int shootFalloff;
 	public int shootDamage;
 	public int movesUsed;
 
@@ -19,6 +20,7 @@ public class Scr_Shotgun : MonoBehaviour {
 		Shotgun.maxShots = maxShots;
 		Shotgun.shotsRemaining = maxShots;
 		Shotgun.shootRange = shootRange;
+        Shotgun.shootFalloff = shootFalloff;
 		Shotgun.shootDamage = shootDamage;
 		Shotgun.movesUsed = movesUsed;
 

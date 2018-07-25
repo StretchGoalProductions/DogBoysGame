@@ -8,7 +8,8 @@ public class Scr_DogStats : MonoBehaviour {
 		public int maxShots;
 		public int shotsRemaining;
 		public int shootRange;
-		public int shootDamage;
+        public int shootFalloff;
+        public int shootDamage;
 		public int movesUsed;
 	}
 

@@ -7,7 +7,8 @@ public class Scr_Revolver : MonoBehaviour {
 	public int maxShots;
 	public int shotsRemaining;
 	public int shootRange;
-	public int shootDamage;
+    public int shootFalloff;
+    public int shootDamage;
 	public int movesUsed;
 
 	private Scr_DogStats.weaponStats Revolver;
@@ -19,6 +20,7 @@ public class Scr_Revolver : MonoBehaviour {
 		Revolver.maxShots = maxShots;
 		Revolver.shotsRemaining = maxShots;
 		Revolver.shootRange = shootRange;
+        Revolver.shootFalloff = shootFalloff;
 		Revolver.shootDamage = shootDamage;
 		Revolver.movesUsed = movesUsed;
 

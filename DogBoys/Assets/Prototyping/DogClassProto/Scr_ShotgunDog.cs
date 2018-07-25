@@ -7,8 +7,8 @@ public class Scr_ShotgunDog : MonoBehaviour {
 	public int maxHealth;
 	public int moveRange;
 
-	private Scr_DogStats.dogStats ShotgunDog;
-	private Scr_DogStats dogStats;
+    private Scr_DogStats.dogStats ShotgunDog;
+    private Scr_DogStats dogStats;
 
 	void Awake() {
 		dogStats = GetComponent<Scr_DogStats>();
@@ -16,6 +16,6 @@ public class Scr_ShotgunDog : MonoBehaviour {
 		ShotgunDog.maxHealth = maxHealth;
 		ShotgunDog.moveRange = moveRange;
 
-		dogStats.thisDog = ShotgunDog;
+        dogStats.thisDog = ShotgunDog;
 	}
 }

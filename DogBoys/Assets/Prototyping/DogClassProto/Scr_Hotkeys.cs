@@ -32,7 +32,7 @@ public class Scr_Hotkeys : MonoBehaviour {
             dog.UIController.OnClickAttackButton();
         }
         //Hotkey for Unselecting a Character
-        else if (Input.GetKeyDown(KeyCode.Escape))
+        else if (Input.GetKeyDown(KeyCode.Space))
         {
             dog.UnselectCharacter();
         }
