@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: a6b48f8f2ed26914aa33356cf3437e8c
+=======
+guid: 4d5f7482403906b4a8429eee7677b32f
+>>>>>>> HUD_Revision
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
