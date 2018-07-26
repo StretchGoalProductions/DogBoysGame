@@ -127,6 +127,16 @@ public class Scr_GameController : MonoBehaviour
     {
         return;
     }
+    
+    public static List<GameObject> returnRedTeam()
+    {
+        return Scr_TeamController.redTeam;
+    }
+
+    public static List<GameObject> returnBlueTeam()
+    {
+        return Scr_TeamController.blueTeam;
+    }
     #endregion
 
 }
