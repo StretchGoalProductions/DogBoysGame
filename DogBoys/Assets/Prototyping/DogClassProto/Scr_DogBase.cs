@@ -19,7 +19,7 @@ public class Scr_DogBase : MonoBehaviour {
 
 	public enum dogState { unselected, selected, attack, moving, shooting, shot, killed, overwatch };
 	public dogState currentState;
-	public List<Scr_DogBase> enemiesSeen;
+	public List<GameObject> enemiesSeen;
 
 	public Scr_GameController gameController;
 	public GunEffects gunEffects;
@@ -35,7 +35,7 @@ public class Scr_DogBase : MonoBehaviour {
 		animator = GetComponent<Animator>();
 
 		currentState = dogState.unselected;
-		enemiesSeen = new List<Scr_DogBase>();
+		enemiesSeen = new List<GameObject>();
 
 		gameController = Scr_GameController.Instance;
 		gunEffects = GunEffects.Instance();
@@ -57,6 +57,12 @@ public class Scr_DogBase : MonoBehaviour {
             accuracyDisplay.GetComponentInChildren<Text>().text = hitChance.ToString() + "%";
         } else {
             accuracyDisplay.SetActive(false);
+        }
+
+        //Once a dog starts to move update line of sight and check for guard dog attacks
+        if(currentState == dogState.moving)
+        {
+            lineOfSight();
         }
     }
 	
@@ -199,7 +205,63 @@ public class Scr_DogBase : MonoBehaviour {
 		GetComponent<Scr_Pathfinding>().enabled = false;
 	}
 
-	public void UseMove() {
+    public void lineOfSight()
+    {
+        //Ignore these layers when spherecasting 
+        int layerMaskOne = 1 << 9; //Environment
+        int layerMaskTwo = 1 << 10; //Wall
+        int layerMaskThree = 1 << 11; //Cover
+        int finalLayerMask = layerMaskOne | layerMaskTwo | layerMaskThree;
+        finalLayerMask = ~finalLayerMask;
+
+        float maxDistance = this.gameObject.GetComponent<Scr_DogStats>().thisWeapon.shootRange + this.gameObject.GetComponent<Scr_DogStats>().thisWeapon.shootFalloff;
+
+        Collider[] hitsInformation = Physics.OverlapSphere(this.transform.position, (maxDistance / 2.0f), finalLayerMask);
+        if (hitsInformation.Length > 0)
+        {
+            foreach(Collider item in hitsInformation)
+            {
+                if (Scr_GameController.blueTeamTurn_)
+                {
+                    foreach(GameObject dog in Scr_GameController.returnRedTeam())
+                    {
+                        if(item.transform.name.Equals(dog.name))
+                        {
+                            enemiesSeen.Add(item.gameObject);
+                        }
+                    }
+                }
+                else
+                {
+                    foreach (GameObject dog in Scr_GameController.returnBlueTeam())
+                    {
+                        if (item.transform.parent.gameObject.name.Equals(dog.name))
+                        {
+                            enemiesSeen.Add(item.gameObject);
+                        }
+                    }
+                }
+            }
+
+            foreach(GameObject dog in enemiesSeen)
+            {
+                if(dog.GetComponent<Scr_DogBase>().currentState == dogState.overwatch)
+                {
+                    guardDog(dog, this.gameObject);
+                    dog.GetComponent<Scr_DogBase>().currentState = dogState.unselected;
+                }
+            }
+            enemiesSeen.Clear();
+        }
+    }
+
+    public void guardDog(GameObject attacker, GameObject target)
+    {
+        float hitChance = ChanceToHit(attacker, gameObject);
+        attacker.GetComponent<Scr_DogBase>().Fire(this, hitChance);
+    }
+
+    public void UseMove() {
 		movesLeft--;
 	}
 }
