@@ -1261,8 +1261,6 @@ GameObject:
   - component: {fileID: 114245247333973018}
   - component: {fileID: 114131006257160534}
   - component: {fileID: 114201985288822272}
-  - component: {fileID: 114562649529857650}
-  - component: {fileID: 114836494815831756}
   m_Layer: 0
   m_Name: Shotgun_Dog_Blue
   m_TagString: Blue_Team
@@ -3259,7 +3257,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114562649529857650}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickOverwatchButton
         m_Mode: 1
         m_Arguments:
@@ -3396,9 +3394,7 @@ MonoBehaviour:
   selectParticles: {fileID: 198409959091594744}
   currentState: 0
   enemiesSeen: []
-  gameController: {fileID: 0}
   gunEffects: {fileID: 0}
-  UIController: {fileID: 0}
   accuracyDisplay: {fileID: 1276260834262084}
 --- !u!114 &114117360807003492
 MonoBehaviour:
@@ -3913,7 +3909,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114562649529857650}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickSkipTurn
         m_Mode: 1
         m_Arguments:
@@ -3986,27 +3982,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Out of Range
---- !u!114 &114562649529857650
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1674755394276836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbfc17e90e24ed241aee2231be1a4621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPlayerHealthBar_: {fileID: 114697213748510724}
-  currentPlayerMovementBar_: {fileID: 114050907139431282}
-  currentPlayerPortrait_: {fileID: 114496502200760976}
-  currentplayerName_: {fileID: 114042557452512440}
-  currentPlayerGunName_: {fileID: 114673884057351764}
-  currentPlayerAmmoCount_: {fileID: 114361432749138694}
-  attackMode_: {fileID: 114298697035055320}
-  outOfRange_: {fileID: 114548835613977430}
-  needToReload_: {fileID: 114120343962720566}
-  characterHud: {fileID: 0}
 --- !u!114 &114565632829489518
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4283,17 +4258,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114836494815831756
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1674755394276836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff17285a82957d45a411265c25e6668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114864662299719112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4360,7 +4324,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114562649529857650}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickAttackButton
         m_Mode: 1
         m_Arguments:

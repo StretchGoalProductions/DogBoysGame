@@ -1275,8 +1275,6 @@ GameObject:
   - component: {fileID: 114022526861466930}
   - component: {fileID: 114195355911403242}
   - component: {fileID: 114945796392693744}
-  - component: {fileID: 114489572889873358}
-  - component: {fileID: 114214187826630712}
   m_Layer: 0
   m_Name: Revolver_Dog_Red
   m_TagString: Red_Team
@@ -2820,9 +2818,7 @@ MonoBehaviour:
   selectParticles: {fileID: 198406587471597292}
   currentState: 0
   enemiesSeen: []
-  gameController: {fileID: 0}
   gunEffects: {fileID: 0}
-  UIController: {fileID: 0}
   accuracyDisplay: {fileID: 1719034678306390}
 --- !u!114 &114101267355598922
 MonoBehaviour:
@@ -2998,7 +2994,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114489572889873358}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickAttackButton
         m_Mode: 1
         m_Arguments:
@@ -3033,17 +3029,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 0
   maxMoveRange: 0
---- !u!114 &114214187826630712
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1811122993782190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff17285a82957d45a411265c25e6668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114236490217256404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3116,7 +3101,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114489572889873358}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickOverwatchButton
         m_Mode: 1
         m_Arguments:
@@ -3377,27 +3362,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114489572889873358
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1811122993782190}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbfc17e90e24ed241aee2231be1a4621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPlayerHealthBar_: {fileID: 114346730265583360}
-  currentPlayerMovementBar_: {fileID: 114352907321127854}
-  currentPlayerPortrait_: {fileID: 114573233876943152}
-  currentplayerName_: {fileID: 114803126816932066}
-  currentPlayerGunName_: {fileID: 114945089517211260}
-  currentPlayerAmmoCount_: {fileID: 114665490372761998}
-  attackMode_: {fileID: 114111274627112718}
-  outOfRange_: {fileID: 114236490217256404}
-  needToReload_: {fileID: 114700951303912498}
-  characterHud: {fileID: 0}
 --- !u!114 &114522264950661122
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3537,7 +3501,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114489572889873358}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickSkipTurn
         m_Mode: 1
         m_Arguments:

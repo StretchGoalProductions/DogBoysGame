@@ -565,16 +565,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4855017268720610}
-  - component: {fileID: 136579254549356128}
   - component: {fileID: 95082292289474176}
+  - component: {fileID: 136579254549356128}
   - component: {fileID: 195859442257313014}
   - component: {fileID: 114204568521233344}
   - component: {fileID: 114293998212719322}
   - component: {fileID: 114328233272178766}
   - component: {fileID: 114111285037881392}
   - component: {fileID: 114146617025613152}
-  - component: {fileID: 114759497628695692}
-  - component: {fileID: 114876418175196676}
   m_Layer: 8
   m_Name: Rifle_Dog_Red
   m_TagString: Red_Team
@@ -3201,7 +3199,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114759497628695692}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickAttackButton
         m_Mode: 1
         m_Arguments:
@@ -3323,9 +3321,7 @@ MonoBehaviour:
   selectParticles: {fileID: 198208138472265260}
   currentState: 0
   enemiesSeen: []
-  gameController: {fileID: 0}
   gunEffects: {fileID: 0}
-  UIController: {fileID: 0}
   accuracyDisplay: {fileID: 1576996863784020}
 --- !u!114 &114226778474059248
 MonoBehaviour:
@@ -3446,7 +3442,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114759497628695692}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickSkipTurn
         m_Mode: 1
         m_Arguments:
@@ -3836,7 +3832,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114759497628695692}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickOverwatchButton
         m_Mode: 1
         m_Arguments:
@@ -3882,27 +3878,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: 'Movement:'
---- !u!114 &114759497628695692
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1416264187905814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbfc17e90e24ed241aee2231be1a4621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPlayerHealthBar_: {fileID: 114226778474059248}
-  currentPlayerMovementBar_: {fileID: 114008441040817910}
-  currentPlayerPortrait_: {fileID: 114984131483672652}
-  currentplayerName_: {fileID: 114613595615672566}
-  currentPlayerGunName_: {fileID: 114962927179478764}
-  currentPlayerAmmoCount_: {fileID: 114880745761117584}
-  attackMode_: {fileID: 114375193530499794}
-  outOfRange_: {fileID: 114516474131184044}
-  needToReload_: {fileID: 114021851292553476}
-  characterHud: {fileID: 0}
 --- !u!114 &114822402197920940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3990,17 +3965,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114876418175196676
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1416264187905814}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff17285a82957d45a411265c25e6668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114880745761117584
 MonoBehaviour:
   m_ObjectHideFlags: 1

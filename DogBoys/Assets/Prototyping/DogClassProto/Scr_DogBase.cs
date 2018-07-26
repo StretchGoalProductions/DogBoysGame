@@ -22,9 +22,7 @@ public class Scr_DogBase : MonoBehaviour {
 	public dogState currentState;
 	public List<GameObject> enemiesSeen;
 
-	public Scr_GameController gameController;
 	public GunEffects gunEffects;
-	public Scr_UIController UIController;
 
     public GameObject accuracyDisplay;
 
@@ -38,9 +36,7 @@ public class Scr_DogBase : MonoBehaviour {
 		currentState = dogState.unselected;
 		enemiesSeen = new List<GameObject>();
 
-		gameController = Scr_GameController.Instance;
 		gunEffects = GunEffects.Instance();
-		UIController = GetComponent<Scr_UIController>();
 
 		currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
 		currentNode.currentState = Cls_Node.nodeState.player;
@@ -51,7 +47,7 @@ public class Scr_DogBase : MonoBehaviour {
         selectCooldown -= Time.deltaTime;
         
         // Display Accuracy
-        if (Scr_GameController.attackMode_ && (Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team")) {
+        if (Scr_GameController.attackMode_ && ((Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team"))) {
             accuracyDisplay.SetActive(true);
             GameObject attacker = Scr_GameController.selectedDog_;
             int hitChance = (int)(ChanceToHit(attacker, gameObject) * 100.0f);
@@ -70,9 +66,11 @@ public class Scr_DogBase : MonoBehaviour {
 	void OnMouseOver() {
 		if(!EventSystem.current.IsPointerOverGameObject())
 		{
-			if(currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0 && Scr_GameController.selectedDog_ == null) {
-				SelectCharacter();
-			}
+            if ((Scr_GameController.blueTeamTurn_ && gameObject.tag == "Blue_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Red_Team")) {
+                if (currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0 && Scr_GameController.selectedDog_ == null) {
+                    SelectCharacter();
+                }
+            }
 			else if (currentState != dogState.attack && Scr_GameController.attackMode_) {
 				// Do shooting here (see methods fire and reload)
 				// Check if same or different team
@@ -176,7 +174,8 @@ public class Scr_DogBase : MonoBehaviour {
 
 	public void SelectCharacter() {
 		currentState = Scr_DogBase.dogState.selected;
-		UIController.CharacterHudSet(true);
+		Scr_UIController.CharacterHudSet(true);
+        Scr_UIController.updateCurrentHealthBar(health, MAX_HEALTH);
 		selectParticles.Play();
 		Scr_GameController.selectedDog_ = gameObject;
 		selectCooldown = 0.2f;
@@ -193,7 +192,7 @@ public class Scr_DogBase : MonoBehaviour {
 
 		hitParticles.Play();
 		gunEffects.Hit();
-		UIController.updateCurrentHealthBar(health, MAX_HEALTH);
+		Scr_UIController.updateCurrentHealthBar(health, MAX_HEALTH);
 
 		if (health <= 0)
 			Die();
@@ -201,7 +200,7 @@ public class Scr_DogBase : MonoBehaviour {
 
 	public void UnselectCharacter() {
 		currentState = Scr_DogBase.dogState.unselected;
-		UIController.CharacterHudSet(false);
+		Scr_UIController.CharacterHudSet(false);
 		selectParticles.Stop();
 		Scr_GameController.selectedDog_ = null;
 		Scr_GameController.attackMode_ = false;

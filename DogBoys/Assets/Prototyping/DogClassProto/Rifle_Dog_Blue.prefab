@@ -1427,16 +1427,14 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4985255033259876}
-  - component: {fileID: 136334174339848904}
   - component: {fileID: 95639804003703488}
+  - component: {fileID: 136334174339848904}
   - component: {fileID: 195525199648148150}
   - component: {fileID: 114169049900156190}
   - component: {fileID: 114759721103607332}
   - component: {fileID: 114166376887421128}
   - component: {fileID: 114352397475495274}
   - component: {fileID: 114375888119559210}
-  - component: {fileID: 114929267440336126}
-  - component: {fileID: 114546124835645006}
   m_Layer: 8
   m_Name: Rifle_Dog_Blue
   m_TagString: Blue_Team
@@ -3034,7 +3032,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114929267440336126}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickSkipTurn
         m_Mode: 1
         m_Arguments:
@@ -3079,9 +3077,7 @@ MonoBehaviour:
   selectParticles: {fileID: 198377841852925314}
   currentState: 0
   enemiesSeen: []
-  gameController: {fileID: 0}
   gunEffects: {fileID: 0}
-  UIController: {fileID: 0}
   accuracyDisplay: {fileID: 1879341876088476}
 --- !u!114 &114173770761293658
 MonoBehaviour:
@@ -3408,7 +3404,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114929267440336126}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickAttackButton
         m_Mode: 1
         m_Arguments:
@@ -3599,17 +3595,6 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: Need to Reload
---- !u!114 &114546124835645006
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1867375930216830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ff17285a82957d45a411265c25e6668, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114546466693663782
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4017,7 +4002,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 114929267440336126}
+      - m_Target: {fileID: 0}
         m_MethodName: OnClickOverwatchButton
         m_Mode: 1
         m_Arguments:
@@ -4111,27 +4096,6 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
---- !u!114 &114929267440336126
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1867375930216830}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dbfc17e90e24ed241aee2231be1a4621, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentPlayerHealthBar_: {fileID: 114505506496520800}
-  currentPlayerMovementBar_: {fileID: 114203746181891594}
-  currentPlayerPortrait_: {fileID: 114910329474618326}
-  currentplayerName_: {fileID: 114413845291643704}
-  currentPlayerGunName_: {fileID: 114229475069083142}
-  currentPlayerAmmoCount_: {fileID: 114906490393582944}
-  attackMode_: {fileID: 114919693638140646}
-  outOfRange_: {fileID: 114025749397511604}
-  needToReload_: {fileID: 114543969308336226}
-  characterHud: {fileID: 0}
 --- !u!114 &114939348518509842
 MonoBehaviour:
   m_ObjectHideFlags: 1
