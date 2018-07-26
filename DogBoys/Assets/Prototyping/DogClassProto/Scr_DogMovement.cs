@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.EventSystems;
 
 public class Scr_DogMovement : MonoBehaviour {
 
@@ -45,7 +46,7 @@ public class Scr_DogMovement : MonoBehaviour {
 				}
 			}
 		}
-		else if(Input.GetMouseButtonDown(0) && dog.currentState == Scr_DogBase.dogState.selected && dog.movesLeft > 0 && dog.selectCooldown <= 0) {
+		else if(Input.GetMouseButtonDown(0) && dog.currentState == Scr_DogBase.dogState.selected && dog.movesLeft > 0 && dog.selectCooldown <= 0 && !EventSystem.current.IsPointerOverGameObject()) {
 			Vector3 mouse = Input.mousePosition;
 			Ray castPoint = mainCamera.ScreenPointToRay(mouse);
 

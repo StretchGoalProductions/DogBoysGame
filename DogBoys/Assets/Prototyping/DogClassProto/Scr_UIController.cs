@@ -63,7 +63,10 @@ public class Scr_UIController : MonoBehaviour {
 
     public void OnClickAttackButton() {
 		Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
-		dog.currentState = Scr_DogBase.dogState.attack;
+        if(Scr_GameController.attackMode_)
+		    dog.currentState = Scr_DogBase.dogState.attack;
+        else
+            dog.currentState = Scr_DogBase.dogState.selected;
         attackMode_.enabled = Scr_GameController.attackMode_;
     }
 

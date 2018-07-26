@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Scr_DogBase : MonoBehaviour {
 
@@ -61,22 +62,25 @@ public class Scr_DogBase : MonoBehaviour {
     }
 	
 	void OnMouseOver() {
-		if(currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0 && Scr_GameController.selectedDog_ == null) {
-			SelectCharacter();
-		}
-		else if (currentState != dogState.attack && Scr_GameController.attackMode_) {
-            // Do shooting here (see methods fire and reload)
-            // Check if same or different team
-            // Check if in range
-            // Check if shot will pass through wall, cover, partial cover, or nothing
-            // Probably have a seperate script with a function that does these things an call function here
+		if(!EventSystem.current.IsPointerOverGameObject())
+		{
+			if(currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0 && Scr_GameController.selectedDog_ == null) {
+				SelectCharacter();
+			}
+			else if (currentState != dogState.attack && Scr_GameController.attackMode_) {
+				// Do shooting here (see methods fire and reload)
+				// Check if same or different team
+				// Check if in range
+				// Check if shot will pass through wall, cover, partial cover, or nothing
+				// Probably have a seperate script with a function that does these things an call function here
 
-            if (Input.GetMouseButtonDown(0) && (Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team")) {
-                GameObject attacker = Scr_GameController.selectedDog_;
-                float hitChance = ChanceToHit(attacker, gameObject);
-                attacker.GetComponent<Scr_DogBase>().Fire(this, hitChance);
-            }
-        }
+				if (Input.GetMouseButtonDown(0) && (Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team")) {
+					GameObject attacker = Scr_GameController.selectedDog_;
+					float hitChance = ChanceToHit(attacker, gameObject);
+					attacker.GetComponent<Scr_DogBase>().Fire(this, hitChance);
+				}
+			}
+		}
 	}
 
     public float ChanceToHit(GameObject attacker, GameObject defender) {
