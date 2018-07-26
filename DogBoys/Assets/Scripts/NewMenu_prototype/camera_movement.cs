@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class camera_movement : MonoBehaviour {
-
+public class camera_movement : MonoBehaviour
+{
     //positions for movement
     [SerializeField]
     private Vector3 start; //= new Vector3(0,5,-23);
@@ -19,11 +19,20 @@ public class camera_movement : MonoBehaviour {
     [SerializeField]
     private GameObject door_r;
     //lerp times
-    private float doorTime = 5;
-    private float barTime = 3;
+    private float doorTime = 2.5f;
+    private float barTime = .5f;
     private float currentLerpTime = 0;
-    //action #
+    //action # -- 0 = stationary, 1-5 = moving
     int action;
+    //menus
+    [SerializeField]
+    private GameObject titlePanel;
+    [SerializeField]
+    private GameObject draftPanel;
+    [SerializeField]
+    private GameObject optionsPanel;
+    [SerializeField]
+    private GameObject levelPanel;
 
 	// Use this for initialization
 	void Start () {
@@ -33,7 +42,7 @@ public class camera_movement : MonoBehaviour {
 	// Update is called once per frame
     void Update()
     {
-
+        #region mouse input
         if (Input.GetMouseButtonDown(0))
         {
             RaycastHit hit;
@@ -44,81 +53,107 @@ public class camera_movement : MonoBehaviour {
                     //Debug.Log("door clicked");
                     door_l.GetComponent<open_door>().open(0);   //open left door
                     door_r.GetComponent<open_door>().open(1);   //open right door
+                    titlePanel.SetActive(false);
                     action = 1;
                 }else if (hit.collider.gameObject.name == "To_Options"){
+                    draftPanel.SetActive(false);
                     action = 2;
                 }
                 else if (hit.collider.gameObject.name == "From_Options"){
+                    optionsPanel.SetActive(false);
                     action = 3;
                 }
                 else if (hit.collider.gameObject.name == "To_Level"){
+                    draftPanel.SetActive(false);
                     action = 4;
                 }
                 else if (hit.collider.gameObject.name == "From_Level"){
+                    levelPanel.SetActive(false);
                     action = 5;
                 }
             }
         }
+        #endregion
 
-        //move through door
+        #region movement
+        //check movement
+        //move through door -> draft
         if (action == 1)
         {
-            currentLerpTime += Time.deltaTime;
-            if (currentLerpTime >= doorTime)
+            moveTo(start, draft, doorTime);
+            if (checkPosition(draft))
             {
-                currentLerpTime = doorTime;
+                action = 0;
+                draftPanel.SetActive(true);
             }
-            float perc = currentLerpTime / doorTime;
-            this.gameObject.transform.position = Vector3.Lerp(start, draft, perc);
         }
-
         //draft -> options
-        if (action == 2)
+        else if (action == 2)
         {
-            currentLerpTime += Time.deltaTime;
-            if (currentLerpTime >= barTime)
+            moveTo(draft, options, barTime);
+            if (checkPosition(options))
             {
-                currentLerpTime = barTime;
+                action = 0;
+                optionsPanel.SetActive(true);
             }
-            float perc = currentLerpTime / barTime;
-            this.gameObject.transform.position = Vector3.Lerp(draft, options, perc);
         }
 
         //options -> draft
-        if (action == 3)
+        else if (action == 3)
         {
-            currentLerpTime += Time.deltaTime;
-            if (currentLerpTime >= barTime)
+            moveTo(options, draft, barTime);
+            if (checkPosition(draft))
             {
-                currentLerpTime = barTime;
+                action = 0;
+                draftPanel.SetActive(true);
             }
-            float perc = currentLerpTime / barTime;
-            this.gameObject.transform.position = Vector3.Lerp(options, draft, perc);
         }
 
         //draft -> level
-        if (action == 4)
+        else if (action == 4)
         {
-            currentLerpTime += Time.deltaTime;
-            if (currentLerpTime >= barTime)
+            moveTo(draft, level, barTime);
+            if (checkPosition(level))
             {
-                currentLerpTime = barTime;
+                action = 0;
+                levelPanel.SetActive(true);
             }
-            float perc = currentLerpTime / barTime;
-            this.gameObject.transform.position = Vector3.Lerp(draft, level, perc);
         }
-
         //level -> draft
-        if (action == 5)
+        else if (action == 5)
         {
-            currentLerpTime += Time.deltaTime;
-            if (currentLerpTime >= barTime)
-            {
-                currentLerpTime = barTime;
+            moveTo(level, draft, barTime);
+            if(checkPosition(draft)){
+                action = 0;
+                draftPanel.SetActive(true);
             }
-            float perc = currentLerpTime / barTime;
-            this.gameObject.transform.position = Vector3.Lerp(level, draft, perc);
         }
-
+        //movement complete -- reset currentLerpTime
+        else if (action == 0)
+        {
+            currentLerpTime = 0;
+        }
+        #endregion
+    
     }
+
+    void moveTo(Vector3 from, Vector3 to, float maxTime)
+    {
+        currentLerpTime += Time.deltaTime;
+        if (currentLerpTime >= maxTime)
+        {
+            currentLerpTime = maxTime;
+        }
+        float perc = currentLerpTime / maxTime;
+        this.gameObject.transform.position = Vector3.Lerp(from, to, perc);
+    }
+
+    bool checkPosition(Vector3 check)
+    {
+        if (this.transform.position == check)
+            return true;
+        else
+            return false;
+    }
+
 }

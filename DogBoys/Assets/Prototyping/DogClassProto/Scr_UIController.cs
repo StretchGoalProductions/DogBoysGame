@@ -6,37 +6,42 @@ using UnityEngine.UI; //Need for UI components
 public class Scr_UIController : MonoBehaviour {
 
     public Image currentPlayerHealthBar_;
+    public static Image staticImageHealthBar;
+
     public Image currentPlayerMovementBar_;
     public Image currentPlayerPortrait_;
     public Text currentplayerName_;
     public Text currentPlayerGunName_;
     public Image currentPlayerAmmoCount_;
+
 	public Image attackMode_;
+    public static Image staticImageAttackMode;
+
 	public Text outOfRange_;
 	public Text needToReload_;
 
-	private Scr_GameController gameController;
 	private Scr_DogBase dog;
-	public GameObject characterHud;
-
-    private int lastRecordedMovement_ = 0;
-    private int lastRecoredAmmoCount_ = 0;
+	public static GameObject characterHud;
 
 	public void Start() {
-		gameController = Scr_GameController.Instance;
-		dog = GetComponent<Scr_DogBase>();
 		characterHud = transform.GetChild(0).gameObject;
+
+        staticImageHealthBar = currentPlayerHealthBar_;
+        staticImageAttackMode = attackMode_;
 	}
 
 
 
-	public void CharacterHudSet(bool setActive) {
+	public static void CharacterHudSet(bool setActive) {
 		characterHud.SetActive(setActive);
+        if(!setActive) {
+            staticImageAttackMode.gameObject.SetActive(setActive);
+        }
 	}
 
-    public void updateCurrentHealthBar(int currentHealth, int maxHealth) {
+    public static void updateCurrentHealthBar(int currentHealth, int maxHealth) {
             float newFillAmount = ((float)currentHealth) / maxHealth;
-            currentPlayerHealthBar_.fillAmount = newFillAmount;
+            staticImageHealthBar.fillAmount = newFillAmount;
     }
 
     public void updateCurrentMovementBar(int currentMovement, int maxMovement) {
@@ -62,12 +67,21 @@ public class Scr_UIController : MonoBehaviour {
     }
 
     public void OnClickAttackButton() {
+        dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+
 		Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
-		dog.currentState = Scr_DogBase.dogState.attack;
-        attackMode_.enabled = Scr_GameController.attackMode_;
+        if(Scr_GameController.attackMode_) {
+		    dog.currentState = Scr_DogBase.dogState.attack;
+        }
+        else {
+            dog.currentState = Scr_DogBase.dogState.selected;
+        }
+        attackMode_.gameObject.SetActive(Scr_GameController.attackMode_);
     }
 
     public void OnClickOverwatchButton() {
+        dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+
         dog.currentState = Scr_DogBase.dogState.overwatch;
 		dog.movesLeft = 0;
 		dog.UnselectCharacter();
@@ -78,6 +92,8 @@ public class Scr_UIController : MonoBehaviour {
     }
 
     public void OnClickSkipTurn() {
+        dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+
 		dog.SkipTurn ();
     }
 }

@@ -4,16 +4,23 @@ using UnityEngine;
 
 public class Scr_Hotkeys : MonoBehaviour {
 
-	private Scr_DogBase dog;
+    private GameObject dogObj;
+	private Scr_DogBase dogScr;
+    private Scr_UIController UICont;
 
-	void Start () {
-		dog = GetComponent<Scr_DogBase>();
-	}
+    void Start() {
+        UICont = GetComponent<Scr_UIController>();
+    }
 	
 	void Update () {
-		if(dog.currentState == Scr_DogBase.dogState.selected) {
-			CheckForHotKeyPress();
-		}
+        dogObj = Scr_GameController.selectedDog_;
+
+        if (dogObj != null) {
+            dogScr = dogObj.GetComponent<Scr_DogBase>();
+            if (dogScr.currentState == Scr_DogBase.dogState.selected) {
+                CheckForHotKeyPress();
+            }
+        }
 
 		if (Input.GetKeyDown(KeyCode.Escape))
         {
@@ -29,22 +36,22 @@ public class Scr_Hotkeys : MonoBehaviour {
         //Hotkey for entering attackmode
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            dog.UIController.OnClickAttackButton();
+            UICont.OnClickAttackButton();
         }
         //Hotkey for Unselecting a Character
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            dog.UnselectCharacter();
+            dogScr.UnselectCharacter();
         }
         //HotKey for overwatch(setGuardDog)
         else if (Input.GetKeyDown(KeyCode.Alpha2))
         {
-            dog.UIController.OnClickOverwatchButton();
+            UICont.OnClickOverwatchButton();
         }
         //Hotkey for skip turn
         else if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            dog.SkipTurn();
+            dogScr.SkipTurn();
         }
     }
 }
