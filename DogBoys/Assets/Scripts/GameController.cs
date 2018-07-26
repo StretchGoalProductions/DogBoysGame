@@ -533,6 +533,9 @@ public class GameController : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Backspace)){
             skipTurn();
         }
+        if(Input.GetKeyDown(KeyCode.Escape)) {
+            Application.Quit();
+        }
 
         //lineOfSight();
         //winGame();
