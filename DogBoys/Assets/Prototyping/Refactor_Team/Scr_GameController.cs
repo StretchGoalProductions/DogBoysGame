@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 public class Scr_GameController : MonoBehaviour
 {
@@ -13,7 +12,7 @@ public class Scr_GameController : MonoBehaviour
     public static bool blueTeamTurn_;
     public static bool attackMode_;
     public static int roundCount_;
-    private static GameObject cameraPivot_;
+    private static Camera_Movement cameraPivot_;
     public static string displayTeamName_;
     public static Scr_GameController Instance;
     #endregion
@@ -22,7 +21,7 @@ public class Scr_GameController : MonoBehaviour
     {
         Instance = this;
         teamInfo_ = this.gameObject.GetComponent<Scr_TeamController>();
-        cameraPivot_ = GameObject.FindGameObjectsWithTag("MainCamera")[0]; //There should only be one object that is set to MainCamera
+        cameraPivot_ = Camera.main.transform.parent.GetComponent<Camera_Movement>();
         displayTeamName_ = "Blue Bandits";
         blueTeamTurn_ = true;
         redTeamTurn_ = false;
@@ -87,6 +86,8 @@ public class Scr_GameController : MonoBehaviour
     //Update all information related to the start of a new round
     private static void RoundUpdate()
     {
+        attackMode_ = false;
+        
         if (redTeamTurn_)
         {
             blueTeamTurn_ = true;
@@ -119,13 +120,23 @@ public class Scr_GameController : MonoBehaviour
     //On new round, force the camera to move   
     private static void ChangeCameraPivot()
     {
-        cameraPivot_.GetComponent<Camera_Movement>().toggle = true;
+        cameraPivot_.toggle = true;
     }
 
     //If there will be a gloabl canvas this function will handle updating the canvas information
     private static void UpdateDisplay()
     {
         return;
+    }
+    
+    public static List<GameObject> returnRedTeam()
+    {
+        return Scr_TeamController.redTeam;
+    }
+
+    public static List<GameObject> returnBlueTeam()
+    {
+        return Scr_TeamController.blueTeam;
     }
     #endregion
 
