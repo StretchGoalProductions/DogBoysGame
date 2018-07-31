@@ -53,9 +53,12 @@ public class Scr_DogMovement : MonoBehaviour {
 			RaycastHit hit;
 			
 			if(Physics.Raycast(castPoint, out hit, Mathf.Infinity, hitLayers)) {
-				Debug.Log(hit.point);
-				pathfinder.targetPosition = hit.point;
-				dog.UseMove();
+				Cls_Node thisNode = Scr_Grid.NodeFromWorldPosition(hit.point);
+
+				if(thisNode.currentState == Cls_Node.nodeState.empty) {
+					pathfinder.targetPosition = hit.point;
+					dog.UseMove();
+				}
 			}
 		}
 	}

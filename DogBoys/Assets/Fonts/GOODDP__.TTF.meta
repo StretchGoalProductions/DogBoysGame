@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 22d7bd228a8b0d7439ea188cec8e8377
+guid: ba7f2fbb059f09e42808aa159dae279a
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
-  fontSize: 16
-  forceTextureCase: -2
+  fontSize: 300
+  forceTextureCase: -1
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
@@ -13,7 +13,7 @@ TrueTypeFontImporter:
   - GoodDog Plain
   fallbackFontReferences: []
   customCharacters: 
-  fontRenderingMode: 0
+  fontRenderingMode: 1
   ascentCalculationMode: 1
   useLegacyBoundsCalculation: 0
   shouldRoundAdvanceValue: 1
