@@ -9,11 +9,14 @@ public class Scr_Pathfinding : MonoBehaviour {
 	public int maxMoveRange;
 	public int currentRange;
 
+	//public bool move;
+
 	private Scr_DogMovement dogMovement;
 
 	private void Start() {
 		dogMovement = GetComponent<Scr_DogMovement>();
 		targetPosition = transform.position;
+		//move = false;
 	}
 
 	private void Update() {
@@ -49,7 +52,7 @@ public class Scr_Pathfinding : MonoBehaviour {
 			}
 
 			foreach (Cls_Node neighborNode in Scr_Grid.GetNeighboringNodes(currentNode)) {
-				if((neighborNode.currentState == Cls_Node.nodeState.wall) || ClosedList.Contains(neighborNode)) {
+				if((neighborNode.currentState == Cls_Node.nodeState.wall) || (neighborNode.currentState == Cls_Node.nodeState.player) || ClosedList.Contains(neighborNode)) {
 					continue; // Skip if node is wall or in closed list
 				}
 
@@ -68,7 +71,7 @@ public class Scr_Pathfinding : MonoBehaviour {
 		}
 	}
 
-	private int GetDistance(Cls_Node nodeA, Cls_Node nodeB) {
+	public int GetDistance(Cls_Node nodeA, Cls_Node nodeB) {
 		int iX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
 		int iY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
 
