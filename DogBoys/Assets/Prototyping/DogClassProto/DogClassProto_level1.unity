@@ -5317,6 +5317,9 @@ MonoBehaviour:
   playerMask:
     serializedVersion: 2
     m_Bits: 256
+  coverMask:
+    serializedVersion: 2
+    m_Bits: 0
   inspectGridWorldSize: {x: 24, y: 32}
   nodeRadius: 0.5
   nodeDistance: 0

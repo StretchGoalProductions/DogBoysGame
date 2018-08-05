@@ -26,6 +26,9 @@ public class Scr_DogBase : MonoBehaviour {
 
     public GameObject accuracyDisplay;
 
+    public float AngleScale = 0.01f;
+    private LineRenderer rangeCircle;
+
     void Start() {
 		health = 100;
 		movesLeft = 2;
@@ -36,7 +39,9 @@ public class Scr_DogBase : MonoBehaviour {
 		currentState = dogState.unselected;
 		enemiesSeen = new List<GameObject>();
 
-		gunEffects = GunEffects.Instance();
+        rangeCircle = GetComponent<LineRenderer>();
+
+        gunEffects = GunEffects.Instance();
 
 		currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
 		currentNode.currentState = Cls_Node.nodeState.player;
@@ -61,8 +66,28 @@ public class Scr_DogBase : MonoBehaviour {
         {
             lineOfSight();
         }
+
+        if (Scr_GameController.attackMode_ && Scr_GameController.selectedDog_ == gameObject) {
+            rangeCircle.enabled = true;
+            DrawRange();
+        } else {
+            rangeCircle.enabled = false;
+        }
     }
 	
+    void DrawRange() {
+        float radius = weaponStats.shootRange;
+        float angle = 0f;
+        int size = (int)((1f / AngleScale) + 1f);
+        rangeCircle.positionCount = size;
+        for (int i = 0; i < size; i++) {
+            angle += (2.0f * Mathf.PI * AngleScale);
+            float x = radius * Mathf.Cos(angle);
+            float y = radius * Mathf.Sin(angle);
+            rangeCircle.SetPosition(i, transform.position + new Vector3(x, 0, y));
+        }
+    }
+
 	void OnMouseOver() {
 		if(!EventSystem.current.IsPointerOverGameObject())
 		{
