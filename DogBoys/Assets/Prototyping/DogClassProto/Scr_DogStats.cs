@@ -11,6 +11,7 @@ public class Scr_DogStats : MonoBehaviour {
         public int shootFalloff;
         public int shootDamage;
 		public int movesUsed;
+		public float shootAngle;
 	}
 
 	public struct dogStats {

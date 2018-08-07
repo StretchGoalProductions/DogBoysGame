@@ -985,7 +985,7 @@ GameObject:
   - component: {fileID: 114131006257160534}
   - component: {fileID: 114201985288822272}
   - component: {fileID: 120555786646392614}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Shotgun_Dog_Blue
   m_TagString: Blue_Team
   m_Icon: {fileID: 0}
@@ -2756,6 +2756,9 @@ MonoBehaviour:
   selectParticles: {fileID: 198409959091594744}
   currentState: 0
   enemiesSeen: []
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 8192
   gunEffects: {fileID: 0}
   accuracyDisplay: {fileID: 1276260834262084}
   AngleScale: 0.01
@@ -2892,6 +2895,7 @@ MonoBehaviour:
   shootFalloff: 10
   shootDamage: 34
   movesUsed: 1
+  shootAngle: 45
 --- !u!114 &114937534992660328
 MonoBehaviour:
   m_ObjectHideFlags: 1

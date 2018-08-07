@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 114111285037881392}
   - component: {fileID: 114146617025613152}
   - component: {fileID: 120423679199253082}
-  m_Layer: 8
+  m_Layer: 13
   m_Name: Rifle_Dog_Red
   m_TagString: Red_Team
   m_Icon: {fileID: 0}
@@ -2442,6 +2442,7 @@ MonoBehaviour:
   shootFalloff: 20
   shootDamage: 40
   movesUsed: 1
+  shootAngle: 1
 --- !u!114 &114111285037881392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2512,6 +2513,9 @@ MonoBehaviour:
   selectParticles: {fileID: 198208138472265260}
   currentState: 0
   enemiesSeen: []
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
   gunEffects: {fileID: 0}
   accuracyDisplay: {fileID: 1576996863784020}
   AngleScale: 0.01
