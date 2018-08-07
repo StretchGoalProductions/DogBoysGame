@@ -1005,7 +1005,7 @@ GameObject:
   - component: {fileID: 114352397475495274}
   - component: {fileID: 114375888119559210}
   - component: {fileID: 120960204145955626}
-  m_Layer: 8
+  m_Layer: 12
   m_Name: Rifle_Dog_Blue
   m_TagString: Blue_Team
   m_Icon: {fileID: 0}
@@ -2457,6 +2457,9 @@ MonoBehaviour:
   selectParticles: {fileID: 198377841852925314}
   currentState: 0
   enemiesSeen: []
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 8192
   gunEffects: {fileID: 0}
   accuracyDisplay: {fileID: 1879341876088476}
   AngleScale: 0.01
@@ -2589,6 +2592,7 @@ MonoBehaviour:
   shootFalloff: 20
   shootDamage: 40
   movesUsed: 1
+  shootAngle: 1
 --- !u!114 &114751158171966934
 MonoBehaviour:
   m_ObjectHideFlags: 1

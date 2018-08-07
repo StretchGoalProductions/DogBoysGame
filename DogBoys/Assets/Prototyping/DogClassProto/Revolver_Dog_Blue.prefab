@@ -58,7 +58,7 @@ GameObject:
   - component: {fileID: 114055989953244532}
   - component: {fileID: 114788646567954642}
   - component: {fileID: 120659266410293910}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Revolver_Dog_Blue
   m_TagString: Blue_Team
   m_Icon: {fileID: 0}
@@ -2347,6 +2347,9 @@ MonoBehaviour:
   selectParticles: {fileID: 198188700001673678}
   currentState: 0
   enemiesSeen: []
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 8192
   gunEffects: {fileID: 0}
   accuracyDisplay: {fileID: 1969739447700064}
   AngleScale: 0.01
@@ -2427,6 +2430,7 @@ MonoBehaviour:
   shootFalloff: 16
   shootDamage: 12
   movesUsed: 1
+  shootAngle: 1
 --- !u!120 &120035772743456376
 LineRenderer:
   m_ObjectHideFlags: 1

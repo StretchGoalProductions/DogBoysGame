@@ -21,6 +21,9 @@ public class Scr_DogBase : MonoBehaviour {
 	public enum dogState { unselected, selected, attack, moving, shooting, shot, killed, overwatch };
 	public dogState currentState;
 	public List<GameObject> enemiesSeen;
+    public List<GameObject> validTargets;
+
+    public LayerMask targetLayerMask;
 
 	public GunEffects gunEffects;
 
@@ -119,8 +122,7 @@ public class Scr_DogBase : MonoBehaviour {
 
 				if (Input.GetMouseButtonDown(0) && (Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team")) {
 					GameObject attacker = Scr_GameController.selectedDog_;
-					float hitChance = ChanceToHit(attacker, gameObject);
-					attacker.GetComponent<Scr_DogBase>().Fire(this, hitChance);
+					attacker.GetComponent<Scr_DogBase>().Fire(this);
 				}
 			}
 		}
@@ -192,9 +194,41 @@ public class Scr_DogBase : MonoBehaviour {
 		Destroy(gameObject);
     }
 
+    public void GetValidTargets(Vector3 aimAngle)
+    {
+        validTargets.Clear();
+
+        int shotDist = weaponStats.shootRange;
+        float shotAngle = weaponStats.shootAngle;
+
+        Collider[] TargetsInRange = Physics.OverlapSphere(transform.position, shotDist, targetLayerMask);
+
+        for(int i=0; i<TargetsInRange.Length; i++)
+        {
+            Transform t = TargetsInRange[i].GetComponent<Transform>();
+            Vector3 dirToTarget = (t.position - transform.position).normalized;
+
+            if(Vector3.Angle(aimAngle, dirToTarget) < shotAngle/2)
+            {
+                validTargets.Add(TargetsInRange[i].gameObject);
+            }
+        }
+
+
+        
+    }
+
 	public void Fire(Scr_DogBase targetDog, float accuracy = 1.0f, float damageReduction = 0.0f) {
-		if(weaponStats.shotsRemaining > 0 && Random.value <= accuracy) {
-			targetDog.TakeDamage( weaponStats.shootDamage - (int) (weaponStats.shootDamage * damageReduction));
+        Debug.Log("Fire");
+        GetValidTargets((targetDog.transform.position-transform.position).normalized);
+		if(weaponStats.shotsRemaining > 0) {
+            foreach (GameObject target in validTargets)
+            {
+                if(Random.value <= ChanceToHit(gameObject, target))
+                {
+                    target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
+                }
+            }
 			weaponStats.shotsRemaining--;
 			UseMove();
 			UnselectCharacter();

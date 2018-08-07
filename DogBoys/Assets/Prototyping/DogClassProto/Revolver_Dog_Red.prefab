@@ -963,7 +963,7 @@ GameObject:
   - component: {fileID: 114195355911403242}
   - component: {fileID: 114945796392693744}
   - component: {fileID: 120547507945995026}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Revolver_Dog_Red
   m_TagString: Red_Team
   m_Icon: {fileID: 0}
@@ -2271,6 +2271,9 @@ MonoBehaviour:
   selectParticles: {fileID: 198406587471597292}
   currentState: 0
   enemiesSeen: []
+  targetLayerMask:
+    serializedVersion: 2
+    m_Bits: 4096
   gunEffects: {fileID: 0}
   accuracyDisplay: {fileID: 1719034678306390}
   AngleScale: 0.01
@@ -2364,6 +2367,7 @@ MonoBehaviour:
   shootFalloff: 16
   shootDamage: 12
   movesUsed: 1
+  shootAngle: 1
 --- !u!114 &114810629053284164
 MonoBehaviour:
   m_ObjectHideFlags: 1
