@@ -27,7 +27,8 @@ public class Scr_DogBase : MonoBehaviour {
     public GameObject accuracyDisplay;
 
     public float AngleScale = 0.01f;
-    private LineRenderer rangeCircle;
+    public LineRenderer rangeCircle;
+    public LineRenderer falloffCircle;
 
     void Start() {
 		health = 100;
@@ -39,7 +40,7 @@ public class Scr_DogBase : MonoBehaviour {
 		currentState = dogState.unselected;
 		enemiesSeen = new List<GameObject>();
 
-        rangeCircle = GetComponent<LineRenderer>();
+        //rangeCircle = GetComponent<LineRenderer>();
 
         gunEffects = GunEffects.Instance();
 
@@ -69,9 +70,11 @@ public class Scr_DogBase : MonoBehaviour {
 
         if (Scr_GameController.attackMode_ && Scr_GameController.selectedDog_ == gameObject) {
             rangeCircle.enabled = true;
+            falloffCircle.enabled = true;
             DrawRange();
         } else {
             rangeCircle.enabled = false;
+            falloffCircle.enabled = false;
         }
     }
 	
@@ -85,6 +88,17 @@ public class Scr_DogBase : MonoBehaviour {
             float x = radius * Mathf.Cos(angle);
             float y = radius * Mathf.Sin(angle);
             rangeCircle.SetPosition(i, transform.position + new Vector3(x, 0, y));
+        }
+
+        radius = weaponStats.shootFalloff;
+        angle = 0f;
+        size = (int)((1f / AngleScale) + 1f);
+        falloffCircle.positionCount = size;
+        for (int i = 0; i < size; i++) {
+            angle += (2.0f * Mathf.PI * AngleScale);
+            float x = radius * Mathf.Cos(angle);
+            float y = radius * Mathf.Sin(angle);
+            falloffCircle.SetPosition(i, transform.position + new Vector3(x, 0, y));
         }
     }
 
