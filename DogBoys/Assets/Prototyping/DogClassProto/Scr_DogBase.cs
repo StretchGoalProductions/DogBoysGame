@@ -21,10 +21,17 @@ public class Scr_DogBase : MonoBehaviour {
 	public enum dogState { unselected, selected, attack, moving, shooting, shot, killed, overwatch };
 	public dogState currentState;
 	public List<GameObject> enemiesSeen;
+    public List<GameObject> validTargets;
+
+    public LayerMask targetLayerMask;
 
 	public GunEffects gunEffects;
 
     public GameObject accuracyDisplay;
+
+    public float AngleScale = 0.01f;
+    public LineRenderer rangeCircle;
+    public LineRenderer falloffCircle;
 
     void Start() {
 		health = 100;
@@ -36,7 +43,9 @@ public class Scr_DogBase : MonoBehaviour {
 		currentState = dogState.unselected;
 		enemiesSeen = new List<GameObject>();
 
-		gunEffects = GunEffects.Instance();
+        //rangeCircle = GetComponent<LineRenderer>();
+
+        gunEffects = GunEffects.Instance();
 
 		currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
 		currentNode.currentState = Cls_Node.nodeState.player;
@@ -61,8 +70,41 @@ public class Scr_DogBase : MonoBehaviour {
         {
             lineOfSight();
         }
+
+        if (Scr_GameController.attackMode_ && Scr_GameController.selectedDog_ == gameObject) {
+            rangeCircle.enabled = true;
+            falloffCircle.enabled = true;
+            DrawRange();
+        } else {
+            rangeCircle.enabled = false;
+            falloffCircle.enabled = false;
+        }
     }
 	
+    void DrawRange() {
+        float radius = weaponStats.shootRange;
+        float angle = 0f;
+        int size = (int)((1f / AngleScale) + 1f);
+        rangeCircle.positionCount = size;
+        for (int i = 0; i < size; i++) {
+            angle += (2.0f * Mathf.PI * AngleScale);
+            float x = radius * Mathf.Cos(angle);
+            float y = radius * Mathf.Sin(angle);
+            rangeCircle.SetPosition(i, transform.position + new Vector3(x, 0, y));
+        }
+
+        radius = weaponStats.shootFalloff;
+        angle = 0f;
+        size = (int)((1f / AngleScale) + 1f);
+        falloffCircle.positionCount = size;
+        for (int i = 0; i < size; i++) {
+            angle += (2.0f * Mathf.PI * AngleScale);
+            float x = radius * Mathf.Cos(angle);
+            float y = radius * Mathf.Sin(angle);
+            falloffCircle.SetPosition(i, transform.position + new Vector3(x, 0, y));
+        }
+    }
+
 	void OnMouseOver() {
 		if(!EventSystem.current.IsPointerOverGameObject())
 		{
@@ -80,8 +122,7 @@ public class Scr_DogBase : MonoBehaviour {
 
 				if (Input.GetMouseButtonDown(0) && (Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team")) {
 					GameObject attacker = Scr_GameController.selectedDog_;
-					float hitChance = ChanceToHit(attacker, gameObject);
-					attacker.GetComponent<Scr_DogBase>().Fire(this, hitChance);
+					attacker.GetComponent<Scr_DogBase>().Fire(this);
 				}
 			}
 		}
@@ -153,9 +194,41 @@ public class Scr_DogBase : MonoBehaviour {
 		Destroy(gameObject);
     }
 
+    public void GetValidTargets(Vector3 aimAngle)
+    {
+        validTargets.Clear();
+
+        int shotDist = weaponStats.shootRange;
+        float shotAngle = weaponStats.shootAngle;
+
+        Collider[] TargetsInRange = Physics.OverlapSphere(transform.position, shotDist, targetLayerMask);
+
+        for(int i=0; i<TargetsInRange.Length; i++)
+        {
+            Transform t = TargetsInRange[i].GetComponent<Transform>();
+            Vector3 dirToTarget = (t.position - transform.position).normalized;
+
+            if(Vector3.Angle(aimAngle, dirToTarget) < shotAngle/2)
+            {
+                validTargets.Add(TargetsInRange[i].gameObject);
+            }
+        }
+
+
+        
+    }
+
 	public void Fire(Scr_DogBase targetDog, float accuracy = 1.0f, float damageReduction = 0.0f) {
-		if(weaponStats.shotsRemaining > 0 && Random.value <= accuracy) {
-			targetDog.TakeDamage( weaponStats.shootDamage - (int) (weaponStats.shootDamage * damageReduction));
+        Debug.Log("Fire");
+        GetValidTargets((targetDog.transform.position-transform.position).normalized);
+		if(weaponStats.shotsRemaining > 0) {
+            foreach (GameObject target in validTargets)
+            {
+                if(Random.value <= ChanceToHit(gameObject, target))
+                {
+                    target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
+                }
+            }
 			weaponStats.shotsRemaining--;
 			UseMove();
 			UnselectCharacter();

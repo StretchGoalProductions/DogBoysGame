@@ -106,3 +106,4 @@ MonoBehaviour:
   shootFalloff: 10
   shootDamage: 34
   movesUsed: 1
+  shootAngle: 45

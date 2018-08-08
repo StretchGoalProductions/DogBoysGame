@@ -18,6 +18,11 @@ public class Scr_DogMovement : MonoBehaviour {
 
 	public int maxMoveRange;
 
+    public GameObject moveRangeIndicator;
+    public GameObject cantMoveIndicator;
+    private bool displayed = false;
+    private List<GameObject> rangeIndicators = new List<GameObject>();
+
 	void Start () {
 		myAgent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         myAnim = GetComponent<Animator>();
@@ -53,14 +58,57 @@ public class Scr_DogMovement : MonoBehaviour {
 			RaycastHit hit;
 			
 			if(Physics.Raycast(castPoint, out hit, Mathf.Infinity, hitLayers)) {
-				Debug.Log(hit.point);
-				pathfinder.targetPosition = hit.point;
-				dog.UseMove();
+				Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(hit.point);
+
+				if(targetNode.currentState == Cls_Node.nodeState.empty) {
+					Cls_Node currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
+					int distance = pathfinder.GetDistance(currentNode, targetNode);
+
+					Debug.Log(distance);
+
+					if(distance <= maxMoveRange*10) {
+						Debug.Log("moving");
+						pathfinder.targetPosition = hit.point;
+						dog.UseMove();
+					}
+				}
 			}
 		}
+
+        if (dog.currentState == Scr_DogBase.dogState.selected) {
+            displayRange();
+        } else {
+            removeRange();
+        }
 	}
 
+    public void displayRange() {
+        if (!displayed) {
+            Cls_Node currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
+            for (int i = 0; i < Scr_Grid.gridWorldSize.x; i++) {
+                for (int j = 0; j < Scr_Grid.gridWorldSize.y; j++) {
+                    int distance = pathfinder.GetDistance(currentNode, Scr_Grid.grid[i, j]);
+                    if (distance <= maxMoveRange * 10 && Scr_Grid.grid[i, j].currentState != Cls_Node.nodeState.wall && Scr_Grid.grid[i, j].currentState != Cls_Node.nodeState.cover) {
+                        //Debug.Log("(" + Scr_Grid.grid[i, j].gridX + ", " + Scr_Grid.grid[i, j].gridY + ")");
+                        GameObject indicator = Instantiate(moveRangeIndicator, Scr_Grid.grid[i, j].position, Quaternion.identity);
+                        rangeIndicators.Add(indicator);
+                    } else if (distance <= maxMoveRange * 10) {
+                        GameObject indicator = Instantiate(cantMoveIndicator, Scr_Grid.grid[i, j].position, Quaternion.identity);
+                        rangeIndicators.Add(indicator);
+                    }
+                }
+            }
+            displayed = true;
+        }
+    }
 
+    public void removeRange() {
+        for (int i = 0; i < rangeIndicators.Count; i++) {
+            Destroy(rangeIndicators[i]);
+        }
+        rangeIndicators.Clear();
+        displayed = false;
+    }
 
 	public void SetDestination() {
 		if(dog.currentState == Scr_DogBase.dogState.selected) { // Change to selected once Select Character is refactored

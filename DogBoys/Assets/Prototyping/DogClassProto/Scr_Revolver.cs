@@ -10,6 +10,7 @@ public class Scr_Revolver : MonoBehaviour {
     public int shootFalloff;
     public int shootDamage;
 	public int movesUsed;
+	public int shootAngle;
 
 	private Scr_DogStats.weaponStats Revolver;
 	private	Scr_DogStats dogStats;
@@ -23,6 +24,7 @@ public class Scr_Revolver : MonoBehaviour {
         Revolver.shootFalloff = shootFalloff;
 		Revolver.shootDamage = shootDamage;
 		Revolver.movesUsed = movesUsed;
+		Revolver.shootAngle = shootAngle;
 
 		dogStats.thisWeapon = Revolver;
 	}
