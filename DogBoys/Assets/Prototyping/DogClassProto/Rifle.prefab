@@ -286,6 +286,7 @@ MonoBehaviour:
   shootFalloff: 20
   shootDamage: 40
   movesUsed: 1
+  shootAngle: 1
 --- !u!136 &136453868300170052
 CapsuleCollider:
   m_ObjectHideFlags: 1

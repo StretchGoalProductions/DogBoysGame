@@ -17,7 +17,7 @@ public class Scr_Hotkeys : MonoBehaviour {
 
         if (dogObj != null) {
             dogScr = dogObj.GetComponent<Scr_DogBase>();
-            if (dogScr.currentState == Scr_DogBase.dogState.selected) {
+            if (dogScr.currentState == Scr_DogBase.dogState.selected || dogScr.currentState == Scr_DogBase.dogState.attack) {
                 CheckForHotKeyPress();
             }
         }
