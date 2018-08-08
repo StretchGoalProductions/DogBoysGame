@@ -196,9 +196,7 @@ public class Scr_DogBase : MonoBehaviour {
 
     public void GetValidTargets(Vector3 aimAngle)
     {
-        validTargets.Clear();
-
-        int shotDist = weaponStats.shootRange;
+        int shotDist = weaponStats.shootFalloff;
         float shotAngle = weaponStats.shootAngle;
 
         Collider[] TargetsInRange = Physics.OverlapSphere(transform.position, shotDist, targetLayerMask);
@@ -219,8 +217,13 @@ public class Scr_DogBase : MonoBehaviour {
     }
 
 	public void Fire(Scr_DogBase targetDog, float accuracy = 1.0f, float damageReduction = 0.0f) {
-        Debug.Log("Fire");
-        GetValidTargets((targetDog.transform.position-transform.position).normalized);
+        validTargets.Clear();
+
+        if(gameObject.GetComponent<Scr_ShotgunDog>() == null)
+            validTargets.Add(targetDog.gameObject);
+        else
+            GetValidTargets((targetDog.transform.position-transform.position).normalized);
+        
 		if(weaponStats.shotsRemaining > 0) {
             foreach (GameObject target in validTargets)
             {
