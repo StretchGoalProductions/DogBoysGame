@@ -6,6 +6,7 @@ public class Scr_Grid : MonoBehaviour {
 
 	public LayerMask wallMask;
 	public LayerMask playerMask;
+	public LayerMask coverMask;
 	public Vector2 inspectGridWorldSize;
 	public static Vector2 gridWorldSize;
 	public float nodeRadius;
@@ -23,6 +24,7 @@ public class Scr_Grid : MonoBehaviour {
 	private void Awake() {
 		wallMask = LayerMask.GetMask("Wall");
 		playerMask = LayerMask.GetMask("Player");
+		coverMask = LayerMask.GetMask("Cover");
 		gridWorldSize = inspectGridWorldSize;
 		nodeDiameter = nodeRadius * 2;
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
@@ -40,10 +42,15 @@ public class Scr_Grid : MonoBehaviour {
 				Vector3 worldPoint = bottomLeft + Vector3.right * (x * nodeDiameter + nodeRadius) + Vector3.forward * (y * nodeDiameter + nodeRadius);
 				bool isWall = Physics.CheckSphere(worldPoint, nodeRadius, wallMask);
 				bool isPlayer = Physics.CheckSphere(worldPoint, nodeRadius, playerMask);
+				bool isCover = Physics.CheckSphere(worldPoint, nodeRadius, coverMask);
 
 				Cls_Node.nodeState currentState = Cls_Node.nodeState.empty;
 				if (isWall) {
 					currentState = Cls_Node.nodeState.wall;
+					grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
+				}
+				else if (isCover) {
+					currentState = Cls_Node.nodeState.cover;
 					grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
 				}
 				else if (isPlayer) {
@@ -149,18 +156,21 @@ public class Scr_Grid : MonoBehaviour {
 			else if (grid != null && !onlyDrawPath) {
 				foreach (Cls_Node node in grid) {
 					if( node.currentState == Cls_Node.nodeState.wall) {
-							Gizmos.color = Color.red;
-						}
-						else if (node.currentState == Cls_Node.nodeState.player) {
-							Gizmos.color = Color.magenta;
-						}
-						else {
-							Gizmos.color = Color.gray;
-						}
+						Gizmos.color = Color.red;
+					}
+					else if (node.currentState == Cls_Node.nodeState.cover) {
+						Gizmos.color = Color.yellow;
+					}
+					else if (node.currentState == Cls_Node.nodeState.player) {
+						Gizmos.color = Color.magenta;
+					}
+					else {
+						Gizmos.color = Color.gray;
+					}
 
-						if (finalPath != null && finalPath.Contains(node)) {
-							Gizmos.color = Color.blue;
-						}
+					if (finalPath != null && finalPath.Contains(node)) {
+						Gizmos.color = Color.blue;
+					}
 
 
 					Gizmos.DrawCube(node.position, Vector3.one * (nodeDiameter - nodeDistance));
