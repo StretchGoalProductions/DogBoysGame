@@ -5,11 +5,12 @@ using UnityEngine.UI;
 
 public class Scr_DogListable : MonoBehaviour {
 
-	public Button left;
-	public Button right;
+	public GameObject left;
+	public GameObject right;
 	public Text text;
 	public Text countText;
 	public int count;
+    public int team;    //0 = available, 1 = blue, 2 = red
 	//panels
 	private GameObject listAvailable;
 	private GameObject listBlue;
@@ -93,4 +94,25 @@ public class Scr_DogListable : MonoBehaviour {
 			}
 		}
 	}
+
+    void Update()
+    {
+        if (Scr_TeamController.menuBlueDogs.Count == 5 && team != 2)
+        {
+            left.SetActive(false);
+        }
+        else if (team != 1)
+        {
+            left.SetActive(true);
+        }
+
+        if (Scr_TeamController.menuRedDogs.Count == 5 && team != 1)
+        {
+            right.SetActive(false);
+        }
+        else if (team != 2)
+        {
+            right.SetActive(true);
+        }
+    }
 }
