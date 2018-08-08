@@ -94,6 +94,7 @@ MonoBehaviour:
   shootFalloff: 16
   shootDamage: 12
   movesUsed: 1
+  shootAngle: 1
 --- !u!135 &135527104509328852
 SphereCollider:
   m_ObjectHideFlags: 1
