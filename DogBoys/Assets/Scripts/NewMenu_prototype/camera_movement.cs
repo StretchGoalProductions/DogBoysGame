@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class camera_movement : MonoBehaviour
 {
+    #region variables
     //positions for movement
     [SerializeField]
     private Vector3 start; //= new Vector3(0,5,-23);
@@ -13,6 +14,8 @@ public class camera_movement : MonoBehaviour
     private Vector3 level; // = new Vector3(11,7,12);
     [SerializeField]
     private Vector3 options; // = new Vector3(-11,7,12);
+    [SerializeField]
+    private Vector3 howTo; // = new Vector3(0,5,10.5);
     //interactive objects w/ scripts
     [SerializeField]
     private GameObject door_l;
@@ -20,9 +23,9 @@ public class camera_movement : MonoBehaviour
     private GameObject door_r;
     //lerp times
     private float doorTime = 2.5f;
-    private float barTime = .5f;
+    private float barTime = 1.5f;
     private float currentLerpTime = 0;
-    //action # -- 0 = stationary, 1-5 = moving
+    //action # -- 0 = stationary, 1-7 = moving
     int action;
     //menus
     [SerializeField]
@@ -33,8 +36,18 @@ public class camera_movement : MonoBehaviour
     private GameObject optionsPanel;
     [SerializeField]
     private GameObject levelPanel;
+    [SerializeField]
+    private GameObject howToPanel;
+    [SerializeField]
+    private GameObject alwaysPanel;
+    //for how to movement
+    [SerializeField]
+    private Vector3 previous;
+    [SerializeField]
+    private GameObject last;
+    #endregion
 
-	// Use this for initialization
+    // Use this for initialization
 	void Start () {
         action = 0;
 	}
@@ -51,8 +64,8 @@ public class camera_movement : MonoBehaviour
             {
                 if(hit.transform.tag == "Menu_door"){
                     //Debug.Log("door clicked");
-                    door_l.GetComponent<open_door>().open(0);   //open left door
-                    door_r.GetComponent<open_door>().open(1);   //open right door
+                    door_l.GetComponent<open_door>().setOpen(0);   //open left door
+                    door_r.GetComponent<open_door>().setOpen(1);   //open right door
                     titlePanel.SetActive(false);
                     action = 1;
                 }else if (hit.collider.gameObject.name == "To_Options"){
@@ -85,6 +98,7 @@ public class camera_movement : MonoBehaviour
             {
                 action = 0;
                 draftPanel.SetActive(true);
+                alwaysPanel.SetActive(true);
             }
         }
         //draft -> options
@@ -128,6 +142,38 @@ public class camera_movement : MonoBehaviour
                 draftPanel.SetActive(true);
             }
         }
+        //anywhere -> HowTo
+        else if (action == 6){
+            if(checkPosition(draft)){
+                previous = draft;
+            }else if(checkPosition(level)){
+                previous = level;
+            }
+            else if (checkPosition(options))
+            {
+                previous = options;
+            }
+            last.SetActive(false);
+            alwaysPanel.transform.GetChild(0).gameObject.SetActive(false);
+            moveHowTo(previous, howTo, barTime);
+            if (checkPosition(howTo))
+            {
+                action = 0;
+                alwaysPanel.transform.GetChild(1).gameObject.SetActive(true);
+                howToPanel.SetActive(true);
+            }
+        }
+        //HowTo -> anywhere
+        else if(action == 7){
+            alwaysPanel.transform.GetChild(1).gameObject.SetActive(false);
+            moveHowTo(howTo, previous, barTime);
+            if (checkPosition(previous))
+            {
+                action = 0;
+                alwaysPanel.transform.GetChild(0).gameObject.SetActive(true);
+                last.SetActive(true);
+            }
+        }
         //movement complete -- reset currentLerpTime
         else if (action == 0)
         {
@@ -145,7 +191,48 @@ public class camera_movement : MonoBehaviour
             currentLerpTime = maxTime;
         }
         float perc = currentLerpTime / maxTime;
+        perc = perc*perc*perc *(perc * (6f*perc - 15f) + 10f);
         this.gameObject.transform.position = Vector3.Lerp(from, to, perc);
+    }
+
+    void moveHowTo(Vector3 from, Vector3 to, float maxTime)
+    {
+        Quaternion toHow = Quaternion.Euler(0f, 180f, 0f);
+        Quaternion fromHow = Quaternion.Euler(0f, 0f, 0f);
+        currentLerpTime += Time.deltaTime;
+        if (currentLerpTime >= maxTime)
+        {
+            currentLerpTime = maxTime;
+        }
+        float perc = currentLerpTime / maxTime;
+        perc = perc * perc * perc * (perc * (6f * perc - 15f) + 10f);
+        if(to == howTo){
+            this.gameObject.transform.position = Vector3.Lerp(from, to, perc);
+            this.gameObject.transform.rotation = Quaternion.Lerp(this.gameObject.transform.rotation, toHow, perc);
+        }else{
+            this.gameObject.transform.position = Vector3.Lerp(from, to, perc);
+            this.transform.rotation = Quaternion.Lerp(transform.rotation, fromHow, perc);
+        }
+    }
+
+    GameObject setLast(Vector3 now)
+    {
+        if(now == draft){
+            return draftPanel;
+        }
+        else if (now == level)
+        {
+            return levelPanel;
+
+        }
+        else if (now == options)
+        {
+            return optionsPanel;
+        }
+        else
+        {
+            return null;
+        }
     }
 
     bool checkPosition(Vector3 check)
@@ -156,4 +243,13 @@ public class camera_movement : MonoBehaviour
             return false;
     }
 
+    public void actionHowTo(){
+        last = setLast(this.transform.position);
+        action = 6;
+    }
+
+    public void actionFromHowTo(){
+        howToPanel.SetActive(false);
+        action = 7;
+    }
 }
