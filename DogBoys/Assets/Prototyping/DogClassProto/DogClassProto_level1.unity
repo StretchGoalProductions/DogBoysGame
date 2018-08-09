@@ -2124,6 +2124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef377fff9f0b3e243aa5b900e75a510c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winSceneInfo: {fileID: 1068490347229502, guid: 1332b26fdfc3df749b7867478f0b1949,
+    type: 2}
 --- !u!4 &566524617
 Transform:
   m_ObjectHideFlags: 0

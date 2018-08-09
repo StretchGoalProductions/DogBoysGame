@@ -15,6 +15,8 @@ public class Scr_GameController : MonoBehaviour
     private static Camera_Movement cameraPivot_;
     public static string displayTeamName_;
     public static Scr_GameController Instance;
+    public GameObject winSceneInfo;
+    public static GameObject winInfo_;
     #endregion
 
     private void Awake()
@@ -27,6 +29,7 @@ public class Scr_GameController : MonoBehaviour
         redTeamTurn_ = false;
         attackMode_ = false;
         roundCount_ = 1;
+        winInfo_ = (GameObject)Instantiate(winSceneInfo, transform.position, transform.rotation);
     }
 
     //Check for an elimination win case
@@ -34,12 +37,12 @@ public class Scr_GameController : MonoBehaviour
     {
         if (Scr_TeamController.blueTeam.Count <= 0)
         {
-            Constants.WinScreen.C_WinText = "Red Rovers Win!!";
+            winInfo_.GetComponent<cls_Win_Screne_Info>().winner_ = true;
             SceneManager.LoadScene("Win Scene");
         }
         else if (Scr_TeamController.redTeam.Count <= 0)
         {
-            Constants.WinScreen.C_WinText = "Blue Bandits Win!!";
+            winInfo_.GetComponent<cls_Win_Screne_Info>().winner_ = false;
             SceneManager.LoadScene("Win Scene");
         }
     }
