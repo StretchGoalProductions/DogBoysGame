@@ -16,6 +16,8 @@ public class Scr_GameController : MonoBehaviour
     private static Camera_Movement cameraPivot_;
     public static string displayTeamName_;
     public static Scr_GameController Instance;
+    public GameObject winInfoPrefab;
+    public static GameObject winInfo_;
     #endregion
 
     private void Awake()
@@ -23,6 +25,7 @@ public class Scr_GameController : MonoBehaviour
         Instance = this;
         teamInfo_ = this.gameObject.GetComponent<Scr_TeamController>();
         cameraPivot_ = Camera.main.transform.parent.GetComponent<Camera_Movement>();
+        winInfo_ = Instantiate(winInfoPrefab, transform.position, transform.rotation);
         displayTeamName_ = "Blue Bandits";
         blueTeamTurn_ = true;
         redTeamTurn_ = false;
@@ -36,12 +39,12 @@ public class Scr_GameController : MonoBehaviour
     {
         if (Scr_TeamController.blueTeam.Count <= 0)
         {
-            //Constants.WinScreen.C_WinText = "Red Rovers Win!!";
+            winInfo_.GetComponent<cls_Win_Screne_Info>().winner_ = true;
             SceneManager.LoadScene("Win Scene");
         }
         else if (Scr_TeamController.redTeam.Count <= 0)
         {
-            //Constants.WinScreen.C_WinText = "Blue Bandits Win!!";
+            winInfo_.GetComponent<cls_Win_Screne_Info>().winner_ = false;
             SceneManager.LoadScene("Win Scene");
         }
     }
