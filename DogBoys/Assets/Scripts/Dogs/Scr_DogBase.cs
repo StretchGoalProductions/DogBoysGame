@@ -117,7 +117,6 @@ public class Scr_DogBase : MonoBehaviour {
 
 				if (Input.GetMouseButtonDown(0) && ((Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team"))) {
 					GameObject attacker = Scr_GameController.selectedDog_;
-                    Debug.Log("ATTACK");
 					attacker.GetComponent<Scr_DogBase>().Fire(this);
 				}
 			}
@@ -227,6 +226,28 @@ public class Scr_DogBase : MonoBehaviour {
                 {
                     target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
                 }
+            }
+			weaponStats.shotsRemaining--;
+			UseMove();
+			UnselectCharacter();
+		}
+		else {
+			Reload();
+		}
+	}
+
+    public void Fire(Scr_ExplosiveBarrel targetBarrel, float accuracy = 1.0f, float damageReduction = 0.0f) {
+        validTargets.Clear();
+
+        if(gameObject.GetComponent<Scr_ShotgunDog>() == null)
+            validTargets.Add(targetBarrel.gameObject);
+        else
+            GetValidTargets((targetBarrel.transform.position-transform.position).normalized);
+        
+		if(weaponStats.shotsRemaining > 0) {
+            foreach (GameObject target in validTargets)
+            {
+                target.GetComponent<Scr_ExplosiveBarrel>().Explode();
             }
 			weaponStats.shotsRemaining--;
 			UseMove();
