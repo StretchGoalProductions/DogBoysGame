@@ -7,21 +7,54 @@ using UnityEngine.SceneManagement;
 public class WinScene : MonoBehaviour
 {
 
-    [SerializeField]
-    private Text winnerTest_;
+    private bool winner_; //If true then red team has won, else the blue team has won
+    public GameObject redDancingDog_;
+    public GameObject blueDancingDog_;
+    public GameObject redWinImageDisplay_;
+    public GameObject blueWinImageDisplay_;
+    private GameObject info;
+    private GameObject oldGameController_;
+
+    private void Awake()
+    {
+        info = GameObject.Find("Win_Scene_Info(Clone)");
+        oldGameController_ = GameObject.Find("TeamController(Clone)");
+
+
+    }
+
+    private void Start()
+    {
+        winner_ = info.GetComponent<cls_Win_Screne_Info>().winner_;
+        Destroy(info);
+        Destroy(oldGameController_);
+    }
 
     public void Update()
     {
-        updateWinText();
+        screneUpdate();
     }
 
-    public void updateWinText()
+    private void screneUpdate()
     {
-        winnerTest_.text = Constants.WinScreen.C_WinText;
+        if (winner_) //Red team has won 
+        {
+            redDancingDog_.SetActive(true);
+            blueDancingDog_.SetActive(false);
+            redWinImageDisplay_.SetActive(true);
+            blueWinImageDisplay_.SetActive(false);
+        }
+        else //Blue team has won 
+        {
+            redDancingDog_.SetActive(false);
+            blueDancingDog_.SetActive(true);
+            redWinImageDisplay_.SetActive(false);
+            blueWinImageDisplay_.SetActive(true);
+        }
     }
 
     public void returnToDogHouse()
     {
-        SceneManager.LoadScene("Hub menu");
+        SceneManager.LoadScene("New_Menu_Prototype");
     }
 }
