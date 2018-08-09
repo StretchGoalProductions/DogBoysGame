@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Win Scene.unity
     guid: 6988d8353b96dbe4e86b3990ea81d4a0
+  - enabled: 1
+    path: Assets/Scenes/DeathMatch_Level02.unity
+    guid: ad18952dfe1e8964984bf321d4235707
+  - enabled: 1
+    path: Assets/Scenes/DeathMatch_Level03.unity
+    guid: 5fdcd64b393f7d942a723d732eac0846
+  - enabled: 1
+    path: Assets/Scenes/Level02_Nighttime.unity
+    guid: 1794e5fb10c58fb43bddc19f7cf7a74a
   m_configObjects: {}
