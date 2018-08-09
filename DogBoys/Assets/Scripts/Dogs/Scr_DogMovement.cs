@@ -13,7 +13,6 @@ public class Scr_DogMovement : MonoBehaviour {
     public Animator myAnim;
 	public Scr_DogBase dog;
 	public Scr_Pathfinding pathfinder;
-	public Camera mainCamera;
 	public LayerMask hitLayers;
 
 	public int maxMoveRange;
@@ -28,7 +27,6 @@ public class Scr_DogMovement : MonoBehaviour {
         myAnim = GetComponent<Animator>();
 		dog = GetComponent<Scr_DogBase>();
 		pathfinder = GetComponent<Scr_Pathfinding>();
-		mainCamera = GameObject.FindGameObjectsWithTag("MainCamera")[0].GetComponentInChildren<Camera>();
 		hitLayers = LayerMask.GetMask("Environment");
 		
 		pathfinder.maxMoveRange = maxMoveRange;
@@ -53,7 +51,7 @@ public class Scr_DogMovement : MonoBehaviour {
 		}
 		else if(Input.GetMouseButtonDown(0) && dog.currentState == Scr_DogBase.dogState.selected && dog.movesLeft > 0 && dog.selectCooldown <= 0 && !EventSystem.current.IsPointerOverGameObject()) {
 			Vector3 mouse = Input.mousePosition;
-			Ray castPoint = mainCamera.ScreenPointToRay(mouse);
+			Ray castPoint = Camera.main.ScreenPointToRay(mouse);
 
 			RaycastHit hit;
 			
@@ -64,10 +62,7 @@ public class Scr_DogMovement : MonoBehaviour {
 					Cls_Node currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
 					int distance = pathfinder.GetDistance(currentNode, targetNode);
 
-					Debug.Log(distance);
-
 					if(distance <= maxMoveRange*10) {
-						Debug.Log("moving");
 						pathfinder.targetPosition = hit.point;
 						dog.UseMove();
 					}
@@ -125,8 +120,15 @@ public class Scr_DogMovement : MonoBehaviour {
 		dog.currentNode.currentState = Cls_Node.nodeState.empty;
 		dog.currentNode.dog = null;
 		dog.currentNode = finalPath[0];
-		dog.currentNode.currentState = Cls_Node.nodeState.player;
 		dog.currentNode.dog = dog;
+
+		if(dog.currentNode.currentState == Cls_Node.nodeState.pickup) {
+			if(dog.currentNode.grenadePickup != null) {
+				dog.currentNode.grenadePickup.pickUp();
+			}
+		}
+
+		dog.currentNode.currentState = Cls_Node.nodeState.player;
 		finalPath.Remove(finalPath[0]);
 	}
 }

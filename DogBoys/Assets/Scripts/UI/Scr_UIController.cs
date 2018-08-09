@@ -20,7 +20,7 @@ public class Scr_UIController : MonoBehaviour {
 	public Text outOfRange_;
 	public Text needToReload_;
 
-	private Scr_DogBase dog;
+	private static Scr_DogBase dog;
 	public static GameObject characterHud;
 
 	public void Start() {
@@ -34,8 +34,20 @@ public class Scr_UIController : MonoBehaviour {
 
 	public static void CharacterHudSet(bool setActive) {
 		characterHud.SetActive(setActive);
+
+        dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+
+        if (dog.grenadesHeld >= 1) {
+            // Set grenade button to interactable
+        }
+        else {
+
+        }
+
         if(!setActive) {
             staticImageAttackMode.gameObject.SetActive(setActive);
+
+            // Deactivate grenade button
         }
 	}
 
@@ -67,16 +79,18 @@ public class Scr_UIController : MonoBehaviour {
     }
 
     public void OnClickAttackButton() {
-        dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+        if (!Scr_GameController.grenadeMode_) {
+            dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
-		Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
-        if(Scr_GameController.attackMode_) {
-		    dog.currentState = Scr_DogBase.dogState.attack;
+            Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
+            if(Scr_GameController.attackMode_) {
+                dog.currentState = Scr_DogBase.dogState.attack;
+            }
+            else {
+                dog.currentState = Scr_DogBase.dogState.selected;
+            }
+            attackMode_.gameObject.SetActive(Scr_GameController.attackMode_);
         }
-        else {
-            dog.currentState = Scr_DogBase.dogState.selected;
-        }
-        attackMode_.gameObject.SetActive(Scr_GameController.attackMode_);
     }
 
     public void OnClickOverwatchButton() {
@@ -95,5 +109,20 @@ public class Scr_UIController : MonoBehaviour {
         dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
 		dog.SkipTurn ();
+    }
+
+    public void OnClickSqueakyGrenade() {
+        if (!Scr_GameController.attackMode_) {
+            dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+
+            Scr_GameController.grenadeMode_ = !Scr_GameController.grenadeMode_;
+            if(Scr_GameController.grenadeMode_) {
+                dog.currentState = Scr_DogBase.dogState.attack;
+            }
+            else {
+                dog.currentState = Scr_DogBase.dogState.selected;
+            }
+            attackMode_.gameObject.SetActive(Scr_GameController.grenadeMode_);
+        }
     }
 }

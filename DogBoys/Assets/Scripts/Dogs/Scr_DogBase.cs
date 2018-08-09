@@ -33,6 +33,8 @@ public class Scr_DogBase : MonoBehaviour {
     public LineRenderer rangeCircle;
     public LineRenderer falloffCircle;
 
+    public int grenadesHeld = 0;
+
     void Start() {
 		health = 100;
 		movesLeft = 2;
@@ -79,7 +81,48 @@ public class Scr_DogBase : MonoBehaviour {
             rangeCircle.enabled = false;
             falloffCircle.enabled = false;
         }
+
+        if (Scr_GameController.grenadeMode_ && currentState == dogState.attack) {
+            if(Input.GetMouseButtonDown(0)) {
+                Vector3 mouse = Input.mousePosition;
+                Ray castPoint = Camera.main.ScreenPointToRay(mouse);
+
+                RaycastHit hit;
+                
+                if(Physics.Raycast(castPoint, out hit, Mathf.Infinity, LayerMask.GetMask("Environment"))) {
+                    Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(hit.point);
+
+                    if(targetNode.currentState == Cls_Node.nodeState.empty) {
+                        Cls_Node currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
+                        int distance = pathfinder.GetDistance(currentNode, targetNode);
+
+                        if(distance <= maxMoveRange*10) {
+                            pathfinder.targetPosition = hit.point;
+                            dog.UseMove();
+                        }
+                    }
+                }
+            }
+        }
     }
+
+    void OnMouseOver() {
+		if(!EventSystem.current.IsPointerOverGameObject())
+		{
+            if ((Scr_GameController.blueTeamTurn_ && gameObject.tag == "Blue_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Red_Team")) {
+                if (currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0 && Scr_GameController.selectedDog_ == null) {
+                    SelectCharacter();
+                }
+            }
+			else if (currentState != dogState.attack && Scr_GameController.attackMode_) {
+
+				if (Input.GetMouseButtonDown(0) && ((Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team"))) {
+					GameObject attacker = Scr_GameController.selectedDog_;
+					attacker.GetComponent<Scr_DogBase>().Fire(this);
+				}
+			}
+		}
+	}
 	
     void DrawRange() {
         float radius = weaponStats.shootRange;
@@ -104,24 +147,6 @@ public class Scr_DogBase : MonoBehaviour {
             falloffCircle.SetPosition(i, transform.position + new Vector3(x, 0, y));
         }
     }
-
-	void OnMouseOver() {
-		if(!EventSystem.current.IsPointerOverGameObject())
-		{
-            if ((Scr_GameController.blueTeamTurn_ && gameObject.tag == "Blue_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Red_Team")) {
-                if (currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0 && Scr_GameController.selectedDog_ == null) {
-                    SelectCharacter();
-                }
-            }
-			else if (currentState != dogState.attack && Scr_GameController.attackMode_) {
-
-				if (Input.GetMouseButtonDown(0) && ((Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team"))) {
-					GameObject attacker = Scr_GameController.selectedDog_;
-					attacker.GetComponent<Scr_DogBase>().Fire(this);
-				}
-			}
-		}
-	}
 
     public float ChanceToHit(GameObject attacker, GameObject defender) {
         float range = attacker.GetComponent<Scr_DogStats>().thisWeapon.shootRange;
@@ -301,6 +326,7 @@ public class Scr_DogBase : MonoBehaviour {
 		selectParticles.Stop();
 		Scr_GameController.selectedDog_ = null;
 		Scr_GameController.attackMode_ = false;
+        Scr_GameController.grenadeMode_ = false;
 		Scr_GameController.CheckTurn();
 		GetComponent<Scr_Pathfinding>().enabled = false;
 	}
