@@ -37,6 +37,10 @@ public class Scr_UIController : MonoBehaviour
 
         staticImageHealthBar = currentPlayerHealthBar_;
 
+        //Set different player states
+        currentplayerState_Attacking = playerAtacking;
+        currentplayerState_Moving = playerMoving;
+
         //Set the different states of the attack button
         reload_ = playerRel;
         attack_ = playerAtt;
@@ -99,6 +103,8 @@ public class Scr_UIController : MonoBehaviour
             reload_.SetActive(true);
             attack_.SetActive(false);
             cancel_.SetActive(false);
+            currentplayerState_Moving.SetActive(true);
+            currentplayerState_Attacking.SetActive(false);
         }
         else if (dog.currentState == Scr_DogBase.dogState.attack)
         {
@@ -118,12 +124,26 @@ public class Scr_UIController : MonoBehaviour
         if (!Scr_GameController.grenadeMode_) {
             dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
-            Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
-            if(Scr_GameController.attackMode_) {
-                dog.currentState = Scr_DogBase.dogState.attack;
+            if (reload_.activeSelf) //If the reload button is active and is clicked, then have the dog reload
+            {
+                dog.Reload();
+                dog.UseMove();
+                currentplayerState_Moving.SetActive(true);
+                currentplayerState_Attacking.SetActive(false);
             }
-            else {
+            else if (attack_.activeSelf) //If the attack button is active and is click, then have the dog enter the attack state
+            {
+                Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
+                dog.currentState = Scr_DogBase.dogState.attack;
+                currentplayerState_Attacking.SetActive(true);
+                currentplayerState_Moving.SetActive(false);
+            }
+            else
+            {
+                Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
                 dog.currentState = Scr_DogBase.dogState.selected;
+                currentplayerState_Moving.SetActive(true);
+                currentplayerState_Attacking.SetActive(false);
             }
         }
     }

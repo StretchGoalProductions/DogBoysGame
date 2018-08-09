@@ -7,6 +7,7 @@ public class Scr_SqueakyGrenade : MonoBehaviour {
 	public Cls_Node currentNode;
 
 	public int range;
+	List<Cls_Node> explosionNodes = new List<Cls_Node>();
 
 	void Start () {
 		currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
@@ -16,9 +17,23 @@ public class Scr_SqueakyGrenade : MonoBehaviour {
 	}
 
 	public void Explode() {
-		List<Cls_Node> explosionNodes = new List<Cls_Node>();
+		
+		NodesInRange(range);
 
-		for (int i = 0; i < range; i++) {
+		foreach (Cls_Node node in explosionNodes) {
+			if(node.currentState == Cls_Node.nodeState.player) {
+				node.dog.currentState = Scr_DogBase.dogState.selected;
+				node.dog.GetComponent<Scr_Pathfinding>().enabled = true;
+				node.dog.GetComponent<Scr_Pathfinding>().targetPosition = currentNode.position;
+				break;
+			}
+		}
+
+	}
+
+	public void NodesInRange(int squareRange) {
+
+		for (int i = 0; i < squareRange; i++) {
 			if (i == 0) {
 				List<Cls_Node> thisNodeList = Scr_Grid.GetNeighboringNodes(currentNode);
 				foreach (Cls_Node node in thisNodeList) {
@@ -36,15 +51,6 @@ public class Scr_SqueakyGrenade : MonoBehaviour {
 						}
 					}
 				}
-			}
-		}
-
-		foreach (Cls_Node node in explosionNodes) {
-			if(node.currentState == Cls_Node.nodeState.player) {
-				node.dog.currentState = Scr_DogBase.dogState.selected;
-				node.dog.GetComponent<Scr_Pathfinding>().enabled = true;
-				node.dog.GetComponent<Scr_Pathfinding>().targetPosition = currentNode.position;
-				break;
 			}
 		}
 
