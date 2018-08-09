@@ -36,6 +36,8 @@ public class Scr_DogBase : MonoBehaviour {
     public int grenadesHeld = 0;
     public GameObject squeakyGrenade;
 
+    public bool guardDogOn_;
+
     void Start() {
 		health = 100;
 		movesLeft = 2;
@@ -53,7 +55,9 @@ public class Scr_DogBase : MonoBehaviour {
 		currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
 		currentNode.currentState = Cls_Node.nodeState.player;
 		currentNode.dog = this;
-	}
+        guardDogOn_ = false;
+
+    }
 
     void Update() {
         selectCooldown -= Time.deltaTime;
@@ -372,12 +376,12 @@ public class Scr_DogBase : MonoBehaviour {
                 }
             }
 
-            foreach(GameObject dog in enemiesSeen)
+            foreach (GameObject dog in enemiesSeen)
             {
-                if(dog.GetComponent<Scr_DogBase>().currentState == dogState.overwatch)
+                if (dog.GetComponent<Scr_DogBase>().guardDogOn_)
                 {
+                    dog.GetComponent<Scr_DogBase>().guardDogOn_ = false;
                     guardDog(dog, this.gameObject);
-                    dog.GetComponent<Scr_DogBase>().currentState = dogState.unselected;
                 }
             }
             enemiesSeen.Clear();
@@ -386,8 +390,9 @@ public class Scr_DogBase : MonoBehaviour {
 
     public void guardDog(GameObject attacker, GameObject target)
     {
-        float hitChance = ChanceToHit(attacker, gameObject);
-        attacker.GetComponent<Scr_DogBase>().Fire(this, hitChance);
+        float hitChance = ChanceToHit(attacker, target);
+        attacker.GetComponent<Scr_DogBase>().Fire(target.GetComponent<Scr_DogBase>(), hitChance);
+        SelectCharacter();
     }
 
     public void UseMove() {
