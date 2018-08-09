@@ -434,7 +434,7 @@ GameObject:
   - component: {fileID: 114111285037881392}
   - component: {fileID: 114146617025613152}
   - component: {fileID: 120423679199253082}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: Rifle_Dog_Red
   m_TagString: Red_Team
   m_Icon: {fileID: 0}
@@ -2513,6 +2513,7 @@ MonoBehaviour:
   selectParticles: {fileID: 198208138472265260}
   currentState: 0
   enemiesSeen: []
+  validTargets: []
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 4096

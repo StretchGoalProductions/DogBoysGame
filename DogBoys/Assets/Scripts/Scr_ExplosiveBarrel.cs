@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Scr_MouseHandler : MonoBehaviour {
+public class Scr_ExplosiveBarrel : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

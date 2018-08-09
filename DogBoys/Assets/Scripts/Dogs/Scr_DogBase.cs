@@ -114,14 +114,10 @@ public class Scr_DogBase : MonoBehaviour {
                 }
             }
 			else if (currentState != dogState.attack && Scr_GameController.attackMode_) {
-				// Do shooting here (see methods fire and reload)
-				// Check if same or different team
-				// Check if in range
-				// Check if shot will pass through wall, cover, partial cover, or nothing
-				// Probably have a seperate script with a function that does these things an call function here
 
-				if (Input.GetMouseButtonDown(0) && (Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team")) {
+				if (Input.GetMouseButtonDown(0) && ((Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team"))) {
 					GameObject attacker = Scr_GameController.selectedDog_;
+                    Debug.Log("ATTACK");
 					attacker.GetComponent<Scr_DogBase>().Fire(this);
 				}
 			}
@@ -270,8 +266,12 @@ public class Scr_DogBase : MonoBehaviour {
 		gunEffects.Hit();
 		Scr_UIController.updateCurrentHealthBar(health, MAX_HEALTH);
 
-		if (health <= 0)
+		if (health <= 0) {
 			Die();
+        }
+        else {
+            animator.SetTrigger ("a_isHit");
+        }
 	}
 
 	public void UnselectCharacter() {
@@ -302,7 +302,7 @@ public class Scr_DogBase : MonoBehaviour {
             {
                 if (Scr_GameController.blueTeamTurn_)
                 {
-                    foreach(GameObject dog in Scr_GameController.returnRedTeam())
+                    foreach(GameObject dog in Scr_TeamController.redTeam)
                     {
                         if(item.transform.name.Equals(dog.name))
                         {
@@ -312,9 +312,9 @@ public class Scr_DogBase : MonoBehaviour {
                 }
                 else
                 {
-                    foreach (GameObject dog in Scr_GameController.returnBlueTeam())
+                    foreach (GameObject dog in Scr_TeamController.blueTeam)
                     {
-                        if (item.transform.parent.gameObject.name.Equals(dog.name))
+                        if (item.transform.name.Equals(dog.name))
                         {
                             enemiesSeen.Add(item.gameObject);
                         }

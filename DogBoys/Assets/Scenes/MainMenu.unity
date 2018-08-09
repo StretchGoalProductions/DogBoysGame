@@ -4503,7 +4503,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ae0b34406bf914ba5c0e1c49af81f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: DogClassProto_level1
+  level: Deathmatch_Level00_Original
 --- !u!1001 &1238437051
 Prefab:
   m_ObjectHideFlags: 0

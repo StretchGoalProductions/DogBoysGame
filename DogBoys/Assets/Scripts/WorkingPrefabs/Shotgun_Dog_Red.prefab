@@ -287,7 +287,7 @@ GameObject:
   - component: {fileID: 114772922760468788}
   - component: {fileID: 114777803768108340}
   - component: {fileID: 120641330804241050}
-  m_Layer: 13
+  m_Layer: 8
   m_Name: Shotgun_Dog_Red
   m_TagString: Red_Team
   m_Icon: {fileID: 0}
@@ -2923,6 +2923,7 @@ MonoBehaviour:
   selectParticles: {fileID: 198427671816309108}
   currentState: 0
   enemiesSeen: []
+  validTargets: []
   targetLayerMask:
     serializedVersion: 2
     m_Bits: 4096
