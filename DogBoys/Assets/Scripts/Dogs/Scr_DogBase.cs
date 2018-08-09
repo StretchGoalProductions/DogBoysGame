@@ -34,6 +34,7 @@ public class Scr_DogBase : MonoBehaviour {
     public LineRenderer falloffCircle;
 
     public int grenadesHeld = 0;
+    public GameObject squeakyGrenade;
 
     void Start() {
 		health = 100;
@@ -82,7 +83,7 @@ public class Scr_DogBase : MonoBehaviour {
             falloffCircle.enabled = false;
         }
 
-        if (Scr_GameController.grenadeMode_ && currentState == dogState.attack) {
+        if (Scr_GameController.grenadeMode_ && currentState == dogState.attack && grenadesHeld > 0) {
             if(Input.GetMouseButtonDown(0)) {
                 Vector3 mouse = Input.mousePosition;
                 Ray castPoint = Camera.main.ScreenPointToRay(mouse);
@@ -93,13 +94,7 @@ public class Scr_DogBase : MonoBehaviour {
                     Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(hit.point);
 
                     if(targetNode.currentState == Cls_Node.nodeState.empty) {
-                        Cls_Node currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
-                        int distance = pathfinder.GetDistance(currentNode, targetNode);
-
-                        if(distance <= maxMoveRange*10) {
-                            pathfinder.targetPosition = hit.point;
-                            dog.UseMove();
-                        }
+                        throwGrenade(targetNode.position);
                     }
                 }
             }
@@ -291,11 +286,11 @@ public class Scr_DogBase : MonoBehaviour {
 	}
 
 	public void SelectCharacter() {
+        Scr_GameController.selectedDog_ = gameObject;
 		currentState = Scr_DogBase.dogState.selected;
 		Scr_UIController.CharacterHudSet(true);
         Scr_UIController.updateCurrentHealthBar(health, MAX_HEALTH);
 		selectParticles.Play();
-		Scr_GameController.selectedDog_ = gameObject;
 		selectCooldown = 0.2f;
 		GetComponent<Scr_Pathfinding>().enabled = true;
 	}
@@ -319,6 +314,14 @@ public class Scr_DogBase : MonoBehaviour {
             animator.SetTrigger ("a_isHit");
         }
 	}
+
+    public void throwGrenade(Vector3 grenadePosition) {
+        Instantiate(squeakyGrenade, grenadePosition, transform.rotation);
+
+        grenadesHeld--;
+        UseMove();
+        UnselectCharacter();
+    }
 
 	public void UnselectCharacter() {
 		currentState = Scr_DogBase.dogState.unselected;

@@ -11,19 +11,24 @@ public class Scr_SqueakyGrenade : MonoBehaviour {
 	void Start () {
 		currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
 		currentNode.currentState = Cls_Node.nodeState.empty;
+
+		Explode();
 	}
 
 	public void Explode() {
 		List<Cls_Node> explosionNodes = new List<Cls_Node>();
 
 		for (int i = 0; i < range; i++) {
-			if (explosionNodes.Count == 0) {
+			if (i == 0) {
 				List<Cls_Node> thisNodeList = Scr_Grid.GetNeighboringNodes(currentNode);
-				explosionNodes.AddRange(thisNodeList);
+				foreach (Cls_Node node in thisNodeList) {
+					explosionNodes.Add(node);
+				}
 			}
 			else {
-				foreach (Cls_Node node in explosionNodes) {
-					List<Cls_Node> thisNodeList = Scr_Grid.GetNeighboringNodes(currentNode);
+				List<Cls_Node> tempNodes = new List<Cls_Node>(explosionNodes);
+				foreach (Cls_Node node in tempNodes) {
+					List<Cls_Node> thisNodeList = Scr_Grid.GetNeighboringNodes(node);
 
 					foreach (Cls_Node newNode in thisNodeList) {
 						if (!explosionNodes.Contains(newNode)) {
