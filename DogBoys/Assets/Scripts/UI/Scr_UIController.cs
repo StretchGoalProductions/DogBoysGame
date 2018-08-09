@@ -3,97 +3,153 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; //Need for UI components
 
-public class Scr_UIController : MonoBehaviour {
+public class Scr_UIController : MonoBehaviour
+{
 
     public Image currentPlayerHealthBar_;
     public static Image staticImageHealthBar;
 
-    public Image currentPlayerMovementBar_;
-    public Image currentPlayerPortrait_;
-    public Text currentplayerName_;
-    public Text currentPlayerGunName_;
-    public Image currentPlayerAmmoCount_;
+    public Text currentPlayerAmmoCount_;
+    public Text maxPlayerAmmo_;
+    public static Text maxAmmo;
+    public static Text currentAmmo;
 
-	public Image attackMode_;
-    public static Image staticImageAttackMode;
+    public GameObject playerAtacking;
+    public GameObject playerMoving;
+    public static GameObject currentplayerState_Attacking;
+    public static GameObject currentplayerState_Moving;
 
-	public Text outOfRange_;
-	public Text needToReload_;
+    public GameObject playerRel;
+    public GameObject playerAtt;
+    public GameObject playerCan;
+    public static GameObject reload_;
+    public static GameObject attack_;
+    public static GameObject cancel_;
 
-	private Scr_DogBase dog;
-	public static GameObject characterHud;
+    private Scr_DogBase dog;
+    public static GameObject characterHud;
 
-	public void Start() {
-		characterHud = transform.GetChild(0).gameObject;
+    public void Start()
+    {
+        characterHud = transform.GetChild(0).gameObject;
 
         staticImageHealthBar = currentPlayerHealthBar_;
-        staticImageAttackMode = attackMode_;
-	}
 
+        //Set the different states of the attack button
+        reload_ = playerRel;
+        attack_ = playerAtt;
+        cancel_ = playerCan;
 
+        //Set the ammo counters up
+        maxAmmo = maxPlayerAmmo_;
+        currentAmmo = currentPlayerAmmoCount_;
 
-	public static void CharacterHudSet(bool setActive) {
-		characterHud.SetActive(setActive);
-        if(!setActive) {
-            staticImageAttackMode.gameObject.SetActive(setActive);
+        //Set the different states of the player
+        currentplayerState_Attacking = playerAtacking;
+        currentplayerState_Moving = playerMoving;
+    }
+
+    public void Update()
+    {
+        //I'll fix this stuff up later
+        if(Scr_GameController.selectedDog_ != null)
+        {
+            dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+            checkForButtonDisplayUpdates(dog);
+            updateAmmoInfo(dog.weaponStats.shotsRemaining);
+            setMaxAmmoCount(dog.weaponStats.maxShots);
+
         }
-	}
-
-    public static void updateCurrentHealthBar(int currentHealth, int maxHealth) {
-            float newFillAmount = ((float)currentHealth) / maxHealth;
-            staticImageHealthBar.fillAmount = newFillAmount;
     }
 
-    public void updateCurrentMovementBar(int currentMovement, int maxMovement) {
-            float newFillAmount = ((float)currentMovement) / maxMovement;
-            currentPlayerMovementBar_.fillAmount = newFillAmount;
+    public static void CharacterHudSet(bool setActive)
+    {
+        characterHud.SetActive(setActive);
     }
 
-    public void updateCurrentPortraitSprite(Sprite newPortrait) {
-        currentPlayerPortrait_.overrideSprite = newPortrait;
+    public static void updateCurrentHealthBar(int currentHealth, int maxHealth)
+    {
+        float newFillAmount = ((float)currentHealth) / maxHealth;
+        staticImageHealthBar.fillAmount = newFillAmount;
     }
 
-    public void updateCurrentName(string newName) {
-        currentplayerName_.text = newName;
+    public static void updateAmmoInfo(int currentAmmoForUnit)
+    {
+        currentAmmo.text = currentAmmoForUnit.ToString();
     }
 
-    public void updateCurrentAmmoCountBar(int currentAmmo, int maxAmmo) {
-            float newFillAmount = ((float)currentAmmo) / maxAmmo;
-            currentPlayerAmmoCount_.fillAmount = newFillAmount;
+    public static void setMaxAmmoCount(int maxAmmoForUnit)
+    {
+        maxAmmo.text = maxAmmoForUnit.ToString();
     }
 
-    public void updateCurrentGunName(string newName) { 
-        currentPlayerGunName_.text = newName;
+    public static void checkForButtonDisplayUpdates(Scr_DogBase dog)
+    {
+        if (dog.weaponStats.shotsRemaining <= 0)
+        {
+            reload_.SetActive(true);
+            attack_.SetActive(false);
+            cancel_.SetActive(false);
+        }
+        else if (dog.currentState == Scr_DogBase.dogState.attack)
+        {
+            reload_.SetActive(false);
+            attack_.SetActive(false);
+            cancel_.SetActive(true);
+        }
+        else
+        {
+            reload_.SetActive(false);
+            attack_.SetActive(true);
+            cancel_.SetActive(false);
+        }
     }
 
-    public void OnClickAttackButton() {
+    public void OnClickAttackButton()
+    {
         dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
-		Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
-        if(Scr_GameController.attackMode_) {
-		    dog.currentState = Scr_DogBase.dogState.attack;
+        if (reload_.activeSelf) //If the reload button is active and is clicked, then have the dog reload
+        {
+            dog.Reload();
+            dog.UseMove();
         }
-        else {
+        else if (attack_.activeSelf) //If the attack button is active and is click, then have the dog enter the attack state
+        {
+            Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
+            dog.currentState = Scr_DogBase.dogState.attack;
+            currentplayerState_Attacking.SetActive(true);
+            currentplayerState_Moving.SetActive(false);
+            //attackMode_.gameObject.SetActive(Scr_GameController.attackMode_);
+        }
+        else
+        {
             dog.currentState = Scr_DogBase.dogState.selected;
+            Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
+            currentplayerState_Moving.SetActive(true);
+            currentplayerState_Attacking.SetActive(false);
         }
-        attackMode_.gameObject.SetActive(Scr_GameController.attackMode_);
+
     }
 
-    public void OnClickOverwatchButton() {
+    public void OnClickOverwatchButton()
+    {
         dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
         dog.currentState = Scr_DogBase.dogState.overwatch;
-		dog.movesLeft = 0;
-		dog.UnselectCharacter();
+        dog.movesLeft = 0;
+        dog.UnselectCharacter();
     }
 
-    public void OnClickHunkerDownButton() {
+    public void OnClickHunkerDownButton()
+    {
         Debug.Log("I'm pretty scratched up here... give me a paw.");
     }
 
-    public void OnClickSkipTurn() {
+    public void OnClickSkipTurn()
+    {
         dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
-		dog.SkipTurn ();
+        dog.SkipTurn();
     }
 }
