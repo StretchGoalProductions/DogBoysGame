@@ -159,6 +159,7 @@ public class Scr_DogBase : MonoBehaviour {
         // Line of site / Cover
         float coverMod = 1.0f;
         int x0, y0, x1, y1;
+        Debug.Log(this.name);
         if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX < defender.GetComponent<Scr_DogBase>().currentNode.gridX) {
             x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
             y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
@@ -221,6 +222,10 @@ public class Scr_DogBase : MonoBehaviour {
             Transform t = TargetsInRange[i].GetComponent<Transform>();
             Vector3 dirToTarget = (t.position - transform.position).normalized;
 
+            if((t.gameObject.GetComponent<Scr_DogBase>() == null && t.gameObject.GetComponent<Scr_ExplosiveBarrel>() == null) || (t.gameObject == this.gameObject))
+            {
+                continue;
+            }
             if(Vector3.Angle(aimAngle, dirToTarget) < shotAngle/2)
             {
                 validTargets.Add(TargetsInRange[i].gameObject);
@@ -242,9 +247,13 @@ public class Scr_DogBase : MonoBehaviour {
 		if(weaponStats.shotsRemaining > 0) {
             foreach (GameObject target in validTargets)
             {
-                if(Random.value <= ChanceToHit(gameObject, target))
+                if(target.GetComponent<Scr_DogBase>() != null && Random.value <= ChanceToHit(gameObject, target))
                 {
                     target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
+                }
+                else
+                {
+                    target.GetComponent<Scr_ExplosiveBarrel>().Explode();
                 }
             }
 			weaponStats.shotsRemaining--;
@@ -267,7 +276,14 @@ public class Scr_DogBase : MonoBehaviour {
 		if(weaponStats.shotsRemaining > 0) {
             foreach (GameObject target in validTargets)
             {
-                target.GetComponent<Scr_ExplosiveBarrel>().Explode();
+                if(target.GetComponent<Scr_DogBase>() != null && Random.value <= ChanceToHit(gameObject, target))
+                {
+                    target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
+                }
+                else
+                {
+                    target.GetComponent<Scr_ExplosiveBarrel>().Explode();
+                }
             }
 			weaponStats.shotsRemaining--;
 			UseMove();

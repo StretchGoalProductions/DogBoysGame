@@ -2459,7 +2459,7 @@ MonoBehaviour:
   validTargets: []
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 8192
+    m_Bits: 10496
   gunEffects: {fileID: 0}
   accuracyDisplay: {fileID: 1879341876088476}
   AngleScale: 0.01

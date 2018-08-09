@@ -986,7 +986,7 @@ GameObject:
   - component: {fileID: 114234993310194924}
   - component: {fileID: 114640865021454420}
   - component: {fileID: 120559585195934360}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RifleDogFINAL_blue
   m_TagString: Blue_Team
   m_Icon: {fileID: 0}
@@ -2820,7 +2820,7 @@ MonoBehaviour:
   validTargets: []
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2304
   gunEffects: {fileID: 0}
   accuracyDisplay: {fileID: 1723087420479290}
   AngleScale: 0.01
