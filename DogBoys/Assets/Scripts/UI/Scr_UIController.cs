@@ -25,6 +25,7 @@ public class Scr_UIController : MonoBehaviour
     public static GameObject reload_;
     public static GameObject attack_;
     public static GameObject cancel_;
+    public Button grenadeButton;
 
 	private static Scr_DogBase dog;
 	public static GameObject characterHud;
@@ -43,6 +44,17 @@ public class Scr_UIController : MonoBehaviour
         //Set the ammo counters up
         maxAmmo = maxPlayerAmmo_;
         currentAmmo = currentPlayerAmmoCount_;
+    }
+
+    void Udate() {
+        if (Scr_GameController.selectedDog_ != null) {
+            dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+
+            checkForButtonDisplayUpdates(dog);
+            updateAmmoInfo(dog.weaponStats.shotsRemaining);
+            
+        }
+    }
 
 	public static void CharacterHudSet(bool setActive) {
 		characterHud.SetActive(setActive);
@@ -57,15 +69,9 @@ public class Scr_UIController : MonoBehaviour
         }
 
         if(!setActive) {
-            staticImageAttackMode.gameObject.SetActive(setActive);
 
             // Deactivate grenade button
         }
-    }
-
-    public static void CharacterHudSet(bool setActive)
-    {
-        characterHud.SetActive(setActive);
     }
 
     public static void updateCurrentHealthBar(int currentHealth, int maxHealth)
@@ -117,7 +123,6 @@ public class Scr_UIController : MonoBehaviour
             else {
                 dog.currentState = Scr_DogBase.dogState.selected;
             }
-            attackMode_.gameObject.SetActive(Scr_GameController.attackMode_);
         }
     }
 
@@ -153,7 +158,6 @@ public class Scr_UIController : MonoBehaviour
             else {
                 dog.currentState = Scr_DogBase.dogState.selected;
             }
-            attackMode_.gameObject.SetActive(Scr_GameController.grenadeMode_);
         }
     }
 }
