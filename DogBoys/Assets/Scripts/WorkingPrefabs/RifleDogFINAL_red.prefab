@@ -2706,7 +2706,8 @@ MonoBehaviour:
   rangeCircle: {fileID: 120225734574573742}
   falloffCircle: {fileID: 120649845433474516}
   grenadesHeld: 0
-  squeakyGrenade: {fileID: 0}
+  squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
+    type: 2}
 --- !u!114 &114361980324931614
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2786,7 +2787,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1309380784855858}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87104db96fbc4eb4d8564a84c45128e4, type: 3}
   m_Name: 

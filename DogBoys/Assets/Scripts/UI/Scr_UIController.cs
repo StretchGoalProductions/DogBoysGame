@@ -26,6 +26,7 @@ public class Scr_UIController : MonoBehaviour
     public static GameObject attack_;
     public static GameObject cancel_;
     public Button grenadeButton;
+    public static Button grenade_;
 
 	private static Scr_DogBase dog;
 	public static GameObject characterHud;
@@ -40,19 +41,20 @@ public class Scr_UIController : MonoBehaviour
         reload_ = playerRel;
         attack_ = playerAtt;
         cancel_ = playerCan;
+        grenade_ = grenadeButton;
 
         //Set the ammo counters up
         maxAmmo = maxPlayerAmmo_;
         currentAmmo = currentPlayerAmmoCount_;
     }
 
-    void Udate() {
+    void Update() {
         if (Scr_GameController.selectedDog_ != null) {
             dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
             checkForButtonDisplayUpdates(dog);
             updateAmmoInfo(dog.weaponStats.shotsRemaining);
-            
+            setMaxAmmoCount(dog.weaponStats.maxShots);
         }
     }
 
@@ -63,14 +65,14 @@ public class Scr_UIController : MonoBehaviour
 
         if (dog.grenadesHeld >= 1) {
             // Set grenade button to interactable
+            grenade_.interactable = true;
         }
         else {
-
+            grenade_.interactable = false;
         }
 
         if(!setActive) {
-
-            // Deactivate grenade button
+            grenade_.interactable = false;
         }
     }
 
