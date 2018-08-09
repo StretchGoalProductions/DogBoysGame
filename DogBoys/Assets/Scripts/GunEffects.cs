@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class GunEffects : MonoBehaviour {
 
-	GameController gc = GameController.Instance;
 	private static GunEffects instance = null;
 
 	public AudioSource rifleShot;
