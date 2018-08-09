@@ -54,9 +54,10 @@ public class Scr_UIController : MonoBehaviour
         //I'll fix this stuff up later
         if(Scr_GameController.selectedDog_ != null)
         {
-            checkForButtonDisplayUpdates(Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>());
-            updateAmmoInfo(Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>().weaponStats.shotsRemaining);
-            setMaxAmmoCount(Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>().weaponStats.maxShots);
+            dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+            checkForButtonDisplayUpdates(dog);
+            updateAmmoInfo(dog.weaponStats.shotsRemaining);
+            setMaxAmmoCount(dog.weaponStats.maxShots);
 
         }
     }
