@@ -2219,12 +2219,12 @@ MonoBehaviour:
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 140
+    m_Font: {fileID: 12800000, guid: ba7f2fbb059f09e42808aa159dae279a, type: 3}
+    m_FontSize: 200
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 1
-    m_MaxSize: 140
+    m_MinSize: 0
+    m_MaxSize: 300
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -3833,7 +3833,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48ae0b34406bf914ba5c0e1c49af81f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  level: DogClassProto_level1
+  level: Deathmatch_Level00_Original
 --- !u!114 &114569066072857774
 MonoBehaviour:
   m_ObjectHideFlags: 1

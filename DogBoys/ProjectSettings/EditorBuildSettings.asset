@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Prototyping/DogClassProto/New_Menu_Prototype.unity
+    path: Assets/Scenes/MainMenu.unity
     guid: ba1650110053eb247a906d877b567fa5
   - enabled: 1
-    path: Assets/Prototyping/DogClassProto/DogClassProto_level1.unity
+    path: Assets/Scenes/Deathmatch_Level00_Original.unity
     guid: f71d1d9a48239d24286339640f9a81b9
   - enabled: 1
     path: Assets/Scenes/Win Scene.unity
