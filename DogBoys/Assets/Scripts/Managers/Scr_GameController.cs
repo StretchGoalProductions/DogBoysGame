@@ -34,12 +34,12 @@ public class Scr_GameController : MonoBehaviour
     {
         if (Scr_TeamController.blueTeam.Count <= 0)
         {
-            Constants.WinScreen.C_WinText = "Red Rovers Win!!";
+            //Constants.WinScreen.C_WinText = "Red Rovers Win!!";
             SceneManager.LoadScene("Win Scene");
         }
         else if (Scr_TeamController.redTeam.Count <= 0)
         {
-            Constants.WinScreen.C_WinText = "Blue Bandits Win!!";
+            //Constants.WinScreen.C_WinText = "Blue Bandits Win!!";
             SceneManager.LoadScene("Win Scene");
         }
     }
