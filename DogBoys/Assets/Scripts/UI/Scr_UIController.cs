@@ -14,9 +14,6 @@ public class Scr_UIController : MonoBehaviour
     public static Text maxAmmo;
     public static Text currentAmmo;
 
-    public Image attackMode_;
-    public static Image staticImageAttackMode;
-
     public GameObject playerAtacking;
     public GameObject playerMoving;
     public static GameObject currentplayerState_Attacking;
@@ -52,13 +49,21 @@ public class Scr_UIController : MonoBehaviour
         currentplayerState_Moving = playerMoving;
     }
 
+    public void Update()
+    {
+        //I'll fix this stuff up later
+        if(Scr_GameController.selectedDog_ != null)
+        {
+            checkForButtonDisplayUpdates(Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>());
+            updateAmmoInfo(Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>().weaponStats.shotsRemaining);
+            setMaxAmmoCount(Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>().weaponStats.maxShots);
+
+        }
+    }
+
     public static void CharacterHudSet(bool setActive)
     {
         characterHud.SetActive(setActive);
-        if (!setActive)
-        {
-            staticImageAttackMode.gameObject.SetActive(setActive);
-        }
     }
 
     public static void updateCurrentHealthBar(int currentHealth, int maxHealth)
@@ -77,15 +82,15 @@ public class Scr_UIController : MonoBehaviour
         maxAmmo.text = maxAmmoForUnit.ToString();
     }
 
-    public static void checkForButtonDisplayUpdates(int currentAmmo)
+    public static void checkForButtonDisplayUpdates(Scr_DogBase dog)
     {
-        if (currentAmmo <= 0)
+        if (dog.weaponStats.shotsRemaining <= 0)
         {
             reload_.SetActive(true);
             attack_.SetActive(false);
             cancel_.SetActive(false);
         }
-        else if (Scr_GameController.attackMode_)
+        else if (dog.currentState == Scr_DogBase.dogState.attack)
         {
             reload_.SetActive(false);
             attack_.SetActive(false);
@@ -119,6 +124,7 @@ public class Scr_UIController : MonoBehaviour
         else
         {
             dog.currentState = Scr_DogBase.dogState.selected;
+            Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
             currentplayerState_Moving.SetActive(true);
             currentplayerState_Attacking.SetActive(false);
         }
