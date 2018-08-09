@@ -306,7 +306,7 @@ GameObject:
   - component: {fileID: 114085232730755140}
   - component: {fileID: 114802524711384882}
   - component: {fileID: 120225734574573742}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: RifleDogFINAL_red
   m_TagString: Red_Team
   m_Icon: {fileID: 0}
@@ -2699,7 +2699,7 @@ MonoBehaviour:
   validTargets: []
   targetLayerMask:
     serializedVersion: 2
-    m_Bits: 4096
+    m_Bits: 2304
   gunEffects: {fileID: 0}
   accuracyDisplay: {fileID: 1735529710764074}
   AngleScale: 0.01
