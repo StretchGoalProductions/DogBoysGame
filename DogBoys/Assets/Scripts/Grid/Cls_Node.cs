@@ -12,10 +12,11 @@ public class Cls_Node {
 	public int hCost;
 	public int fCost { get { return gCost + hCost; } }
 
-	public enum nodeState {empty, player, wall, cover};
+	public enum nodeState {empty, player, wall, cover, pickup};
 	public nodeState currentState;
 
 	public Scr_DogBase dog;
+	public Scr_SqueakyGrenadePickup grenadePickup;
 
 	public Cls_Node (nodeState currentState, Vector3 position, int gridX, int gridY) {
 		this.currentState = currentState;

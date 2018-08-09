@@ -11,6 +11,7 @@ public class Scr_GameController : MonoBehaviour
     public static bool redTeamTurn_;
     public static bool blueTeamTurn_;
     public static bool attackMode_;
+    public static bool grenadeMode_;
     public static int roundCount_;
     private static Camera_Movement cameraPivot_;
     public static string displayTeamName_;
@@ -29,6 +30,7 @@ public class Scr_GameController : MonoBehaviour
         blueTeamTurn_ = true;
         redTeamTurn_ = false;
         attackMode_ = false;
+        grenadeMode_ = false;
         roundCount_ = 1;
     }
 

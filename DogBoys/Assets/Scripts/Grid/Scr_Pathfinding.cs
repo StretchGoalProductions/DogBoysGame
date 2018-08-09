@@ -52,7 +52,7 @@ public class Scr_Pathfinding : MonoBehaviour {
 			}
 
 			foreach (Cls_Node neighborNode in Scr_Grid.GetNeighboringNodes(currentNode)) {
-				if((neighborNode.currentState != Cls_Node.nodeState.empty) || ClosedList.Contains(neighborNode)) {
+				if(((neighborNode.currentState != Cls_Node.nodeState.empty) && (neighborNode.currentState != Cls_Node.nodeState.pickup)) || ClosedList.Contains(neighborNode)) {
 					continue; // Skip if node is wall or in closed list
 				}
 

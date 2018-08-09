@@ -7,6 +7,7 @@ public class Scr_Grid : MonoBehaviour {
 	public LayerMask wallMask;
 	public LayerMask playerMask;
 	public LayerMask coverMask;
+	public LayerMask pickUpMask;
 	public Vector2 inspectGridWorldSize;
 	public static Vector2 gridWorldSize;
 	public float nodeRadius;
@@ -25,6 +26,7 @@ public class Scr_Grid : MonoBehaviour {
 		wallMask = LayerMask.GetMask("Wall");
 		playerMask = LayerMask.GetMask("Player");
 		coverMask = LayerMask.GetMask("Cover");
+		pickUpMask = LayerMask.GetMask("PickUp");
 		gridWorldSize = inspectGridWorldSize;
 		nodeDiameter = nodeRadius * 2;
 		gridSizeX = Mathf.RoundToInt(gridWorldSize.x / nodeDiameter);
@@ -43,6 +45,7 @@ public class Scr_Grid : MonoBehaviour {
 				bool isWall = Physics.CheckSphere(worldPoint, nodeRadius, wallMask);
 				bool isPlayer = Physics.CheckSphere(worldPoint, nodeRadius, playerMask);
 				bool isCover = Physics.CheckSphere(worldPoint, nodeRadius, coverMask);
+				bool isPickUp = Physics.CheckSphere(worldPoint, nodeRadius, pickUpMask);
 
 				Cls_Node.nodeState currentState = Cls_Node.nodeState.empty;
 				if (isWall) {
@@ -52,6 +55,12 @@ public class Scr_Grid : MonoBehaviour {
 				else if (isCover) {
 					currentState = Cls_Node.nodeState.cover;
 					grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
+				}
+				else if (isPickUp) {
+					currentState = Cls_Node.nodeState.pickup;
+					grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
+
+					
 				}
 				else if (isPlayer) {
 					currentState = Cls_Node.nodeState.player;

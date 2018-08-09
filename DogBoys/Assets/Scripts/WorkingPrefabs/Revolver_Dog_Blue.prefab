@@ -2389,7 +2389,6 @@ MonoBehaviour:
   myAnim: {fileID: 0}
   dog: {fileID: 0}
   pathfinder: {fileID: 0}
-  mainCamera: {fileID: 0}
   hitLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -2476,6 +2475,9 @@ MonoBehaviour:
   AngleScale: 0.01
   rangeCircle: {fileID: 120659266410293910}
   falloffCircle: {fileID: 120035772743456376}
+  grenadesHeld: 0
+  squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
+    type: 2}
 --- !u!114 &114718250434782414
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2515,7 +2517,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1081367547350362}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 87104db96fbc4eb4d8564a84c45128e4, type: 3}
   m_Name: 
