@@ -127,7 +127,6 @@ public class Scr_UIController : MonoBehaviour
             if (reload_.activeSelf) //If the reload button is active and is clicked, then have the dog reload
             {
                 dog.Reload();
-                dog.UseMove();
                 currentplayerState_Moving.SetActive(true);
                 currentplayerState_Attacking.SetActive(false);
             }
