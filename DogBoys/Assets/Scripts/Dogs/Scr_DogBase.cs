@@ -43,6 +43,8 @@ public class Scr_DogBase : MonoBehaviour {
 
 		animator = GetComponent<Animator>();
 
+        animator.SetBool("a_isAlive", true);
+
 		currentState = dogState.unselected;
 		enemiesSeen = new List<GameObject>();
 
