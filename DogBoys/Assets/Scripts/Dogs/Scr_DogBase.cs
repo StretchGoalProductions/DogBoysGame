@@ -185,7 +185,15 @@ public class Scr_DogBase : MonoBehaviour {
                     coverMod = 0.0f;
                     break;
                 } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
-                    coverMod = 0.5f;
+                    List<Cls_Node> neighbors = Scr_Grid.GetNeighboringNodes(Scr_Grid.grid[x, y]);
+                    bool ownCover = false;
+                    for (int i = 0; i < neighbors.Count; i++) {
+                        if (neighbors[i].dog == attacker.GetComponent<Scr_DogBase>())
+                            ownCover = true;
+                    }
+                    if (!ownCover) {
+                        coverMod = 0.5f;
+                    }
                 }
             }
         } else {
@@ -211,7 +219,15 @@ public class Scr_DogBase : MonoBehaviour {
                     coverMod = 0.0f;
                     break;
                 } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
-                    coverMod = 0.5f;
+                    List<Cls_Node> neighbors = Scr_Grid.GetNeighboringNodes(Scr_Grid.grid[x, y]);
+                    bool ownCover = false;
+                    for (int i = 0; i < neighbors.Count; i++) {
+                        if (neighbors[i].dog == attacker.GetComponent<Scr_DogBase>())
+                            ownCover = true;
+                    }
+                    if (!ownCover) {
+                        coverMod = 0.5f;
+                    }
                 }
                 err = err + derr;
                 if (err >= 0.5) {
