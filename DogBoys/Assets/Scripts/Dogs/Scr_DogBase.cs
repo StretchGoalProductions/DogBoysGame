@@ -166,34 +166,58 @@ public class Scr_DogBase : MonoBehaviour {
         float coverMod = 1.0f;
         int x0, y0, x1, y1;
         Debug.Log(this.name);
-        if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX < defender.GetComponent<Scr_DogBase>().currentNode.gridX) {
-            x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
-            y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
-            x1 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
-            y1 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
-        } else {
-            x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
-            y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
-            x0 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
-            y0 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
-        }
-        float dx = x1 - x0;
-        float dy = y1 - y0;
-        float derr = Mathf.Abs(dy / dx);
-        float err = 0.0f;
-        int y = y0;
 
-        for (int x = x0; x <= x1; x++) {
-            if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
-                coverMod = 0.0f;
-                break;
-            } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
-                coverMod = 0.5f;
+        if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX == defender.GetComponent<Scr_DogBase>().currentNode.gridX) {
+            if (attacker.GetComponent<Scr_DogBase>().currentNode.gridY < defender.GetComponent<Scr_DogBase>().currentNode.gridY) {
+                x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+                x1 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y1 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
+            } else {
+                x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+                x0 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y0 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
             }
-            err = err + derr;
-            if (err >= 0.5) {
-                y += (int) Mathf.Sign(dy) * 1;
-                err -= 1.0f;
+            int x = x0;
+            for (int y = y0; y <= y1; y++) {
+                if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
+                    coverMod = 0.0f;
+                    break;
+                } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
+                    coverMod = 0.5f;
+                }
+            }
+        } else {
+            if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX < defender.GetComponent<Scr_DogBase>().currentNode.gridX) {
+                x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+                x1 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y1 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
+            } else {
+                x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+                x0 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y0 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
+            }
+            float dx = x1 - x0;
+            float dy = y1 - y0;
+            float derr = Mathf.Abs(dy / dx);
+            float err = 0.0f;
+            int y = y0;
+
+            for (int x = x0; x <= x1; x++) {
+                if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
+                    coverMod = 0.0f;
+                    break;
+                } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
+                    coverMod = 0.5f;
+                }
+                err = err + derr;
+                if (err >= 0.5) {
+                    y += (int)Mathf.Sign(dy) * 1;
+                    err -= 1.0f;
+                }
             }
         }
         
