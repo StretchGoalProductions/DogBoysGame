@@ -28,6 +28,7 @@ public class Scr_DogBase : MonoBehaviour {
 	public GunEffects gunEffects;
 
     public GameObject accuracyDisplay;
+    public Slider healthBar;
 
     public float AngleScale = 0.01f;
     public LineRenderer rangeCircle;
@@ -48,7 +49,7 @@ public class Scr_DogBase : MonoBehaviour {
 		currentState = dogState.unselected;
 		enemiesSeen = new List<GameObject>();
 
-        //rangeCircle = GetComponent<LineRenderer>();
+        healthBar.maxValue = MAX_HEALTH;
 
         gunEffects = GunEffects.Instance();
 
@@ -59,13 +60,16 @@ public class Scr_DogBase : MonoBehaviour {
 
     void Update() {
         selectCooldown -= Time.deltaTime;
-        
+
+        // Display Health
+        healthBar.value = health;
+
         // Display Accuracy
         if (Scr_GameController.attackMode_ && ((Scr_GameController.blueTeamTurn_ && gameObject.tag == "Red_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Blue_Team"))) {
             accuracyDisplay.SetActive(true);
             GameObject attacker = Scr_GameController.selectedDog_;
             int hitChance = (int)(ChanceToHit(attacker, gameObject) * 100.0f);
-            accuracyDisplay.GetComponentInChildren<Text>().text = hitChance.ToString() + "%";
+            accuracyDisplay.GetComponent<Text>().text = hitChance.ToString() + "%";
         } else {
             accuracyDisplay.SetActive(false);
         }
