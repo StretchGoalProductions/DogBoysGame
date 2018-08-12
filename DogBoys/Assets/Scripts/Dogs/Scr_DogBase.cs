@@ -112,6 +112,7 @@ public class Scr_DogBase : MonoBehaviour {
 		{
             if ((Scr_GameController.blueTeamTurn_ && gameObject.tag == "Blue_Team") || (Scr_GameController.redTeamTurn_ && gameObject.tag == "Red_Team")) {
                 if (currentState == dogState.unselected && Input.GetMouseButtonDown(0) && movesLeft > 0 && Scr_GameController.selectedDog_ == null) {
+                    //Debug.Log("(" + gameObject.GetComponent<Scr_DogBase>().currentNode.gridX + ", " + gameObject.GetComponent<Scr_DogBase>().currentNode.gridY + ")");
                     SelectCharacter();
                 }
             }
@@ -173,70 +174,219 @@ public class Scr_DogBase : MonoBehaviour {
                 y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
                 x1 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
                 y1 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
+
+                int x = x0;
+                Cls_Node lastCover = null;
+                for (int y = y0; y <= y1; y++) {
+                    if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
+                        coverMod = 0.0f;
+                        break;
+                    } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
+                        List<Cls_Node> neighbors = Scr_Grid.GetNeighboringNodes(Scr_Grid.grid[x, y]);
+                        bool ownCover = false;
+                        foreach (Cls_Node neighbor in neighbors) {
+                            if (neighbor.dog == attacker.GetComponent<Scr_DogBase>()) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            } else if (neighbor == lastCover) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            }
+                        }
+                        if (!ownCover) {
+                            coverMod = 0.5f;
+                        }
+                    }
+                }
             } else {
                 x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
                 y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
                 x0 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
                 y0 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
-            }
-            int x = x0;
-            for (int y = y0; y <= y1; y++) {
-                if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
-                    coverMod = 0.0f;
-                    break;
-                } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
-                    List<Cls_Node> neighbors = Scr_Grid.GetNeighboringNodes(Scr_Grid.grid[x, y]);
-                    bool ownCover = false;
-                    for (int i = 0; i < neighbors.Count; i++) {
-                        if (neighbors[i].dog == attacker.GetComponent<Scr_DogBase>())
-                            ownCover = true;
-                    }
-                    if (!ownCover) {
-                        coverMod = 0.5f;
+
+                int x = x0;
+                Cls_Node lastCover = null;
+                for (int y = y1; y >= y0; y--) {
+                    if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
+                        coverMod = 0.0f;
+                        break;
+                    } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
+                        List<Cls_Node> neighbors = Scr_Grid.GetNeighboringNodes(Scr_Grid.grid[x, y]);
+                        bool ownCover = false;
+                        foreach (Cls_Node neighbor in neighbors) {
+                            if (neighbor.dog == attacker.GetComponent<Scr_DogBase>()) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            } else if (neighbor == lastCover) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            }
+                        }
+                        if (!ownCover) {
+                            coverMod = 0.5f;
+                        }
                     }
                 }
             }
         } else {
-            if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX < defender.GetComponent<Scr_DogBase>().currentNode.gridX) {
+            if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX < defender.GetComponent<Scr_DogBase>().currentNode.gridX && attacker.GetComponent<Scr_DogBase>().currentNode.gridY < defender.GetComponent<Scr_DogBase>().currentNode.gridY) {
                 x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
                 y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
                 x1 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
                 y1 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
-            } else {
+
+                float dx = x1 - x0;
+                float dy = y1 - y0;
+                float derr = Mathf.Abs(dy / dx);
+                float err = 0.0f;
+                int y = y0;
+
+                Cls_Node lastCover = null;
+                for (int x = x0; x <= x1; x++) {
+                    if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
+                        coverMod = 0.0f;
+                        break;
+                    } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
+                        List<Cls_Node> neighbors = Scr_Grid.GetNeighboringNodes(Scr_Grid.grid[x, y]);
+                        bool ownCover = false;
+                        foreach (Cls_Node neighbor in neighbors) {
+                            if (neighbor.dog == attacker.GetComponent<Scr_DogBase>()) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            } else if (neighbor == lastCover) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            }
+                        }
+                        if (!ownCover) {
+                            coverMod = 0.5f;
+                        }
+                    }
+                    err = err + derr;
+                    if (err >= 0.5) {
+                        y += (int)Mathf.Sign(dy) * 1;
+                        err -= 1.0f;
+                    }
+                }
+            } else if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX > defender.GetComponent<Scr_DogBase>().currentNode.gridX && attacker.GetComponent<Scr_DogBase>().currentNode.gridY < defender.GetComponent<Scr_DogBase>().currentNode.gridY) {
                 x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
                 y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
                 x0 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
                 y0 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
-            }
-            float dx = x1 - x0;
-            float dy = y1 - y0;
-            float derr = Mathf.Abs(dy / dx);
-            float err = 0.0f;
-            int y = y0;
 
-            for (int x = x0; x <= x1; x++) {
-                if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
-                    coverMod = 0.0f;
-                    break;
-                } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
-                    List<Cls_Node> neighbors = Scr_Grid.GetNeighboringNodes(Scr_Grid.grid[x, y]);
-                    bool ownCover = false;
-                    for (int i = 0; i < neighbors.Count; i++) {
-                        if (neighbors[i].dog == attacker.GetComponent<Scr_DogBase>())
-                            ownCover = true;
+                float dx = x1 - x0;
+                float dy = y1 - y0;
+                float derr = Mathf.Abs(dy / dx);
+                float err = 0.0f;
+                int y = y1;
+
+                Cls_Node lastCover = null;
+                for (int x = x1; x >= x0; x--) {
+                    if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
+                        coverMod = 0.0f;
+                        break;
+                    } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
+                        List<Cls_Node> neighbors = Scr_Grid.GetNeighboringNodes(Scr_Grid.grid[x, y]);
+                        bool ownCover = false;
+                        foreach (Cls_Node neighbor in neighbors) {
+                            if (neighbor.dog == attacker.GetComponent<Scr_DogBase>()) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            } else if (neighbor == lastCover) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            }
+                        }
+                        if (!ownCover) {
+                            coverMod = 0.5f;
+                        }
                     }
-                    if (!ownCover) {
-                        coverMod = 0.5f;
+                    err = err + derr;
+                    if (err >= 0.5) {
+                        y += (int)Mathf.Sign(dy) * 1;
+                        err -= 1.0f;
                     }
                 }
-                err = err + derr;
-                if (err >= 0.5) {
-                    y += (int)Mathf.Sign(dy) * 1;
-                    err -= 1.0f;
+            } else if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX < defender.GetComponent<Scr_DogBase>().currentNode.gridX && attacker.GetComponent<Scr_DogBase>().currentNode.gridY > defender.GetComponent<Scr_DogBase>().currentNode.gridY) {
+                x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+                x1 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y1 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
+
+                float dx = x1 - x0;
+                float dy = y0 - y1;
+                float derr = Mathf.Abs(dy / dx);
+                float err = 0.0f;
+                int y = y0;
+
+                Cls_Node lastCover = null;
+                for (int x = x0; x <= x1; x++) {
+                    if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
+                        coverMod = 0.0f;
+                        break;
+                    } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
+                        List<Cls_Node> neighbors = Scr_Grid.GetNeighboringNodes(Scr_Grid.grid[x, y]);
+                        bool ownCover = false;
+                        foreach (Cls_Node neighbor in neighbors) {
+                            if (neighbor.dog == attacker.GetComponent<Scr_DogBase>()) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            } else if (neighbor == lastCover) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            }
+                        }
+                        if (!ownCover) {
+                            coverMod = 0.5f;
+                        }
+                    }
+                    err = err + derr;
+                    if (err >= 0.5) {
+                        y -= (int)Mathf.Sign(dy) * 1;
+                        err -= 1.0f;
+                    }
+                }
+            } else if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX > defender.GetComponent<Scr_DogBase>().currentNode.gridX && attacker.GetComponent<Scr_DogBase>().currentNode.gridY > defender.GetComponent<Scr_DogBase>().currentNode.gridY) {
+                x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+                x0 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
+                y0 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
+
+                float dx = x1 - x0;
+                float dy = y1 - y0;
+                float derr = Mathf.Abs(dy / dx);
+                float err = 0.0f;
+                int y = y1;
+
+                Cls_Node lastCover = null;
+                for (int x = x1; x >= x0; x--) {
+                    if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.wall) {
+                        coverMod = 0.0f;
+                        break;
+                    } else if (Scr_Grid.grid[x, y].currentState == Cls_Node.nodeState.cover) {
+                        List<Cls_Node> neighbors = Scr_Grid.GetNeighboringNodes(Scr_Grid.grid[x, y]);
+                        bool ownCover = false;
+                        foreach (Cls_Node neighbor in neighbors) {
+                            if (neighbor.dog == attacker.GetComponent<Scr_DogBase>()) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            } else if (neighbor == lastCover) {
+                                ownCover = true;
+                                lastCover = Scr_Grid.grid[x, y];
+                            }
+                        }
+                        if (!ownCover) {
+                            coverMod = 0.5f;
+                        }
+                    }
+                    err = err + derr;
+                    if (err >= 0.5) {
+                        y -= (int)Mathf.Sign(dy) * 1;
+                        err -= 1.0f;
+                    }
                 }
             }
         }
-        
         return chanceToHit * coverMod;
     }
 
