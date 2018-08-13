@@ -10,8 +10,8 @@ public class Scr_LevelSelectButton : MonoBehaviour {
 
     public void LoadMission()
     {
-        if ((Scr_TeamController.menuBlueDogs.Count > 3 && Scr_TeamController.menuBlueDogs.Count < 5) && 
-        (Scr_TeamController.menuRedDogs.Count > 3 && Scr_TeamController.menuRedDogs.Count < 5) &&
+        if ((Scr_TeamController.menuBlueDogs.Count >= 3 && Scr_TeamController.menuBlueDogs.Count <= 5) && 
+        (Scr_TeamController.menuRedDogs.Count >= 3 && Scr_TeamController.menuRedDogs.Count <= 5) &&
         (Scr_TeamController.menuBlueDogs.Count == Scr_TeamController.menuRedDogs.Count)) {
             Debug.Log("Loading");
             SceneManager.LoadScene(level);
