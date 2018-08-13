@@ -5743,7 +5743,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 154775759}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 314343dbe47fc7d4d8f9dfa30d9eec43, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ffca5deea4a48249af4fdb965371f23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   redDancingDog_: {fileID: 1113339689}
@@ -17184,7 +17184,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 154775760}
+      - m_Target: {fileID: 0}
         m_MethodName: returnToDogHouse
         m_Mode: 1
         m_Arguments:

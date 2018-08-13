@@ -127,7 +127,6 @@ public class Scr_UIController : MonoBehaviour
             if (reload_.activeSelf) //If the reload button is active and is clicked, then have the dog reload
             {
                 dog.Reload();
-                dog.UseMove();
                 currentplayerState_Moving.SetActive(true);
                 currentplayerState_Attacking.SetActive(false);
             }
@@ -152,7 +151,7 @@ public class Scr_UIController : MonoBehaviour
     {
         dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
-        dog.currentState = Scr_DogBase.dogState.overwatch;
+        dog.guardDogOn_ = true;
         dog.movesLeft = 0;
         dog.UnselectCharacter();
     }
