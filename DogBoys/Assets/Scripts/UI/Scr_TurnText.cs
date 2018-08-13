@@ -11,7 +11,6 @@ public class Scr_TurnText : MonoBehaviour {
     public GameObject redActions, blueActions;
 
     void Start() {
-        Debug.Log(Scr_TeamController.menuBlueDogs.Count);
         for (int i=0; i < Scr_TeamController.menuBlueDogs.Count; i++) {
             redActions.transform.GetChild(i).gameObject.SetActive(true);
             blueActions.transform.GetChild(i).gameObject.SetActive(true);

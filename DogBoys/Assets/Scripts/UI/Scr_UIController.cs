@@ -65,14 +65,16 @@ public class Scr_UIController : MonoBehaviour
 	public static void CharacterHudSet(bool setActive) {
 		characterHud.SetActive(setActive);
 
-        dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+        if (Scr_GameController.selectedDog_ != null) {
+            dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
-        if (dog.grenadesHeld >= 1) {
-            // Set grenade button to interactable
-            grenade_.interactable = true;
-        }
-        else {
-            grenade_.interactable = false;
+            if (dog.grenadesHeld >= 1) {
+                // Set grenade button to interactable
+                grenade_.interactable = true;
+            }
+            else {
+                grenade_.interactable = false;
+            }
         }
 
         if(!setActive) {

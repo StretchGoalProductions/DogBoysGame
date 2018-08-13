@@ -84,6 +84,13 @@ public class camera_movement : MonoBehaviour
                     levelPanel.SetActive(false);
                     action = 5;
                 }
+                else if (hit.collider.gameObject.name == "How_To_Play"){
+                    //levelPanel.SetActive(false);
+
+                    howToPanel.SetActive(!howToPanel.activeSelf);
+
+                    //action = 6;
+                }
             }
         }
         #endregion
@@ -146,7 +153,8 @@ public class camera_movement : MonoBehaviour
         else if (action == 6){
             if(checkPosition(draft)){
                 previous = draft;
-            }else if(checkPosition(level)){
+            }
+            else if(checkPosition(level)){
                 previous = level;
             }
             else if (checkPosition(options))
