@@ -22,17 +22,9 @@ public class Scr_WinScene : MonoBehaviour {
     private void Start()
     {
         winner_ = info.GetComponent<cls_Win_Screne_Info>().winner_;
-        Destroy(info);
-        Destroy(oldGameController_);
-    }
+        //Destroy(info);
+        //Destroy(oldGameController_);
 
-    public void Update()
-    {
-        screneUpdate();
-    }
-
-    private void screneUpdate()
-    {
         if (winner_) //Red team has won 
         {
             redDancingDog_.SetActive(true);
