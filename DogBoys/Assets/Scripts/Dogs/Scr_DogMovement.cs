@@ -59,7 +59,7 @@ public class Scr_DogMovement : MonoBehaviour {
 			if(Physics.Raycast(castPoint, out hit, Mathf.Infinity, hitLayers)) {
 				Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(hit.point);
 
-				if(targetNode.currentState == Cls_Node.nodeState.empty) {
+				if(targetNode.currentState == Cls_Node.nodeState.empty || targetNode.currentState == Cls_Node.nodeState.pickup) {
 					Cls_Node currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
 					int distance = pathfinder.GetDistance(currentNode, targetNode);
 

@@ -8,6 +8,8 @@ public class Scr_ExplosiveBarrel : MonoBehaviour {
 	public Cls_Node currentNode;
 
 	public int damage;
+	public int range;
+	List<Cls_Node> explosionNodes = new List<Cls_Node>();
 
 	void Start () {
 		currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
@@ -20,16 +22,16 @@ public class Scr_ExplosiveBarrel : MonoBehaviour {
 		{
 			if (Input.GetMouseButtonDown(0) && Scr_GameController.attackMode_) {
 				GameObject attacker = Scr_GameController.selectedDog_;
-				Debug.Log("ATTACK");
 				attacker.GetComponent<Scr_DogBase>().Fire(this);
 			}
 		}
 	}
 
 	public void Explode() {
-		List<Cls_Node> neighborNodes = Scr_Grid.GetNeighboringNodes(currentNode);
+		//explosionNodes = Scr_Grid.GetNeighboringNodes(currentNode);
+		NodesInRange(range);
 		
-		foreach(Cls_Node node in neighborNodes) {
+		foreach(Cls_Node node in explosionNodes) {
 			if (node.dog != null) {
 				node.dog.TakeDamage(damage);
 			}
@@ -37,5 +39,30 @@ public class Scr_ExplosiveBarrel : MonoBehaviour {
 
 		currentNode.currentState = Cls_Node.nodeState.empty;
 		Destroy(transform.parent.gameObject);
+	}
+
+	public void NodesInRange(int squareRange) {
+
+		for (int i = 0; i < squareRange; i++) {
+			if (i == 0) {
+				List<Cls_Node> thisNodeList = Scr_Grid.GetNeighboringNodes(currentNode);
+				foreach (Cls_Node node in thisNodeList) {
+					explosionNodes.Add(node);
+				}
+			}
+			else {
+				List<Cls_Node> tempNodes = new List<Cls_Node>(explosionNodes);
+				foreach (Cls_Node node in tempNodes) {
+					List<Cls_Node> thisNodeList = Scr_Grid.GetNeighboringNodes(node);
+
+					foreach (Cls_Node newNode in thisNodeList) {
+						if (!explosionNodes.Contains(newNode)) {
+							explosionNodes.Add(newNode);
+						}
+					}
+				}
+			}
+		}
+
 	}
 }
