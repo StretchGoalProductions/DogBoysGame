@@ -5,36 +5,43 @@ using UnityEngine.UI;
 
 public class Scr_TurnText : MonoBehaviour {
 
-    string CurrentTeam;
+    public static string CurrentTeam;
 
     public GameObject RedTeam, BlueTeam;
+    private static GameObject _redTeam, _blueTeam;
     public GameObject redActions, blueActions;
+    private static GameObject _redActions, _blueActions;
 
     void Start() {
         for (int i=0; i < Scr_TeamController.menuBlueDogs.Count; i++) {
             redActions.transform.GetChild(i).gameObject.SetActive(true);
             blueActions.transform.GetChild(i).gameObject.SetActive(true);
         }
+        _redTeam = RedTeam;
+        _blueTeam = BlueTeam;
+        _redActions = redActions;
+        _blueActions = blueActions;
     }
 
-	void Update () {
-		CurrentTeam = Scr_GameController.displayTeamName_;
+
+    public static void updateText() {
+        CurrentTeam = Scr_GameController.displayTeamName_;
         if (CurrentTeam == "Blue Bandits")
         {
-            RedTeam.SetActive(false);
-            BlueTeam.SetActive(true);
+            _redTeam.SetActive(false);
+            _blueTeam.SetActive(true);
 
-            for (int i=0; i < Scr_TeamController.menuBlueDogs.Count; i++) {
-                blueActions.transform.GetChild(i).GetChild(0).GetComponent<Text>().text = Scr_TeamController.blueTeam[i].GetComponent<Scr_DogBase>().movesLeft.ToString();
+            for (int i=0; i < Scr_TeamController.blueTeam.Count; i++) {
+                _blueActions.transform.GetChild(i).GetChild(0).GetComponent<Text>().text = Scr_TeamController.blueTeam[i].GetComponent<Scr_DogBase>().movesLeft.ToString();
             }
         }
         else if (CurrentTeam == "Red Rovers")
         {
-            RedTeam.SetActive(true);
-            BlueTeam.SetActive(false);
+            _redTeam.SetActive(true);
+            _blueTeam.SetActive(false);
 
-            for (int i=0; i < Scr_TeamController.menuRedDogs.Count; i++) {
-                redActions.transform.GetChild(i).GetChild(0).GetComponent<Text>().text = Scr_TeamController.redTeam[i].GetComponent<Scr_DogBase>().movesLeft.ToString();
+            for (int i=0; i < Scr_TeamController.redTeam.Count; i++) {
+                _redActions.transform.GetChild(i).GetChild(0).GetComponent<Text>().text = Scr_TeamController.redTeam[i].GetComponent<Scr_DogBase>().movesLeft.ToString();
             }
         }
     }

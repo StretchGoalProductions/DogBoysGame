@@ -439,20 +439,26 @@ public class Scr_DogBase : MonoBehaviour {
 	public void Fire(Scr_DogBase targetDog, float accuracy = 1.0f, float damageReduction = 0.0f) {
         validTargets.Clear();
 
-        if(gameObject.GetComponent<Scr_ShotgunDog>() == null)
+        if(gameObject.GetComponent<Scr_ShotgunDog>() == null) {
             validTargets.Add(targetDog.gameObject);
-        else
+        }
+        else {
             GetValidTargets((targetDog.transform.position-transform.position).normalized);
+        }
         
 		if(weaponStats.shotsRemaining > 0) {
+            animator.SetTrigger ("a_isShooting");
+            shootParticles.Play();
             foreach (GameObject target in validTargets)
             {
 				if (Random.value <= ChanceToHit (gameObject, target)) {
 					if (target.GetComponent<Scr_DogBase> () != null && Random.value <= ChanceToHit (gameObject, target)) {
-						target.GetComponent<Scr_DogBase> ().TakeDamage (weaponStats.shootDamage - (int)(weaponStats.shootDamage * damageReduction));
-					} else {
-						target.GetComponent<Scr_ExplosiveBarrel> ().Explode ();
-					}
+                    target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
+                }
+                else if (target.GetComponent<Scr_ExplosiveBarrel>() != null)
+                {
+                    target.GetComponent<Scr_ExplosiveBarrel>().Explode();
+                }
 				} else {
 					gunEffects.Miss ();
 				}
@@ -469,23 +475,26 @@ public class Scr_DogBase : MonoBehaviour {
     public void Fire(Scr_ExplosiveBarrel targetBarrel, float accuracy = 1.0f, float damageReduction = 0.0f) {
         validTargets.Clear();
 
-        if(gameObject.GetComponent<Scr_ShotgunDog>() == null)
+        if(gameObject.GetComponent<Scr_ShotgunDog>() == null) {
             validTargets.Add(targetBarrel.gameObject);
-        else
+        }
+        else {
             GetValidTargets((targetBarrel.transform.position-transform.position).normalized);
+        }
         
 		if(weaponStats.shotsRemaining > 0) {
+            animator.SetTrigger ("a_isShooting");
+            shootParticles.Play();
             foreach (GameObject target in validTargets)
             {
-				if (Random.value <= ChanceToHit (gameObject, target)) {
-					if (target.GetComponent<Scr_DogBase> () != null) {
-						target.GetComponent<Scr_DogBase> ().TakeDamage (weaponStats.shootDamage - (int)(weaponStats.shootDamage * damageReduction));
-					} else {
-						target.GetComponent<Scr_ExplosiveBarrel> ().Explode ();
-					}
-				} else {
-					gunEffects.Miss ();
-				}
+                if(target.GetComponent<Scr_DogBase>() != null && Random.value <= ChanceToHit(gameObject, target))
+                {
+                    target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
+                }
+                else
+                {
+                    target.GetComponent<Scr_ExplosiveBarrel>().Explode();
+                }
             }
 			weaponStats.shotsRemaining--;
 			UseMove();

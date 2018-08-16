@@ -58,6 +58,8 @@ public class Scr_GameController : MonoBehaviour
     //Check for the start of a new round
     public static void CheckTurn()
     {
+        Scr_TurnText.updateText();
+        
         if (blueTeamTurn_)
         {
             int countNoActionsLeft = 0;
@@ -118,6 +120,7 @@ public class Scr_GameController : MonoBehaviour
 			fx.SwitchTurn ();
             displayTeamName_ = "Red Rovers";
         }
+        Scr_TurnText.updateText();
     }
 
     //On new round, reset the dogs available actions back to 2
