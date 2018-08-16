@@ -2911,6 +2911,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef377fff9f0b3e243aa5b900e75a510c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  winInfoPrefab: {fileID: 1800924174457938, guid: 1332b26fdfc3df749b7867478f0b1949,
+    type: 2}
 --- !u!4 &566524617
 Transform:
   m_ObjectHideFlags: 0
@@ -4192,13 +4194,13 @@ MonoBehaviour:
     type: 2}
   revolverDogBlue: {fileID: 1081367547350362, guid: 5eb63df2eb989934499fa3e27a7bae9c,
     type: 2}
-  rifleDogRed: {fileID: 1416264187905814, guid: fbf0e61408c2c6442be99ab65c2ac38b,
+  rifleDogRed: {fileID: 1309380784855858, guid: 0e0b0a34799f0424ca7dede71fd0e666,
     type: 2}
-  rifleDogBlue: {fileID: 1867375930216830, guid: 7e0ed43180103144fb7ea438a4c01fa4,
+  rifleDogBlue: {fileID: 1811864234466744, guid: d1a1c85a1cd7dcf469033c6f22774983,
     type: 2}
-  shotgunDogRed: {fileID: 1229163733759466, guid: f0653a8a69d0b834e8c3e91c62d68590,
+  shotgunDogRed: {fileID: 1547005881234202, guid: f61ebeead54a0554a8c1b49281b7595c,
     type: 2}
-  shotgunDogBlue: {fileID: 1674755394276836, guid: e1b3c3e17b8aefb45a0ef8e73a52a278,
+  shotgunDogBlue: {fileID: 1143490122008102, guid: 65e8ca09d8948b04e9be466d47697ef8,
     type: 2}
   redSpawn:
   - {x: 2.5, y: 0, z: 14.5}
@@ -7593,6 +7595,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   coverMask:
+    serializedVersion: 2
+    m_Bits: 0
+  pickUpMask:
     serializedVersion: 2
     m_Bits: 0
   inspectGridWorldSize: {x: 24, y: 32}
