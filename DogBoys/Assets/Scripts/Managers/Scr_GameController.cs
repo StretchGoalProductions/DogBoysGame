@@ -18,7 +18,12 @@ public class Scr_GameController : MonoBehaviour
     public static Scr_GameController Instance;
     public GameObject winInfoPrefab;
     public static GameObject winInfo_;
+	private static GunEffects fx;
     #endregion
+
+	private void Start(){
+		fx = GunEffects.Instance ();
+	}
 
     private void Awake()
     {
@@ -100,6 +105,7 @@ public class Scr_GameController : MonoBehaviour
             ResetActionCount(Scr_TeamController.blueTeam);
             ChangeCameraPivot();
             roundCount_ += 1;
+			fx.SwitchTurn ();
             displayTeamName_ = "Blue Bandits";
         }
         else
@@ -109,6 +115,7 @@ public class Scr_GameController : MonoBehaviour
             ResetActionCount(Scr_TeamController.redTeam);
             ChangeCameraPivot();
             roundCount_ += 1;
+			fx.SwitchTurn ();
             displayTeamName_ = "Red Rovers";
         }
     }

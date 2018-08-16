@@ -30,6 +30,7 @@ public class Scr_UIController : MonoBehaviour
 
 	private static Scr_DogBase dog;
 	public static GameObject characterHud;
+	private static GunEffects fx;
 
     public void Start()
     {
@@ -50,6 +51,8 @@ public class Scr_UIController : MonoBehaviour
         //Set the ammo counters up
         maxAmmo = maxPlayerAmmo_;
         currentAmmo = currentPlayerAmmoCount_;
+
+		fx = GunEffects.Instance ();
     }
 
     void Update() {
@@ -123,6 +126,8 @@ public class Scr_UIController : MonoBehaviour
     }
 
     public void OnClickAttackButton() {
+		fx.Click ();
+
         if (!Scr_GameController.grenadeMode_) {
             dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
@@ -151,6 +156,8 @@ public class Scr_UIController : MonoBehaviour
 
     public void OnClickOverwatchButton()
     {
+		fx.Click ();
+
         dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
         dog.guardDogOn_ = true;
@@ -165,12 +172,14 @@ public class Scr_UIController : MonoBehaviour
 
     public void OnClickSkipTurn()
     {
+		fx.Click ();
         dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
         dog.SkipTurn();
     }
 
     public void OnClickSqueakyGrenade() {
+		fx.Click ();
         if (!Scr_GameController.attackMode_) {
             dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 

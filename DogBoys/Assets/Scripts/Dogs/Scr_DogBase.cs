@@ -447,14 +447,15 @@ public class Scr_DogBase : MonoBehaviour {
 		if(weaponStats.shotsRemaining > 0) {
             foreach (GameObject target in validTargets)
             {
-                if(target.GetComponent<Scr_DogBase>() != null && Random.value <= ChanceToHit(gameObject, target))
-                {
-                    target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
-                }
-                else
-                {
-                    target.GetComponent<Scr_ExplosiveBarrel>().Explode();
-                }
+				if (Random.value <= ChanceToHit (gameObject, target)) {
+					if (target.GetComponent<Scr_DogBase> () != null && Random.value <= ChanceToHit (gameObject, target)) {
+						target.GetComponent<Scr_DogBase> ().TakeDamage (weaponStats.shootDamage - (int)(weaponStats.shootDamage * damageReduction));
+					} else {
+						target.GetComponent<Scr_ExplosiveBarrel> ().Explode ();
+					}
+				} else {
+					gunEffects.Miss ();
+				}
             }
 			weaponStats.shotsRemaining--;
 			UseMove();
@@ -476,14 +477,15 @@ public class Scr_DogBase : MonoBehaviour {
 		if(weaponStats.shotsRemaining > 0) {
             foreach (GameObject target in validTargets)
             {
-                if(target.GetComponent<Scr_DogBase>() != null && Random.value <= ChanceToHit(gameObject, target))
-                {
-                    target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
-                }
-                else
-                {
-                    target.GetComponent<Scr_ExplosiveBarrel>().Explode();
-                }
+				if (Random.value <= ChanceToHit (gameObject, target)) {
+					if (target.GetComponent<Scr_DogBase> () != null) {
+						target.GetComponent<Scr_DogBase> ().TakeDamage (weaponStats.shootDamage - (int)(weaponStats.shootDamage * damageReduction));
+					} else {
+						target.GetComponent<Scr_ExplosiveBarrel> ().Explode ();
+					}
+				} else {
+					gunEffects.Miss ();
+				}
             }
 			weaponStats.shotsRemaining--;
 			UseMove();

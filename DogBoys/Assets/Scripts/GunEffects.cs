@@ -13,6 +13,9 @@ public class GunEffects : MonoBehaviour {
 	public AudioSource revolverReload;
 	public AudioSource shotgunReload;
 	public AudioSource hit;
+	public AudioSource switchTurn;
+	public AudioSource click;
+	public AudioSource miss;
 
 	public static GunEffects Instance() {
 		return instance;
@@ -51,4 +54,17 @@ public class GunEffects : MonoBehaviour {
 			instance = this;
 		}
 	}
+
+	public void SwitchTurn() {
+		switchTurn.Play ();
+	}
+
+	public void Click() {
+		click.Play ();
+	}
+
+	public void Miss() {
+		miss.Play ();
+	}
+
 }
