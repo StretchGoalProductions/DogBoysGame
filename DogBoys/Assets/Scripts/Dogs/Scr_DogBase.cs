@@ -62,6 +62,9 @@ public class Scr_DogBase : MonoBehaviour {
 		currentNode.dog = this;
         guardDogOn_ = false;
 
+        spreadMesh = new Mesh();
+        spreadMesh.name = "Shot Spread Mesh";
+        spreadMeshFilter.mesh = spreadMesh;
     }
 
     void Update() {
@@ -682,6 +685,3 @@ public class Scr_DogBase : MonoBehaviour {
 }
 
 
-        spreadMesh = new Mesh();
-        spreadMesh.name = "Shot Spread Mesh";
-        spreadMeshFilter.mesh = spreadMesh;
