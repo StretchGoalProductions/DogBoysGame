@@ -37,6 +37,8 @@ public class Scr_DogBase : MonoBehaviour {
     public int grenadesHeld = 0;
     public GameObject squeakyGrenade;
 
+    public bool guardDogOn_;
+
     void Start() {
 		health = 100;
 		movesLeft = 2;
@@ -56,7 +58,9 @@ public class Scr_DogBase : MonoBehaviour {
 		currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
 		currentNode.currentState = Cls_Node.nodeState.player;
 		currentNode.dog = this;
-	}
+        guardDogOn_ = false;
+
+    }
 
     void Update() {
         selectCooldown -= Time.deltaTime;
@@ -435,22 +439,29 @@ public class Scr_DogBase : MonoBehaviour {
 	public void Fire(Scr_DogBase targetDog, float accuracy = 1.0f, float damageReduction = 0.0f) {
         validTargets.Clear();
 
-        if(gameObject.GetComponent<Scr_ShotgunDog>() == null)
+        if(gameObject.GetComponent<Scr_ShotgunDog>() == null) {
             validTargets.Add(targetDog.gameObject);
-        else
+        }
+        else {
             GetValidTargets((targetDog.transform.position-transform.position).normalized);
+        }
         
 		if(weaponStats.shotsRemaining > 0) {
+            animator.SetTrigger ("a_isShooting");
+            shootParticles.Play();
             foreach (GameObject target in validTargets)
             {
-                if(target.GetComponent<Scr_DogBase>() != null && Random.value <= ChanceToHit(gameObject, target))
-                {
+				if (Random.value <= ChanceToHit (gameObject, target)) {
+					if (target.GetComponent<Scr_DogBase> () != null && Random.value <= ChanceToHit (gameObject, target)) {
                     target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
                 }
-                else
+                else if (target.GetComponent<Scr_ExplosiveBarrel>() != null)
                 {
                     target.GetComponent<Scr_ExplosiveBarrel>().Explode();
                 }
+				} else {
+					gunEffects.Miss ();
+				}
             }
 			weaponStats.shotsRemaining--;
 			UseMove();
@@ -464,12 +475,16 @@ public class Scr_DogBase : MonoBehaviour {
     public void Fire(Scr_ExplosiveBarrel targetBarrel, float accuracy = 1.0f, float damageReduction = 0.0f) {
         validTargets.Clear();
 
-        if(gameObject.GetComponent<Scr_ShotgunDog>() == null)
+        if(gameObject.GetComponent<Scr_ShotgunDog>() == null) {
             validTargets.Add(targetBarrel.gameObject);
-        else
+        }
+        else {
             GetValidTargets((targetBarrel.transform.position-transform.position).normalized);
+        }
         
 		if(weaponStats.shotsRemaining > 0) {
+            animator.SetTrigger ("a_isShooting");
+            shootParticles.Play();
             foreach (GameObject target in validTargets)
             {
                 if(target.GetComponent<Scr_DogBase>() != null && Random.value <= ChanceToHit(gameObject, target))
@@ -584,12 +599,12 @@ public class Scr_DogBase : MonoBehaviour {
                 }
             }
 
-            foreach(GameObject dog in enemiesSeen)
+            foreach (GameObject dog in enemiesSeen)
             {
-                if(dog.GetComponent<Scr_DogBase>().currentState == dogState.overwatch)
+                if (dog.GetComponent<Scr_DogBase>().guardDogOn_)
                 {
+                    dog.GetComponent<Scr_DogBase>().guardDogOn_ = false;
                     guardDog(dog, this.gameObject);
-                    dog.GetComponent<Scr_DogBase>().currentState = dogState.unselected;
                 }
             }
             enemiesSeen.Clear();
@@ -598,8 +613,9 @@ public class Scr_DogBase : MonoBehaviour {
 
     public void guardDog(GameObject attacker, GameObject target)
     {
-        float hitChance = ChanceToHit(attacker, gameObject);
-        attacker.GetComponent<Scr_DogBase>().Fire(this, hitChance);
+        float hitChance = ChanceToHit(attacker, target);
+        attacker.GetComponent<Scr_DogBase>().Fire(target.GetComponent<Scr_DogBase>(), hitChance);
+        SelectCharacter();
     }
 
     public void UseMove() {
