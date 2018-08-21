@@ -43,6 +43,8 @@ public class Scr_TeamBuilder : MonoBehaviour
         //send team info to team controller
         Scr_TeamController.redTeam = redTeam;
         Scr_TeamController.blueTeam = blueTeam;
+
+        Scr_TurnText.updateText();
 	}
 	
 	// Update is called once per frame

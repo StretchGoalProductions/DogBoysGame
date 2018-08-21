@@ -62,10 +62,6 @@ public class Scr_DogBase : MonoBehaviour {
 		currentNode.dog = this;
         guardDogOn_ = false;
 
-        spreadMesh = new Mesh();
-        spreadMesh.name = "Shot Spread Mesh";
-        spreadMeshFilter.mesh = spreadMesh;
-
     }
 
     void Update() {
@@ -501,22 +497,29 @@ public class Scr_DogBase : MonoBehaviour {
 	public void Fire(Scr_DogBase targetDog, float accuracy = 1.0f, float damageReduction = 0.0f) {
         validTargets.Clear();
 
-        if(gameObject.GetComponent<Scr_ShotgunDog>() == null)
+        if(gameObject.GetComponent<Scr_ShotgunDog>() == null) {
             validTargets.Add(targetDog.gameObject);
-        else
+        }
+        else {
             GetValidTargets((targetDog.transform.position-transform.position).normalized);
+        }
         
 		if(weaponStats.shotsRemaining > 0) {
+            animator.SetTrigger ("a_isShooting");
+            shootParticles.Play();
             foreach (GameObject target in validTargets)
             {
-                if(target.GetComponent<Scr_DogBase>() != null && Random.value <= ChanceToHit(gameObject, target))
-                {
+				if (Random.value <= ChanceToHit (gameObject, target)) {
+					if (target.GetComponent<Scr_DogBase> () != null && Random.value <= ChanceToHit (gameObject, target)) {
                     target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
                 }
-                else
+                else if (target.GetComponent<Scr_ExplosiveBarrel>() != null)
                 {
                     target.GetComponent<Scr_ExplosiveBarrel>().Explode();
                 }
+				} else {
+					gunEffects.Miss ();
+				}
             }
 			weaponStats.shotsRemaining--;
 			UseMove();
@@ -530,12 +533,16 @@ public class Scr_DogBase : MonoBehaviour {
     public void Fire(Scr_ExplosiveBarrel targetBarrel, float accuracy = 1.0f, float damageReduction = 0.0f) {
         validTargets.Clear();
 
-        if(gameObject.GetComponent<Scr_ShotgunDog>() == null)
+        if(gameObject.GetComponent<Scr_ShotgunDog>() == null) {
             validTargets.Add(targetBarrel.gameObject);
-        else
+        }
+        else {
             GetValidTargets((targetBarrel.transform.position-transform.position).normalized);
+        }
         
 		if(weaponStats.shotsRemaining > 0) {
+            animator.SetTrigger ("a_isShooting");
+            shootParticles.Play();
             foreach (GameObject target in validTargets)
             {
                 if(target.GetComponent<Scr_DogBase>() != null && Random.value <= ChanceToHit(gameObject, target))
@@ -673,3 +680,8 @@ public class Scr_DogBase : MonoBehaviour {
 		movesLeft--;
 	}
 }
+
+
+        spreadMesh = new Mesh();
+        spreadMesh.name = "Shot Spread Mesh";
+        spreadMeshFilter.mesh = spreadMesh;
