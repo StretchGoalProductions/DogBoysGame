@@ -15,7 +15,7 @@ public class Scr_TeamController : MonoBehaviour
 
     public static GameObject Instance;
 
-    void Start() {
+    void Awake() {
         if (Instance == null) {
             DontDestroyOnLoad(gameObject);
             Instance = gameObject;

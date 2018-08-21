@@ -30,6 +30,7 @@ public class Scr_UIController : MonoBehaviour
 
 	private static Scr_DogBase dog;
 	public static GameObject characterHud;
+	private static GunEffects fx;
 
     public void Start()
     {
@@ -50,6 +51,8 @@ public class Scr_UIController : MonoBehaviour
         //Set the ammo counters up
         maxAmmo = maxPlayerAmmo_;
         currentAmmo = currentPlayerAmmoCount_;
+
+		fx = GunEffects.Instance ();
     }
 
     void Update() {
@@ -65,14 +68,16 @@ public class Scr_UIController : MonoBehaviour
 	public static void CharacterHudSet(bool setActive) {
 		characterHud.SetActive(setActive);
 
-        dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
+        if (Scr_GameController.selectedDog_ != null) {
+            dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
-        if (dog.grenadesHeld >= 1) {
-            // Set grenade button to interactable
-            grenade_.interactable = true;
-        }
-        else {
-            grenade_.interactable = false;
+            if (dog.grenadesHeld >= 1) {
+                // Set grenade button to interactable
+                grenade_.interactable = true;
+            }
+            else {
+                grenade_.interactable = false;
+            }
         }
 
         if(!setActive) {
@@ -121,13 +126,14 @@ public class Scr_UIController : MonoBehaviour
     }
 
     public void OnClickAttackButton() {
+		fx.Click ();
+
         if (!Scr_GameController.grenadeMode_) {
             dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
             if (reload_.activeSelf) //If the reload button is active and is clicked, then have the dog reload
             {
                 dog.Reload();
-                dog.UseMove();
                 currentplayerState_Moving.SetActive(true);
                 currentplayerState_Attacking.SetActive(false);
             }
@@ -150,9 +156,11 @@ public class Scr_UIController : MonoBehaviour
 
     public void OnClickOverwatchButton()
     {
+		fx.Click ();
+
         dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
-        dog.currentState = Scr_DogBase.dogState.overwatch;
+        dog.guardDogOn_ = true;
         dog.movesLeft = 0;
         dog.UnselectCharacter();
     }
@@ -164,12 +172,14 @@ public class Scr_UIController : MonoBehaviour
 
     public void OnClickSkipTurn()
     {
+		fx.Click ();
         dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
         dog.SkipTurn();
     }
 
     public void OnClickSqueakyGrenade() {
+		fx.Click ();
         if (!Scr_GameController.attackMode_) {
             dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
