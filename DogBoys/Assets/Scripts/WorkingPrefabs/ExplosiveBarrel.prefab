@@ -52,8 +52,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762387488535376}
   m_LocalRotation: {x: -0, y: 0.8628906, z: -0, w: 0.50539076}
-  m_LocalPosition: {x: 10.934, y: 1.0159326, z: 11.603}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 10.894, y: 0.864, z: 8.412}
+  m_LocalScale: {x: 1.0000002, y: 1, z: 1.0000002}
   m_Children:
   - {fileID: 4710135063844758}
   m_Father: {fileID: 0}
@@ -138,5 +138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ff53336ff072004996951bf63b13e48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 50
-  range: 1
+  damage: 60
+  range: 2
+  spawnEffect: {fileID: 1645238055840466, guid: 2a6a4eacd1289b4459f7ed02e61f439b,
+    type: 2}
