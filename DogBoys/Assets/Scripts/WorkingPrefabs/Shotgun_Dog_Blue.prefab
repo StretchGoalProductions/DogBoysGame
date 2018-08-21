@@ -2899,6 +2899,7 @@ MonoBehaviour:
   grenadesHeld: 0
   squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
     type: 2}
+  guardDogOn_: 0
 --- !u!114 &114131006257160534
 MonoBehaviour:
   m_ObjectHideFlags: 1
