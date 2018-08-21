@@ -1031,6 +1031,8 @@ GameObject:
   - component: {fileID: 114234993310194924}
   - component: {fileID: 114640865021454420}
   - component: {fileID: 120559585195934360}
+  - component: {fileID: 33363251506452826}
+  - component: {fileID: 23772267699341692}
   m_Layer: 8
   m_Name: RifleDogFINAL_blue
   m_TagString: Blue_Team
@@ -2381,6 +2383,41 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!23 &23772267699341692
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1811864234466744}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 2100000, guid: 31f9e14a53f403b4786eedfa3e5f73b5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23890391836897448
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -2465,6 +2502,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1279437892716798}
   m_Mesh: {fileID: 4300004, guid: d44c87996e3f5fb40ac1ced8ce162dbd, type: 3}
+--- !u!33 &33363251506452826
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1811864234466744}
+  m_Mesh: {fileID: 0}
 --- !u!33 &33380829493861214
 MeshFilter:
   m_ObjectHideFlags: 1
@@ -2834,7 +2878,7 @@ MonoBehaviour:
   shootFalloff: 20
   shootDamage: 40
   movesUsed: 1
-  shootAngle: 1
+  shootAngle: 0
 --- !u!114 &114490918996695896
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2962,9 +3006,11 @@ MonoBehaviour:
   AngleScale: 0.01
   rangeCircle: {fileID: 120559585195934360}
   falloffCircle: {fileID: 120990580435796910}
+  spreadMeshFilter: {fileID: 33363251506452826}
   grenadesHeld: 0
   squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
     type: 2}
+  guardDogOn_: 0
 --- !u!114 &114880271844140898
 MonoBehaviour:
   m_ObjectHideFlags: 1
