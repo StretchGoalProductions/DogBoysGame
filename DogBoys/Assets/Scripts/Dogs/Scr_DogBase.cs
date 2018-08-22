@@ -199,7 +199,8 @@ public class Scr_DogBase : MonoBehaviour {
     {
         Vector3 dir = (new Vector3(Input.mousePosition.x, Input.mousePosition.y) - Camera.main.WorldToScreenPoint(transform.position)).normalized;
         float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
-        if(angle < 0)
+        angle+=Camera.main.transform.eulerAngles.y;
+        if( angle < 0)
         {
             angle+=360;
         }
