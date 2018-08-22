@@ -33,6 +33,8 @@ public class Scr_DogBase : MonoBehaviour {
     public float AngleScale = 0.01f;
     public LineRenderer rangeCircle;
     public LineRenderer falloffCircle;
+    public MeshFilter spreadMeshFilter;
+    private Mesh spreadMesh;
 
     public int grenadesHeld = 0;
     public GameObject squeakyGrenade;
@@ -60,6 +62,9 @@ public class Scr_DogBase : MonoBehaviour {
 		currentNode.dog = this;
         guardDogOn_ = false;
 
+        spreadMesh = new Mesh();
+        spreadMesh.name = "Shot Spread Mesh";
+        spreadMeshFilter.mesh = spreadMesh;
     }
 
     void Update() {
@@ -88,9 +93,11 @@ public class Scr_DogBase : MonoBehaviour {
             rangeCircle.enabled = true;
             falloffCircle.enabled = true;
             DrawRange();
+            DrawShotSpread();
         } else {
             rangeCircle.enabled = false;
             falloffCircle.enabled = false;
+            spreadMesh.Clear();
         }
 
         if (Scr_GameController.grenadeMode_ && currentState == dogState.attack && grenadesHeld > 0) {
@@ -152,6 +159,61 @@ public class Scr_DogBase : MonoBehaviour {
             float y = radius * Mathf.Sin(angle);
             falloffCircle.SetPosition(i, transform.position + new Vector3(x, 0, y));
         }
+    }
+
+    void DrawShotSpread() {
+        int stepCount = Mathf.RoundToInt(weaponStats.shootAngle / AngleScale); 
+        List<Vector3> shotPoints = new List<Vector3>();      
+
+        for(int i=0; i<=stepCount; i++)
+        {
+            float angle = GetAngleToMouse() - weaponStats.shootAngle/2 + AngleScale*i;
+            shotPoints.Add(transform.position+DirFromAngle(angle, true) * weaponStats.shootFalloff);
+        }
+
+        int vertexCount = shotPoints.Count+1;
+        Vector3[] verts = new Vector3[vertexCount];
+        int[] tris = new int[(vertexCount-2)*3];
+
+        verts[0] = Vector3.zero;
+
+        for(int i=0; i<vertexCount-1; i++)
+        {
+            verts[i+1] = transform.InverseTransformPoint(shotPoints[i]);
+
+            if(i < vertexCount-2)
+            {
+                tris[i*3] = 0;
+                tris[i*3+1] = i+1;
+                tris[i*3+2] = i+2;
+            }
+        }
+
+        spreadMesh.Clear();
+        spreadMesh.vertices=verts;
+        spreadMesh.triangles=tris;
+        spreadMesh.RecalculateNormals();
+    }
+
+    float GetAngleToMouse()
+    {
+        Vector3 dir = (new Vector3(Input.mousePosition.x, Input.mousePosition.y) - Camera.main.WorldToScreenPoint(transform.position)).normalized;
+        float angle = Mathf.Atan2(dir.x, dir.y) * Mathf.Rad2Deg;
+        angle+=Camera.main.transform.eulerAngles.y;
+        if( angle < 0)
+        {
+            angle+=360;
+        }
+        return angle;
+    }
+
+    Vector3 DirFromAngle(float angleInDegrees, bool isGlobal)
+    {
+        if(!isGlobal)
+        {
+            angleInDegrees+=transform.eulerAngles.y;
+        }
+        return new Vector3(Mathf.Sin(angleInDegrees*Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees*Mathf.Deg2Rad));
     }
 
     public float ChanceToHit(GameObject attacker, GameObject defender) {
@@ -622,3 +684,5 @@ public class Scr_DogBase : MonoBehaviour {
 		movesLeft--;
 	}
 }
+
+

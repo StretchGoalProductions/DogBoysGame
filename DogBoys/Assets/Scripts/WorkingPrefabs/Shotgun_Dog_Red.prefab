@@ -139,6 +139,8 @@ GameObject:
   - component: {fileID: 114772922760468788}
   - component: {fileID: 114777803768108340}
   - component: {fileID: 120641330804241050}
+  - component: {fileID: 33438592336735170}
+  - component: {fileID: 23221815482793272}
   m_Layer: 8
   m_Name: Shotgun_Dog_Red
   m_TagString: Red_Team
@@ -1515,6 +1517,41 @@ Transform:
   m_Father: {fileID: 4215995648167802}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!23 &23221815482793272
+MeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1229163733759466}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 2100000, guid: 31f9e14a53f403b4786eedfa3e5f73b5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
 --- !u!23 &23360381551042442
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -1593,6 +1630,13 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1895352437679882}
   m_Mesh: {fileID: 4300002, guid: 6c71df75e29bb5e44abc3d838104a19b, type: 3}
+--- !u!33 &33438592336735170
+MeshFilter:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1229163733759466}
+  m_Mesh: {fileID: 0}
 --- !u!65 &65167025789008854
 BoxCollider:
   m_ObjectHideFlags: 1
@@ -1929,6 +1973,7 @@ MonoBehaviour:
   AngleScale: 0.01
   rangeCircle: {fileID: 120641330804241050}
   falloffCircle: {fileID: 120779289450614946}
+  spreadMeshFilter: {fileID: 33438592336735170}
   grenadesHeld: 0
   squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
     type: 2}
