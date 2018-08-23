@@ -18,7 +18,12 @@ public class Scr_GameController : MonoBehaviour
     public static Scr_GameController Instance;
     public GameObject winInfoPrefab;
     public static GameObject winInfo_;
+	private static GunEffects fx;
     #endregion
+
+	private void Start(){
+		fx = GunEffects.Instance ();
+	}
 
     private void Awake()
     {
@@ -49,10 +54,29 @@ public class Scr_GameController : MonoBehaviour
         }
     }
 
+    //Cycle through dogs
+    public void selectNextDog()
+    {
+        GameObject nextDog = selectedDog_;
+        if(redTeamTurn_)
+        {
+            nextDog = Scr_TeamController.getNextDog_Red(selectedDog_);
+        }
+        else if(blueTeamTurn_)
+        {
+            nextDog = Scr_TeamController.getNextDog_Blue(selectedDog_);
+        }
+        
+        selectedDog_.GetComponent<Scr_DogBase>().UnselectCharacter();
+        nextDog.GetComponent<Scr_DogBase>().SelectCharacter();
+    }
+
     #region Functions for updating round
     //Check for the start of a new round
     public static void CheckTurn()
     {
+        Scr_TurnText.updateText();
+        
         if (blueTeamTurn_)
         {
             int countNoActionsLeft = 0;
@@ -100,6 +124,7 @@ public class Scr_GameController : MonoBehaviour
             ResetActionCount(Scr_TeamController.blueTeam);
             ChangeCameraPivot();
             roundCount_ += 1;
+			fx.SwitchTurn ();
             displayTeamName_ = "Blue Bandits";
         }
         else
@@ -109,8 +134,10 @@ public class Scr_GameController : MonoBehaviour
             ResetActionCount(Scr_TeamController.redTeam);
             ChangeCameraPivot();
             roundCount_ += 1;
+			fx.SwitchTurn ();
             displayTeamName_ = "Red Rovers";
         }
+        Scr_TurnText.updateText();
     }
 
     //On new round, reset the dogs available actions back to 2
@@ -133,7 +160,7 @@ public class Scr_GameController : MonoBehaviour
     {
         return;
     }
-    
+
     #endregion
 
 }

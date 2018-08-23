@@ -9,6 +9,8 @@ public class Scr_ExplosiveBarrel : MonoBehaviour {
 
 	public int damage;
 	public int range;
+    public GameObject spawnEffect;
+
 	List<Cls_Node> explosionNodes = new List<Cls_Node>();
 
 	void Start () {
@@ -38,6 +40,8 @@ public class Scr_ExplosiveBarrel : MonoBehaviour {
 		}
 
 		currentNode.currentState = Cls_Node.nodeState.empty;
+
+        Instantiate(spawnEffect, transform.position - new Vector3(0f, -0.5f, 0f), Quaternion.identity);
 		Destroy(transform.parent.gameObject);
 	}
 
