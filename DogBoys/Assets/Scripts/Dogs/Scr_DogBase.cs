@@ -464,8 +464,10 @@ public class Scr_DogBase : MonoBehaviour {
 		else if (Scr_TeamController.blueTeam.Contains(gameObject)) {
 			Scr_TeamController.blueTeam.Remove(gameObject);
 		}
-		
-		animator.SetBool ("a_isAlive", false);
+
+        Instantiate(Resources.Load("HeavenlyDog") as GameObject, transform.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
+
+        animator.SetBool ("a_isAlive", false);
 		animator.SetBool ("a_isDead", true);
         Scr_GameController.WinGameCheck();
 
