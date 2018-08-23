@@ -90,8 +90,7 @@ GameObject:
   - component: {fileID: 114055989953244532}
   - component: {fileID: 114788646567954642}
   - component: {fileID: 120659266410293910}
-  - component: {fileID: 33282603761965132}
-  - component: {fileID: 23822306564506054}
+  - component: {fileID: 114503295020862886}
   m_Layer: 8
   m_Name: Revolver_Dog_Blue
   m_TagString: Blue_Team
@@ -2535,6 +2534,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dog: {fileID: 0}
   dogMove: {fileID: 0}
+--- !u!114 &114503295020862886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1081367547350362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a50cc58ef1f5647b99c5bc0cefc72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  i: 0
+  skins:
+  - {fileID: 2800000, guid: 86623bab5b50671459871b003d4766df, type: 3}
+  - {fileID: 2800000, guid: c44deedb1157d8f469a1863b2f682b76, type: 3}
+  - {fileID: 2800000, guid: 4da516c5f95bece4b9b17138a7e5a3b2, type: 3}
+  thisDog: {fileID: 1929772802563162}
 --- !u!114 &114503410731414576
 MonoBehaviour:
   m_ObjectHideFlags: 1

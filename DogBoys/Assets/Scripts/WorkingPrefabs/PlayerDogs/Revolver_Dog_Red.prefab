@@ -1062,8 +1062,7 @@ GameObject:
   - component: {fileID: 114195355911403242}
   - component: {fileID: 114945796392693744}
   - component: {fileID: 120547507945995026}
-  - component: {fileID: 33173304770533276}
-  - component: {fileID: 23624746442585822}
+  - component: {fileID: 114924393739336090}
   m_Layer: 8
   m_Name: Revolver_Dog_Red
   m_TagString: Red_Team
@@ -2759,7 +2758,23 @@ MonoBehaviour:
   shootFalloff: 16
   shootDamage: 12
   movesUsed: 1
-  shootAngle: 0
+  shootAngle: 1
+--- !u!114 &114924393739336090
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1811122993782190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a50cc58ef1f5647b99c5bc0cefc72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skins:
+  - {fileID: 2800000, guid: ba34d450f86f3aa40ab85cc909f549bc, type: 3}
+  - {fileID: 2800000, guid: 268c7b08870d4e54894be1d834cc26bb, type: 3}
+  - {fileID: 2800000, guid: 36c1b7e323ee4134db6b3d8cd2759e29, type: 3}
+  thisDog: {fileID: 1559205777089156}
 --- !u!114 &114945796392693744
 MonoBehaviour:
   m_ObjectHideFlags: 1
