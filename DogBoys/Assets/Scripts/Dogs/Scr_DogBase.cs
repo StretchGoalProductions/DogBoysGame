@@ -232,9 +232,16 @@ public class Scr_DogBase : MonoBehaviour {
         // Line of site / Cover
         float coverMod = 1.0f;
         int x0, y0, x1, y1;
+        int attackerX = 0;
+        int attackerY = 0;
         int defenderX = 0;
         int defenderY = 0;
         Debug.Log(this.name);
+
+        if (attacker.GetComponent<Scr_DogBase>() != null) {
+            attackerX = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+            attackerY = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+        }
 
         if (defender.GetComponent<Scr_DogBase>() != null) {
             defenderX = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
@@ -246,10 +253,12 @@ public class Scr_DogBase : MonoBehaviour {
         }
 
     
-        if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX == defenderX) {
-            if (attacker.GetComponent<Scr_DogBase>().currentNode.gridY < defenderY) {
-                x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
-                y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+        if (attackerX == defenderX) {
+            if (attackerY < defenderY) {
+                x0 = attackerX;
+                y0 = attackerY;
+                //x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                //y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
                 x1 = defenderX;
                 y1 = defenderY;
                 //x1 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
@@ -279,8 +288,10 @@ public class Scr_DogBase : MonoBehaviour {
                     }
                 }
             } else {
-                x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
-                y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+                x1 = attackerX;
+                y1 = attackerY;
+                //x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                //y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
                 x0 = defenderX;
                 y0 = defenderY;
                 //x0 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
@@ -311,9 +322,11 @@ public class Scr_DogBase : MonoBehaviour {
                 }
             }
         } else {
-            if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX < defenderX && attacker.GetComponent<Scr_DogBase>().currentNode.gridY < defenderY) {
-                x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
-                y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+            if (attackerX < defenderX && attackerY < defenderY) {
+                x0 = attackerX;
+                y0 = attackerY;
+                //x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                //y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
                 x1 = defenderX;
                 y1 = defenderY;
                 //x1 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
@@ -352,9 +365,11 @@ public class Scr_DogBase : MonoBehaviour {
                         err -= 1.0f;
                     }
                 }
-            } else if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX > defenderX && attacker.GetComponent<Scr_DogBase>().currentNode.gridY < defenderY) {
-                x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
-                y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+            } else if (attackerX > defenderX && attackerY < defenderY) {
+                x1 = attackerX;
+                y1 = attackerY;
+                //x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                //y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
                 x0 = defenderX;
                 y0 = defenderY;
                 //x0 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
@@ -393,9 +408,11 @@ public class Scr_DogBase : MonoBehaviour {
                         err -= 1.0f;
                     }
                 }
-            } else if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX < defenderX && attacker.GetComponent<Scr_DogBase>().currentNode.gridY > defenderY) {
-                x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
-                y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+            } else if (attackerX < defenderX && attackerY > defenderY) {
+                x0 = attackerX;
+                y0 = attackerY;
+                //x0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                //y0 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
                 x1 = defenderX;
                 y1 = defenderY;
                 //x1 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
@@ -434,9 +451,11 @@ public class Scr_DogBase : MonoBehaviour {
                         err -= 1.0f;
                     }
                 }
-            } else if (attacker.GetComponent<Scr_DogBase>().currentNode.gridX > defenderX && attacker.GetComponent<Scr_DogBase>().currentNode.gridY > defenderY) {
-                x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
-                y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
+            } else if (attackerX > defenderX && attackerY > defenderY) {
+                x1 = attackerX;
+                y1 = attackerY;
+                //x1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridX;
+                //y1 = attacker.GetComponent<Scr_DogBase>().currentNode.gridY;
                 x0 = defenderX;
                 y0 = defenderY;
                 //x0 = defender.GetComponent<Scr_DogBase>().currentNode.gridX;
