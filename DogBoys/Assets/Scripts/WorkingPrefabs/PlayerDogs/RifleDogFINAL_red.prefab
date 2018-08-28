@@ -2908,11 +2908,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ed4d0c7c5d926468be34d725668353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxShots: 1
-  shotsRemaining: 1
+  maxShots: 2
+  shotsRemaining: 2
   shootRange: 10
   shootFalloff: 20
-  shootDamage: 40
+  shootDamage: 30
   movesUsed: 1
   shootAngle: 0
 --- !u!114 &114224905274221270

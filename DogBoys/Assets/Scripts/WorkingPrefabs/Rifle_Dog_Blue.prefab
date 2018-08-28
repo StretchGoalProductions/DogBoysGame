@@ -2462,12 +2462,15 @@ MonoBehaviour:
     m_Bits: 10496
   gunEffects: {fileID: 0}
   accuracyDisplay: {fileID: 1879341876088476}
+  healthBar: {fileID: 0}
   AngleScale: 0.01
   rangeCircle: {fileID: 120960204145955626}
   falloffCircle: {fileID: 120476177070989848}
+  spreadMeshFilter: {fileID: 0}
   grenadesHeld: 0
   squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
     type: 2}
+  guardDogOn_: 0
 --- !u!114 &114218694536805972
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2588,11 +2591,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ed4d0c7c5d926468be34d725668353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxShots: 1
-  shotsRemaining: 1
+  maxShots: 2
+  shotsRemaining: 2
   shootRange: 10
   shootFalloff: 20
-  shootDamage: 40
+  shootDamage: 30
   movesUsed: 1
   shootAngle: 1
 --- !u!114 &114751158171966934

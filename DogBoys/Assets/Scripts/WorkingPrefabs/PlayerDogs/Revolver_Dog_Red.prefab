@@ -2758,7 +2758,7 @@ MonoBehaviour:
   shotsRemaining: 6
   shootRange: 8
   shootFalloff: 16
-  shootDamage: 12
+  shootDamage: 20
   movesUsed: 1
   shootAngle: 1
 --- !u!114 &114924393739336090

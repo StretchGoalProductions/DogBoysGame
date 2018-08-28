@@ -1504,8 +1504,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5dec262b812f764783ca1d9a3d431c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxShots: 2
-  shotsRemaining: 2
+  maxShots: 1
+  shotsRemaining: 1
   shootRange: 5
   shootFalloff: 10
   shootDamage: 34
