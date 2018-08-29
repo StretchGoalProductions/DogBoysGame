@@ -19,6 +19,10 @@ public class Scr_DogListable : MonoBehaviour {
 	[SerializeField]
 	private string thisDog;//dog type
 
+	//sound
+	[SerializeField]
+	private AudioSource click;
+
 	public void deincrementCount(){
 		count--;	//deincrement count
 		countText.text = count.ToString();	//update display
@@ -67,6 +71,7 @@ public class Scr_DogListable : MonoBehaviour {
 	}
 
 	void AddLeft(){
+		click.Play ();
 		if (count != 0) {
 			if (transform.parent.name == "Red_Drafted") {
 				deincrementCount ();
@@ -81,6 +86,7 @@ public class Scr_DogListable : MonoBehaviour {
 		}
 	}
 	void AddRight(){
+		click.Play ();
 		if (count != 0) {
 			if (transform.parent.name == "Blue_Drafted") {
 				deincrementCount ();
