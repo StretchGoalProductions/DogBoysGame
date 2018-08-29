@@ -18,11 +18,14 @@ public class Camera_Movement : MonoBehaviour {
 	public bool toggle = false;
 	public bool p1 = true;
 
-	// Private Variables
-	private float progress = 0f;
-	private float ang = 0;
+    public float delay = 0f;
 
-	enum Direction {North, East, South, West};
+    // Private Variables
+    private float progress = 0f;
+	private float ang = 0;
+    private float delayCounter = 0f;
+
+    enum Direction {North, East, South, West};
 	Direction dir = Direction.North;
 	private bool rotating = false;
 
@@ -174,43 +177,64 @@ public class Camera_Movement : MonoBehaviour {
 				}
 			}
 		} else {
-			if (p1) {
-				GameObject Red = GameObject.FindGameObjectWithTag("Average_Red");
-				float smoothTime = Mathf.Sin(progress) * flipSpeed * Time.deltaTime;
-				float newPosX = Mathf.Lerp(transform.position.x, Red.transform.position.x, smoothTime);
-				float newPosY = Mathf.Lerp(transform.position.y, Red.transform.position.y, smoothTime);
-				float newPosZ = Mathf.Lerp(transform.position.z, Red.transform.position.z, smoothTime);
-				float newRotY = Mathf.Lerp(transform.eulerAngles.y, 180, smoothTime);
-				transform.position = new Vector3(newPosX, newPosY, newPosZ);
-				transform.localEulerAngles = new Vector3(transform.eulerAngles.x, newRotY, transform.eulerAngles.z);
-				progress += 0.01f * Time.deltaTime;
-				if (Vector3.Distance(transform.position, new Vector3(Red.transform.position.x, Red.transform.position.y, Red.transform.position.z)) <= 0.1f) {
-					transform.position = new Vector3(Red.transform.position.x, Red.transform.position.y, Red.transform.position.z);
-					transform.localEulerAngles = new Vector3(transform.eulerAngles.x, 180f, transform.eulerAngles.z);
-					dir = Direction.South;
-					p1 = false;
-					toggle = false;
-					progress = 0f;
-				}
-			} else {
-				GameObject Blue = GameObject.FindGameObjectWithTag("Average_Blue");
-				float smoothTime = Mathf.Sin(progress) * flipSpeed * Time.deltaTime;
-				float newPosX = Mathf.Lerp(transform.position.x, Blue.transform.position.x, smoothTime);
-				float newPosY = Mathf.Lerp(transform.position.y, Blue.transform.position.y, smoothTime);
-				float newPosZ = Mathf.Lerp(transform.position.z, Blue.transform.position.z, smoothTime);
-				float newRotY = Mathf.Lerp(transform.eulerAngles.y, 0, smoothTime);
-				transform.position = new Vector3(newPosX, newPosY, newPosZ);
-				transform.localEulerAngles = new Vector3(transform.eulerAngles.x, newRotY, transform.eulerAngles.z);
-				progress += 0.01f * Time.deltaTime;
-				if (Vector3.Distance(transform.position, new Vector3(Blue.transform.position.x, Blue.transform.position.y, Blue.transform.position.z)) <= 0.1f) {
-					transform.position = new Vector3(Blue.transform.position.x, Blue.transform.position.y, Blue.transform.position.z);
-					transform.localEulerAngles = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
-					dir = Direction.North;
-					p1 = true;
-					toggle = false;
-					progress = 0f;
-				}
-			}
+		    if (delayCounter >= delay)
+		    {
+		        if (p1)
+		        {
+		            GameObject Red = GameObject.FindGameObjectWithTag("Average_Red");
+		            float smoothTime = Mathf.Sin(progress) * flipSpeed * Time.deltaTime;
+		            float newPosX = Mathf.Lerp(transform.position.x, Red.transform.position.x, smoothTime);
+		            float newPosY = Mathf.Lerp(transform.position.y, Red.transform.position.y, smoothTime);
+		            float newPosZ = Mathf.Lerp(transform.position.z, Red.transform.position.z, smoothTime);
+		            float newRotY = Mathf.Lerp(transform.eulerAngles.y, 180, smoothTime);
+		            transform.position = new Vector3(newPosX, newPosY, newPosZ);
+		            transform.localEulerAngles = new Vector3(transform.eulerAngles.x, newRotY, transform.eulerAngles.z);
+		            progress += 0.01f * Time.deltaTime;
+		            if (Vector3.Distance(transform.position,
+		                    new Vector3(Red.transform.position.x, Red.transform.position.y,
+		                        Red.transform.position.z)) <= 0.1f)
+		            {
+		                transform.position = new Vector3(Red.transform.position.x, Red.transform.position.y,
+		                    Red.transform.position.z);
+		                transform.localEulerAngles =
+		                    new Vector3(transform.eulerAngles.x, 180f, transform.eulerAngles.z);
+		                dir = Direction.South;
+		                p1 = false;
+		                toggle = false;
+		                progress = 0f;
+		                delayCounter = 0f;
+                    }
+		        }
+		        else
+		        {
+		            GameObject Blue = GameObject.FindGameObjectWithTag("Average_Blue");
+		            float smoothTime = Mathf.Sin(progress) * flipSpeed * Time.deltaTime;
+		            float newPosX = Mathf.Lerp(transform.position.x, Blue.transform.position.x, smoothTime);
+		            float newPosY = Mathf.Lerp(transform.position.y, Blue.transform.position.y, smoothTime);
+		            float newPosZ = Mathf.Lerp(transform.position.z, Blue.transform.position.z, smoothTime);
+		            float newRotY = Mathf.Lerp(transform.eulerAngles.y, 0, smoothTime);
+		            transform.position = new Vector3(newPosX, newPosY, newPosZ);
+		            transform.localEulerAngles = new Vector3(transform.eulerAngles.x, newRotY, transform.eulerAngles.z);
+		            progress += 0.01f * Time.deltaTime;
+		            if (Vector3.Distance(transform.position,
+		                    new Vector3(Blue.transform.position.x, Blue.transform.position.y,
+		                        Blue.transform.position.z)) <= 0.1f)
+		            {
+		                transform.position = new Vector3(Blue.transform.position.x, Blue.transform.position.y,
+		                    Blue.transform.position.z);
+		                transform.localEulerAngles = new Vector3(transform.eulerAngles.x, 0f, transform.eulerAngles.z);
+		                dir = Direction.North;
+		                p1 = true;
+		                toggle = false;
+		                progress = 0f;
+		                delayCounter = 0f;
+                    }
+		        }
+		    }
+		    else
+		    {
+		        delayCounter += Time.deltaTime;
+            }
 		}
 	}
 }

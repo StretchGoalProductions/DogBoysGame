@@ -4103,6 +4103,7 @@ MonoBehaviour:
   rotateSpeed: 5000
   toggle: 0
   p1: 1
+  delay: 0.7
 --- !u!4 &1174886543
 Transform:
   m_ObjectHideFlags: 0
