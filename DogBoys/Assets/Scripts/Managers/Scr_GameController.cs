@@ -54,23 +54,6 @@ public class Scr_GameController : MonoBehaviour
         }
     }
 
-    //Cycle through dogs
-    public void selectNextDog()
-    {
-        GameObject nextDog = selectedDog_;
-        if(redTeamTurn_)
-        {
-            nextDog = Scr_TeamController.getNextDog_Red(selectedDog_);
-        }
-        else if(blueTeamTurn_)
-        {
-            nextDog = Scr_TeamController.getNextDog_Blue(selectedDog_);
-        }
-        
-        selectedDog_.GetComponent<Scr_DogBase>().UnselectCharacter();
-        nextDog.GetComponent<Scr_DogBase>().SelectCharacter();
-    }
-
     #region Functions for updating round
     //Check for the start of a new round
     public static void CheckTurn()
@@ -160,7 +143,7 @@ public class Scr_GameController : MonoBehaviour
     {
         return;
     }
-
+    
     #endregion
 
 }

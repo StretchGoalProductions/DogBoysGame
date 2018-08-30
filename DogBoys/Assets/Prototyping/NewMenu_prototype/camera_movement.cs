@@ -10,12 +10,16 @@ public class camera_movement : MonoBehaviour
     private Vector3 start; //= new Vector3(0,5,-23);
     [SerializeField]
     private Vector3 draft; // = new Vector3(0,6,11.5);
+    private Quaternion draftRotate = Quaternion.Euler(0f, 0f, 0f);
     [SerializeField]
     private Vector3 level; // = new Vector3(11,7,12);
+    private Quaternion levelRotate = Quaternion.Euler(0f,90f,0f);
     [SerializeField]
     private Vector3 options; // = new Vector3(-11,7,12);
+    private Quaternion optionsRotate = Quaternion.Euler(0f, -90f, 0f);
     [SerializeField]
     private Vector3 howTo; // = new Vector3(0,5,10.5);
+    private Quaternion howToRotate = Quaternion.Euler(0f, 180f, 0f);
     //interactive objects w/ scripts
     [SerializeField]
     private GameObject door_l;
@@ -45,6 +49,9 @@ public class camera_movement : MonoBehaviour
     private Vector3 previous;
     [SerializeField]
     private GameObject last;
+	//sound
+	[SerializeField]
+	private AudioSource whoosh;
     #endregion
 
     // Use this for initialization
@@ -69,18 +76,22 @@ public class camera_movement : MonoBehaviour
                     titlePanel.SetActive(false);
                     action = 1;
                 }else if (hit.collider.gameObject.name == "To_Options"){
+					whoosh.Play();
                     draftPanel.SetActive(false);
                     action = 2;
                 }
                 else if (hit.collider.gameObject.name == "From_Options"){
+					whoosh.Play();
                     optionsPanel.SetActive(false);
                     action = 3;
                 }
                 else if (hit.collider.gameObject.name == "To_Level"){
+					whoosh.Play();
                     draftPanel.SetActive(false);
                     action = 4;
                 }
                 else if (hit.collider.gameObject.name == "From_Level"){
+					whoosh.Play();
                     levelPanel.SetActive(false);
                     action = 5;
                 }
@@ -100,7 +111,7 @@ public class camera_movement : MonoBehaviour
         //move through door -> draft
         if (action == 1)
         {
-            moveTo(start, draft, doorTime);
+            moveTo(start, draftRotate, draft, draftRotate, doorTime);
             if (checkPosition(draft))
             {
                 action = 0;
@@ -111,7 +122,7 @@ public class camera_movement : MonoBehaviour
         //draft -> options
         else if (action == 2)
         {
-            moveTo(draft, options, barTime);
+            moveTo(draft, draftRotate, options, optionsRotate, barTime);
             if (checkPosition(options))
             {
                 action = 0;
@@ -122,7 +133,7 @@ public class camera_movement : MonoBehaviour
         //options -> draft
         else if (action == 3)
         {
-            moveTo(options, draft, barTime);
+            moveTo(options, optionsRotate, draft, draftRotate, barTime);
             if (checkPosition(draft))
             {
                 action = 0;
@@ -133,7 +144,7 @@ public class camera_movement : MonoBehaviour
         //draft -> level
         else if (action == 4)
         {
-            moveTo(draft, level, barTime);
+            moveTo(draft, draftRotate, level, levelRotate, barTime);
             if (checkPosition(level))
             {
                 action = 0;
@@ -143,7 +154,7 @@ public class camera_movement : MonoBehaviour
         //level -> draft
         else if (action == 5)
         {
-            moveTo(level, draft, barTime);
+            moveTo(level, levelRotate, draft, draftRotate, barTime);
             if(checkPosition(draft)){
                 action = 0;
                 draftPanel.SetActive(true);
@@ -191,7 +202,7 @@ public class camera_movement : MonoBehaviour
     
     }
 
-    void moveTo(Vector3 from, Vector3 to, float maxTime)
+    void moveTo(Vector3 from, Quaternion fromR, Vector3 to, Quaternion toR, float maxTime)
     {
         currentLerpTime += Time.deltaTime;
         if (currentLerpTime >= maxTime)
@@ -201,12 +212,13 @@ public class camera_movement : MonoBehaviour
         float perc = currentLerpTime / maxTime;
         perc = perc*perc*perc *(perc * (6f*perc - 15f) + 10f);
         this.gameObject.transform.position = Vector3.Lerp(from, to, perc);
+        this.gameObject.transform.rotation = Quaternion.Lerp(fromR, toR, perc);
     }
 
     void moveHowTo(Vector3 from, Vector3 to, float maxTime)
     {
         Quaternion toHow = Quaternion.Euler(0f, 180f, 0f);
-        Quaternion fromHow = Quaternion.Euler(0f, 0f, 0f);
+        Quaternion fromHow = setLastR(previous);
         currentLerpTime += Time.deltaTime;
         if (currentLerpTime >= maxTime)
         {
@@ -240,6 +252,27 @@ public class camera_movement : MonoBehaviour
         else
         {
             return null;
+        }
+    }
+
+    Quaternion setLastR(Vector3 now)
+    {
+        if (now == draft)
+        {
+            return draftRotate;
+        }
+        else if (now == level)
+        {
+            return levelRotate;
+
+        }
+        else if (now == options)
+        {
+            return optionsRotate;
+        }
+        else
+        {
+            return draftRotate; //draft == default 0,0,0
         }
     }
 
