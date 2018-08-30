@@ -469,6 +469,8 @@ public class Scr_DogBase : MonoBehaviour {
 		animator.SetBool ("a_isDead", true);
         Scr_GameController.WinGameCheck();
 
+        Instantiate(Resources.Load("HeavenlyDog"), transform.position, transform.rotation);
+
 		Destroy(gameObject);
     }
 
