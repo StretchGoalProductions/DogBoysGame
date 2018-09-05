@@ -109,8 +109,9 @@ public class Scr_DogBase : MonoBehaviour {
                 
                 if(Physics.Raycast(castPoint, out hit, Mathf.Infinity, LayerMask.GetMask("Environment"))) {
                     Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(hit.point);
+                    int dist = GetComponent<Scr_Pathfinding>().GetDistance(currentNode, targetNode);
 
-                    if(targetNode.currentState == Cls_Node.nodeState.empty) {
+                    if(targetNode.currentState == Cls_Node.nodeState.empty && dist <= 10.0f * 10) {
                         throwGrenade(targetNode.position);
                     }
                 }

@@ -40,6 +40,7 @@ public class Scr_ExplosiveBarrel : MonoBehaviour {
 		}
 
 		currentNode.currentState = Cls_Node.nodeState.empty;
+		currentNode.explosiveBarrel = null;
 
         Instantiate(spawnEffect, transform.position - new Vector3(0f, -0.5f, 0f), Quaternion.identity);
 		Destroy(transform.parent.gameObject);

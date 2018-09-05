@@ -16,6 +16,7 @@ public class Cls_Node {
 	public nodeState currentState;
 
 	public Scr_DogBase dog;
+	public Scr_ExplosiveBarrel explosiveBarrel;
 	public Scr_SqueakyGrenadePickup grenadePickup;
 
 	public Cls_Node (nodeState currentState, Vector3 position, int gridX, int gridY) {

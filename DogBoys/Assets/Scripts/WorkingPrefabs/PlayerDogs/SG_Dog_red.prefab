@@ -332,6 +332,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4073953793744800}
+  - component: {fileID: 33843878570207484}
+  - component: {fileID: 23264442119562160}
+  - component: {fileID: 120446133894228052}
   - component: {fileID: 95072939888815310}
   - component: {fileID: 136334445752269350}
   - component: {fileID: 195536890794821478}
@@ -340,9 +343,6 @@ GameObject:
   - component: {fileID: 114282908301933720}
   - component: {fileID: 114255508201353690}
   - component: {fileID: 114629023190186406}
-  - component: {fileID: 120446133894228052}
-  - component: {fileID: 33843878570207484}
-  - component: {fileID: 23264442119562160}
   m_Layer: 8
   m_Name: SG_Dog_red
   m_TagString: Red_Team
@@ -1785,7 +1785,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1547005881234202}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.01
   m_Speed: 4
   m_Acceleration: 100
   avoidancePriority: 50
