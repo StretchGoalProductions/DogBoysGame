@@ -376,7 +376,7 @@ public class Scr_DogBase : MonoBehaviour {
                 //y0 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
 
                 float dx = x1 - x0;
-                float dy = y1 - y0;
+                float dy = y0 - y1;
                 float derr = Mathf.Abs(dy / dx);
                 float err = 0.0f;
                 int y = y1;
