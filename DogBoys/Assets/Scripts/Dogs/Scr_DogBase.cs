@@ -37,9 +37,12 @@ public class Scr_DogBase : MonoBehaviour {
     private Mesh spreadMesh;
 
     public int grenadesHeld = 0;
+    public int grenadeThrowRange = 10;
     public GameObject squeakyGrenade;
 
     public bool guardDogOn_;
+
+    public Scr_DogMovement moveScript;
 
     void Start() {
 		health = 100;
@@ -47,6 +50,7 @@ public class Scr_DogBase : MonoBehaviour {
 		selectCooldown = 0.2f;
 
 		animator = GetComponent<Animator>();
+        moveScript = GetComponent<Scr_DogMovement>();
 
         animator.SetBool("a_isAlive", true);
 
@@ -100,7 +104,7 @@ public class Scr_DogBase : MonoBehaviour {
             spreadMesh.Clear();
         }
 
-        if (Scr_GameController.grenadeMode_ && currentState == dogState.attack && grenadesHeld > 0) {
+        if (Scr_GameController.grenadeMode_ && currentState == dogState.attack && grenadesHeld > 0 && !EventSystem.current.IsPointerOverGameObject()) {
             if(Input.GetMouseButtonDown(0)) {
                 Vector3 mouse = Input.mousePosition;
                 Ray castPoint = Camera.main.ScreenPointToRay(mouse);
@@ -111,7 +115,7 @@ public class Scr_DogBase : MonoBehaviour {
                     Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(hit.point);
                     int dist = GetComponent<Scr_Pathfinding>().GetDistance(currentNode, targetNode);
 
-                    if(targetNode.currentState == Cls_Node.nodeState.empty && dist <= 10.0f * 10) {
+                    if(targetNode.currentState == Cls_Node.nodeState.empty && dist <= grenadeThrowRange * 10) {
                         throwGrenade(targetNode.position);
                     }
                 }
@@ -621,6 +625,8 @@ public class Scr_DogBase : MonoBehaviour {
 	}
 
 	public void SelectCharacter() {
+        moveScript.displayRange(moveScript.maxMoveRange);
+
         Scr_GameController.selectedDog_ = gameObject;
 		currentState = Scr_DogBase.dogState.selected;
 		Scr_UIController.CharacterHudSet(true);
@@ -659,6 +665,8 @@ public class Scr_DogBase : MonoBehaviour {
     }
 
 	public void UnselectCharacter() {
+        moveScript.removeRange();
+
 		currentState = Scr_DogBase.dogState.unselected;
 		Scr_UIController.CharacterHudSet(false);
 		selectParticles.Stop();
@@ -729,6 +737,8 @@ public class Scr_DogBase : MonoBehaviour {
     public void UseMove() {
 		movesLeft--;
 	}
+
+
 }
 
 

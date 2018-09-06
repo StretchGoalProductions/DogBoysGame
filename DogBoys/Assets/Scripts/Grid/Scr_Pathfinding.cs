@@ -75,7 +75,7 @@ public class Scr_Pathfinding : MonoBehaviour {
 		int iX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
 		int iY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
 
-		const int DIAGONAL_DISTANCE = (int) 1.4 * 10;
+		const int DIAGONAL_DISTANCE = (int) (1.4 * 10);
 
 		if( iX > iY ) {
 			return DIAGONAL_DISTANCE * iY + (10 * (iX - iY));

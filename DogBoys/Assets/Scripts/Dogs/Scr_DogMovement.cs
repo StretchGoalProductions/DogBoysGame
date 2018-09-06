@@ -71,24 +71,24 @@ public class Scr_DogMovement : MonoBehaviour {
 			}
 		}
 
-        if (dog.currentState == Scr_DogBase.dogState.selected) {
-            displayRange();
-        } else {
-            removeRange();
-        }
+        // if (dog.currentState == Scr_DogBase.dogState.selected) {
+        //     displayRange(maxMoveRange);
+        // } else {
+        //     removeRange();
+        // }
 	}
 
-    public void displayRange() {
+    public void displayRange(int range) {
         if (!displayed) {
             Cls_Node currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
             for (int i = 0; i < Scr_Grid.gridWorldSize.x; i++) {
                 for (int j = 0; j < Scr_Grid.gridWorldSize.y; j++) {
                     int distance = pathfinder.GetDistance(currentNode, Scr_Grid.grid[i, j]);
-                    if (distance <= maxMoveRange * 10 && Scr_Grid.grid[i, j].currentState != Cls_Node.nodeState.wall && Scr_Grid.grid[i, j].currentState != Cls_Node.nodeState.cover) {
+                    if (distance <= range * 10 && Scr_Grid.grid[i, j].currentState != Cls_Node.nodeState.wall && Scr_Grid.grid[i, j].currentState != Cls_Node.nodeState.cover) {
                         //Debug.Log("(" + Scr_Grid.grid[i, j].gridX + ", " + Scr_Grid.grid[i, j].gridY + ")");
                         GameObject indicator = Instantiate(moveRangeIndicator, Scr_Grid.grid[i, j].position, Quaternion.identity);
                         rangeIndicators.Add(indicator);
-                    } else if (distance <= maxMoveRange * 10) {
+                    } else if (distance <= range * 10) {
                         GameObject indicator = Instantiate(cantMoveIndicator, Scr_Grid.grid[i, j].position, Quaternion.identity);
                         rangeIndicators.Add(indicator);
                     }
@@ -114,6 +114,8 @@ public class Scr_DogMovement : MonoBehaviour {
 			myAgent.destination = finalPath[0].position;
 			//myAgent.autoBraking = false;
 			myAnim.SetBool("a_isRunning", true);
+
+			removeRange();
 		}
     }
 

@@ -20,13 +20,17 @@ public class Scr_SqueakyGrenade : MonoBehaviour {
 		currentNode = Scr_Grid.NodeFromWorldPosition(transform.position);
 		currentNode.currentState = Cls_Node.nodeState.empty;
 
+		dogEffectedNodes = NodesInRange(dogEffectRange);
+		explosionNodes = NodesInRange(explosionRange);
+		walkHereNodes = NodesInRange(1);
+
 		EffectDogs();
 
-		StartCoroutine(WaitSeconds(5));
+		StartCoroutine(WaitSeconds(2));
 	}
 
 	public void EffectDogs() {
-		
+
 		dogEffectedNodes = NodesInRange(dogEffectRange);
 		explosionNodes = NodesInRange(explosionRange);
 		walkHereNodes = NodesInRange(1);
@@ -35,8 +39,16 @@ public class Scr_SqueakyGrenade : MonoBehaviour {
 			if(node.currentState == Cls_Node.nodeState.player && walkHereNodes.Count > 0) {
 				node.dog.currentState = Scr_DogBase.dogState.selected;
 				node.dog.GetComponent<Scr_Pathfinding>().enabled = true;
-				node.dog.GetComponent<Scr_Pathfinding>().targetPosition = walkHereNodes[0].position;
-				walkHereNodes.Remove(walkHereNodes[0]);
+				foreach (Cls_Node targetNode in walkHereNodes) {
+					if (targetNode.currentState == Cls_Node.nodeState.empty) {
+						node.dog.GetComponent<Scr_Pathfinding>().targetPosition = targetNode.position;
+						walkHereNodes.Remove(targetNode);
+						break;
+					}
+					else {
+						//walkHereNodes.Remove(targetNode);
+					}
+				}
 			}
 			else if(walkHereNodes.Count <= 0) {
 				break;
@@ -45,6 +57,10 @@ public class Scr_SqueakyGrenade : MonoBehaviour {
 	}
 
 	public void Explode() {
+
+		dogEffectedNodes = NodesInRange(dogEffectRange);
+		explosionNodes = NodesInRange(explosionRange);
+		walkHereNodes = NodesInRange(1);
 
 		foreach (Cls_Node node in explosionNodes) {
 			if (node.currentState == Cls_Node.nodeState.player) {
