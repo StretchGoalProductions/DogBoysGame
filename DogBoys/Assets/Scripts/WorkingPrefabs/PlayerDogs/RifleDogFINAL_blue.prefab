@@ -574,6 +574,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4462744936383606}
+  - component: {fileID: 137643166424567120}
   m_Layer: 0
   m_Name: barktender
   m_TagString: Untagged
@@ -1022,6 +1023,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4682006118428720}
+  - component: {fileID: 33363251506452826}
+  - component: {fileID: 23772267699341692}
+  - component: {fileID: 120559585195934360}
   - component: {fileID: 95668186986884516}
   - component: {fileID: 136955054779506292}
   - component: {fileID: 195857139482666134}
@@ -1030,9 +1034,7 @@ GameObject:
   - component: {fileID: 114809400707659988}
   - component: {fileID: 114234993310194924}
   - component: {fileID: 114640865021454420}
-  - component: {fileID: 120559585195934360}
-  - component: {fileID: 33363251506452826}
-  - component: {fileID: 23772267699341692}
+  - component: {fileID: 114559708776412652}
   m_Layer: 8
   m_Name: RifleDogFINAL_blue
   m_TagString: Blue_Team
@@ -1900,7 +1902,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1811864234466744}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.5782623, y: 0.0002746582, z: -8.234806}
+  m_LocalPosition: {x: 2.1513176, y: 0.000274539, z: -4.685896}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4257797140638068}
@@ -2903,11 +2905,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95ed4d0c7c5d926468be34d725668353, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxShots: 1
-  shotsRemaining: 1
+  maxShots: 2
+  shotsRemaining: 2
   shootRange: 10
   shootFalloff: 20
-  shootDamage: 40
+  shootDamage: 30
   movesUsed: 1
   shootAngle: 0
 --- !u!114 &114490918996695896
@@ -2948,6 +2950,22 @@ MonoBehaviour:
   m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
+--- !u!114 &114559708776412652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1811864234466744}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a50cc58ef1f5647b99c5bc0cefc72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skins:
+  - {fileID: 2800000, guid: 53f6aa33143a8054d945e9b80570fcb4, type: 3}
+  - {fileID: 2800000, guid: ee3c2c9ef8afe4b47b4388b3c92f67e6, type: 3}
+  - {fileID: 2800000, guid: 4ffaffbdef6ad1b4f8f527b6b46420dc, type: 3}
+  thisDog: {fileID: 1352580085778714}
 --- !u!114 &114640865021454420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3039,9 +3057,13 @@ MonoBehaviour:
   falloffCircle: {fileID: 120990580435796910}
   spreadMeshFilter: {fileID: 33363251506452826}
   grenadesHeld: 0
+  grenadeThrowRange: 10
   squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
     type: 2}
   guardDogOn_: 0
+  moveScript: {fileID: 0}
+  heavenlyDog: {fileID: 1851807080016238, guid: 7690148b91102ef428d4ee63521c9b51,
+    type: 2}
 --- !u!114 &114880271844140898
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3410,6 +3432,53 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000038921833, y: 0.15254238, z: -0.00307554}
     m_Extent: {x: 1.0822937, y: 0.74301124, z: 0.27493262}
   m_DirtyAABB: 0
+--- !u!137 &137643166424567120
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1352580085778714}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 0}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
 --- !u!195 &195857139482666134
 NavMeshAgent:
   m_ObjectHideFlags: 1
@@ -3418,8 +3487,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 1811864234466744}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 4
+  m_Radius: 0.01
+  m_Speed: 2
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 300

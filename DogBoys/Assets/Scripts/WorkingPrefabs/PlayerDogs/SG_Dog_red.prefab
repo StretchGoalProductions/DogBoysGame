@@ -332,6 +332,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4073953793744800}
+  - component: {fileID: 33843878570207484}
+  - component: {fileID: 23264442119562160}
+  - component: {fileID: 120446133894228052}
   - component: {fileID: 95072939888815310}
   - component: {fileID: 136334445752269350}
   - component: {fileID: 195536890794821478}
@@ -340,9 +343,7 @@ GameObject:
   - component: {fileID: 114282908301933720}
   - component: {fileID: 114255508201353690}
   - component: {fileID: 114629023190186406}
-  - component: {fileID: 120446133894228052}
-  - component: {fileID: 33843878570207484}
-  - component: {fileID: 23264442119562160}
+  - component: {fileID: 114396377753000506}
   m_Layer: 8
   m_Name: SG_Dog_red
   m_TagString: Red_Team
@@ -652,7 +653,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1547005881234202}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.8584404, y: 0.0002746582, z: -8.439699}
+  m_LocalPosition: {x: 1.5847924, y: -0.000000115629376, z: -0.6749697}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4758659498925276}
@@ -1374,6 +1375,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   moveRange: 7
+--- !u!114 &114396377753000506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1547005881234202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a50cc58ef1f5647b99c5bc0cefc72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skins:
+  - {fileID: 2800000, guid: 963d372a07029cf429b5fa7b9d3e9c1d, type: 3}
+  - {fileID: 2800000, guid: a9f7478d92fa9c340bbb7dfe7f4f9ae3, type: 3}
+  - {fileID: 2800000, guid: 841c01a127a0cc342961207d7542aae9, type: 3}
+  thisDog: {fileID: 1518539667717082}
 --- !u!114 &114477826163949738
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1443,9 +1460,13 @@ MonoBehaviour:
   falloffCircle: {fileID: 120553539375683862}
   spreadMeshFilter: {fileID: 33843878570207484}
   grenadesHeld: 0
+  grenadeThrowRange: 10
   squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
     type: 2}
   guardDogOn_: 0
+  moveScript: {fileID: 0}
+  heavenlyDog: {fileID: 1740948911016872, guid: 8487b54f330e23240a58e7c53ba0a073,
+    type: 2}
 --- !u!114 &114629023190186406
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1504,8 +1525,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5dec262b812f764783ca1d9a3d431c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxShots: 2
-  shotsRemaining: 2
+  maxShots: 1
+  shotsRemaining: 1
   shootRange: 5
   shootFalloff: 10
   shootDamage: 34
@@ -1785,8 +1806,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 1547005881234202}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 4
+  m_Radius: 0.01
+  m_Speed: 2
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 300

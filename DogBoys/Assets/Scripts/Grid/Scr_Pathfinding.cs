@@ -13,8 +13,9 @@ public class Scr_Pathfinding : MonoBehaviour {
 
 	private Scr_DogMovement dogMovement;
 
-	private void Start() {
+	private void Awake() {
 		dogMovement = GetComponent<Scr_DogMovement>();
+		maxMoveRange = GetComponent<Scr_DogMovement>().maxMoveRange;
 		targetPosition = transform.position;
 		//move = false;
 	}
@@ -30,29 +31,21 @@ public class Scr_Pathfinding : MonoBehaviour {
 		Cls_Node startNode = Scr_Grid.NodeFromWorldPosition(startPosition);
 		Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(targetPosition);
 
-		List<Cls_Node> OpenList = new List<Cls_Node>();
-		List<Cls_Node> ClosedList = new List<Cls_Node>(); // Tutorial uses HashSet since you don't need to access the closed list anymore for A* algorithm, I'm going to use a List to avoid confusion
+		Cls_Heap<Cls_Node> OpenList = new Cls_Heap<Cls_Node>(Scr_Grid.MaxSize);
+		HashSet<Cls_Node> closedSet = new HashSet<Cls_Node>();
 	
 		OpenList.Add(startNode);
 
 		while (OpenList.Count > 0) {
-			Cls_Node currentNode = OpenList[0];
-
-			for (int i = 0; i < OpenList.Count; i++) {
-				if ((OpenList[i].fCost < currentNode.fCost || OpenList[i].fCost == currentNode.fCost) && OpenList[i].hCost < currentNode.hCost) {
-					currentNode = OpenList[i];
-				}
-			}
-
-			OpenList.Remove(currentNode);
-			ClosedList.Add(currentNode);
+			Cls_Node currentNode = OpenList.RemoveFirst();
+			closedSet.Add(currentNode);
 
 			if(currentNode == targetNode) {
 				GetFinalPath(startNode, targetNode);
 			}
 
 			foreach (Cls_Node neighborNode in Scr_Grid.GetNeighboringNodes(currentNode)) {
-				if(((neighborNode.currentState != Cls_Node.nodeState.empty) && (neighborNode.currentState != Cls_Node.nodeState.pickup)) || ClosedList.Contains(neighborNode)) {
+				if(((neighborNode.currentState != Cls_Node.nodeState.empty) && (neighborNode.currentState != Cls_Node.nodeState.pickup)) || closedSet.Contains(neighborNode)) {
 					continue; // Skip if node is wall or in closed list
 				}
 
@@ -75,7 +68,7 @@ public class Scr_Pathfinding : MonoBehaviour {
 		int iX = Mathf.Abs(nodeA.gridX - nodeB.gridX);
 		int iY = Mathf.Abs(nodeA.gridY - nodeB.gridY);
 
-		const int DIAGONAL_DISTANCE = (int) 1.4 * 10;
+		const int DIAGONAL_DISTANCE = (int) (1.4 * 10);
 
 		if( iX > iY ) {
 			return DIAGONAL_DISTANCE * iY + (10 * (iX - iY));

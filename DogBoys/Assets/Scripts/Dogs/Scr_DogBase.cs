@@ -37,9 +37,14 @@ public class Scr_DogBase : MonoBehaviour {
     private Mesh spreadMesh;
 
     public int grenadesHeld = 0;
+    public int grenadeThrowRange = 10;
     public GameObject squeakyGrenade;
 
     public bool guardDogOn_;
+
+    public Scr_DogMovement moveScript;
+
+    public GameObject heavenlyDog;
 
     void Start() {
 		health = 100;
@@ -47,6 +52,7 @@ public class Scr_DogBase : MonoBehaviour {
 		selectCooldown = 0.2f;
 
 		animator = GetComponent<Animator>();
+        moveScript = GetComponent<Scr_DogMovement>();
 
         animator.SetBool("a_isAlive", true);
 
@@ -100,7 +106,7 @@ public class Scr_DogBase : MonoBehaviour {
             spreadMesh.Clear();
         }
 
-        if (Scr_GameController.grenadeMode_ && currentState == dogState.attack && grenadesHeld > 0) {
+        if (Scr_GameController.grenadeMode_ && currentState == dogState.attack && grenadesHeld > 0 && !EventSystem.current.IsPointerOverGameObject()) {
             if(Input.GetMouseButtonDown(0)) {
                 Vector3 mouse = Input.mousePosition;
                 Ray castPoint = Camera.main.ScreenPointToRay(mouse);
@@ -109,8 +115,9 @@ public class Scr_DogBase : MonoBehaviour {
                 
                 if(Physics.Raycast(castPoint, out hit, Mathf.Infinity, LayerMask.GetMask("Environment"))) {
                     Cls_Node targetNode = Scr_Grid.NodeFromWorldPosition(hit.point);
+                    int dist = GetComponent<Scr_Pathfinding>().GetDistance(currentNode, targetNode);
 
-                    if(targetNode.currentState == Cls_Node.nodeState.empty) {
+                    if(targetNode.currentState == Cls_Node.nodeState.empty && dist <= grenadeThrowRange * 10) {
                         throwGrenade(targetNode.position);
                     }
                 }
@@ -376,7 +383,7 @@ public class Scr_DogBase : MonoBehaviour {
                 //y0 = defender.GetComponent<Scr_DogBase>().currentNode.gridY;
 
                 float dx = x1 - x0;
-                float dy = y1 - y0;
+                float dy = y0 - y1;
                 float derr = Mathf.Abs(dy / dx);
                 float err = 0.0f;
                 int y = y1;
@@ -508,11 +515,14 @@ public class Scr_DogBase : MonoBehaviour {
 			Scr_TeamController.blueTeam.Remove(gameObject);
 		}
 
-        Instantiate(Resources.Load("HeavenlyDog") as GameObject, transform.position + new Vector3(0f, 0.5f, 0f), Quaternion.identity);
-
-        animator.SetBool ("a_isAlive", false);
+        currentNode.dog = null;
+        currentNode.currentState = Cls_Node.nodeState.empty;
+		
+		animator.SetBool ("a_isAlive", false);
 		animator.SetBool ("a_isDead", true);
         Scr_GameController.WinGameCheck();
+
+        Instantiate(heavenlyDog, transform.position, transform.rotation);
 
 		Destroy(gameObject);
     }
@@ -560,14 +570,14 @@ public class Scr_DogBase : MonoBehaviour {
             {
 				if (Random.value <= ChanceToHit (gameObject, target)) {
 					if (target.GetComponent<Scr_DogBase> () != null && Random.value <= ChanceToHit (gameObject, target)) {
-                        target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
-                    }
-                    else if (target.GetComponent<Scr_ExplosiveBarrel>() != null) {
-                        target.GetComponent<Scr_ExplosiveBarrel>().Explode();
-                    }
-				}
-                else {
-					gunEffects.Miss();
+                    target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
+                }
+                else if (target.GetComponent<Scr_ExplosiveBarrel>() != null)
+                {
+                    target.GetComponent<Scr_ExplosiveBarrel>().Explode();
+                }
+				} else {
+					gunEffects.Miss ();
 				}
             }
 			weaponStats.shotsRemaining--;
@@ -594,18 +604,14 @@ public class Scr_DogBase : MonoBehaviour {
             shootParticles.Play();
             foreach (GameObject target in validTargets)
             {
-				if (Random.value <= ChanceToHit (gameObject, target)) {
-					if (target.GetComponent<Scr_DogBase> () != null && Random.value <= ChanceToHit (gameObject, target)) {
-                        target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
-                    }
-                    else if (target.GetComponent<Scr_ExplosiveBarrel>() != null) {
-                        Debug.Log("boom?");
-                        target.GetComponent<Scr_ExplosiveBarrel>().Explode();
-                    }
-				}
-                else {
-					gunEffects.Miss();
-				}
+                if(target.GetComponent<Scr_DogBase>() != null && Random.value <= ChanceToHit(gameObject, target))
+                {
+                    target.GetComponent<Scr_DogBase>().TakeDamage(weaponStats.shootDamage - (int) (weaponStats.shootDamage*damageReduction));
+                }
+                else
+                {
+                    target.GetComponent<Scr_ExplosiveBarrel>().Explode();
+                }
             }
 			weaponStats.shotsRemaining--;
 			UseMove();
@@ -624,13 +630,15 @@ public class Scr_DogBase : MonoBehaviour {
 	}
 
 	public void SelectCharacter() {
+        moveScript.displayRange(moveScript.maxMoveRange);
+
         Scr_GameController.selectedDog_ = gameObject;
 		currentState = Scr_DogBase.dogState.selected;
 		Scr_UIController.CharacterHudSet(true);
         Scr_UIController.updateCurrentHealthBar(health, MAX_HEALTH);
 		selectParticles.Play();
 		selectCooldown = 0.2f;
-		GetComponent<Scr_Pathfinding>().enabled = true;
+		//GetComponent<Scr_Pathfinding>().enabled = true;
 	}
 	
 	public void SkipTurn() {
@@ -662,6 +670,8 @@ public class Scr_DogBase : MonoBehaviour {
     }
 
 	public void UnselectCharacter() {
+        moveScript.removeRange();
+
 		currentState = Scr_DogBase.dogState.unselected;
 		Scr_UIController.CharacterHudSet(false);
 		selectParticles.Stop();
@@ -669,7 +679,7 @@ public class Scr_DogBase : MonoBehaviour {
 		Scr_GameController.attackMode_ = false;
         Scr_GameController.grenadeMode_ = false;
 		Scr_GameController.CheckTurn();
-		GetComponent<Scr_Pathfinding>().enabled = false;
+		//GetComponent<Scr_Pathfinding>().enabled = false;
 	}
 
     public void lineOfSight()
@@ -732,6 +742,8 @@ public class Scr_DogBase : MonoBehaviour {
     public void UseMove() {
 		movesLeft--;
 	}
+
+
 }
 
 

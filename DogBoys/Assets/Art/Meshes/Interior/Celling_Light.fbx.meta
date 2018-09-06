@@ -1,0 +1,456 @@
+fileFormatVersion: 2
+guid: 733e6d5cba9416b43a9ba2295cf55b73
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: //RootNode
+    100002: Chains
+    100004: Chains1
+    100006: Chains2
+    100008: Chains3
+    100010: Chains4
+    100012: Hook
+    100014: hook_2
+    100016: Oil_lamp
+    100018: Oil_lamp1
+    100020: Oil_lamp2
+    100022: Oil_lamp2_pPipe1
+    100024: Oil_lamp3
+    100026: Oil_lamp4
+    100028: pCube30
+    100030: pCylinder1
+    100032: pCylinder1 1
+    100034: pCylinder1 2
+    100036: pCylinder1 3
+    100038: pCylinder1 4
+    100040: pCylinder2
+    100042: pCylinder2 1
+    100044: pCylinder2 2
+    100046: pCylinder2 3
+    100048: pCylinder2 4
+    100050: polySurface26
+    100052: polySurface28
+    100054: pPipe1
+    100056: pPipe1 1
+    100058: pPipe1 2
+    100060: pPipe1 3
+    100062: pPipe1 4
+    100064: pPipe2
+    100066: pPipe2 1
+    100068: pPipe2 2
+    100070: pPipe2 3
+    100072: pPipe2 4
+    100074: pTorus11
+    100076: pTorus11 1
+    100078: pTorus11 2
+    100080: pTorus11 3
+    100082: pTorus12
+    100084: pTorus12 1
+    100086: pTorus12 2
+    100088: pTorus12 3
+    100090: pTorus13
+    100092: pTorus13 1
+    100094: pTorus13 2
+    100096: pTorus13 3
+    100098: pTorus14
+    100100: pTorus14 1
+    100102: pTorus14 2
+    100104: pTorus14 3
+    100106: pTorus15
+    100108: pTorus15 1
+    100110: pTorus15 2
+    100112: pTorus15 3
+    100114: pTorus16
+    100116: pTorus17
+    100118: pTorus18
+    100120: pTorus19
+    100122: pTorus2
+    100124: pTorus2 1
+    100126: pTorus2 2
+    100128: pTorus2 3
+    100130: pTorus20
+    100132: pTorus21
+    100134: pTorus22
+    100136: pTorus23
+    100138: pTorus24
+    100140: pTorus25
+    100142: pTorus3
+    100144: pTorus3 1
+    100146: pTorus3 2
+    100148: pTorus3 3
+    100150: pTorus4
+    100152: pTorus4 1
+    100154: pTorus4 2
+    100156: pTorus4 3
+    100158: pTorus5
+    100160: pTorus5 1
+    100162: pTorus5 2
+    100164: pTorus5 3
+    100166: pTorus6
+    100168: pTorus6 1
+    100170: pTorus6 2
+    100172: pTorus6 3
+    100174: pTorus7
+    100176: pTorus7 1
+    100178: pTorus7 2
+    100180: pTorus7 3
+    100182: pTorus8
+    100184: pTorus8 1
+    100186: pTorus8 2
+    100188: pTorus8 3
+    100190: pTorus9
+    100192: pTorus9 1
+    100194: pTorus9 2
+    100196: pTorus9 3
+    100198: transform1
+    100200: transform10
+    100202: transform11
+    100204: transform12
+    100206: transform13
+    100208: transform14
+    100210: transform15
+    100212: transform16
+    100214: transform17
+    100216: transform18
+    100218: transform19
+    100220: transform2
+    100222: transform20
+    100224: transform21
+    100226: transform22
+    100228: transform23
+    100230: transform24
+    100232: transform25
+    100234: transform26
+    100236: transform27
+    100238: transform28
+    100240: transform29
+    100242: transform3
+    100244: transform30
+    100246: transform31
+    100248: transform32
+    100250: transform33
+    100252: transform34
+    100254: transform35
+    100256: transform36
+    100258: transform37
+    100260: transform38
+    100262: transform39
+    100264: transform4
+    100266: transform40
+    100268: transform41
+    100270: transform42
+    100272: transform43
+    100274: transform44
+    100276: transform45
+    100278: transform46
+    100280: transform47
+    100282: transform48
+    100284: transform49
+    100286: transform5
+    100288: transform50
+    100290: transform51
+    100292: transform52
+    100294: transform53
+    100296: transform54
+    100298: transform55
+    100300: transform56
+    100302: transform57
+    100304: transform58
+    100306: transform59
+    100308: transform6
+    100310: transform60
+    100312: transform61
+    100314: transform62
+    100316: transform63
+    100318: transform64
+    100320: transform65
+    100322: transform66
+    100324: transform67
+    100326: transform68
+    100328: transform69
+    100330: transform7
+    100332: transform70
+    100334: transform71
+    100336: transform72
+    100338: transform73
+    100340: transform74
+    100342: transform75
+    100344: transform76
+    100346: transform77
+    100348: transform78
+    100350: transform79
+    100352: transform8
+    100354: transform80
+    100356: transform81
+    100358: transform82
+    100360: transform83
+    100362: transform84
+    100364: transform9
+    400000: //RootNode
+    400002: Chains
+    400004: Chains1
+    400006: Chains2
+    400008: Chains3
+    400010: Chains4
+    400012: Hook
+    400014: hook_2
+    400016: Oil_lamp
+    400018: Oil_lamp1
+    400020: Oil_lamp2
+    400022: Oil_lamp2_pPipe1
+    400024: Oil_lamp3
+    400026: Oil_lamp4
+    400028: pCube30
+    400030: pCylinder1
+    400032: pCylinder1 1
+    400034: pCylinder1 2
+    400036: pCylinder1 3
+    400038: pCylinder1 4
+    400040: pCylinder2
+    400042: pCylinder2 1
+    400044: pCylinder2 2
+    400046: pCylinder2 3
+    400048: pCylinder2 4
+    400050: polySurface26
+    400052: polySurface28
+    400054: pPipe1
+    400056: pPipe1 1
+    400058: pPipe1 2
+    400060: pPipe1 3
+    400062: pPipe1 4
+    400064: pPipe2
+    400066: pPipe2 1
+    400068: pPipe2 2
+    400070: pPipe2 3
+    400072: pPipe2 4
+    400074: pTorus11
+    400076: pTorus11 1
+    400078: pTorus11 2
+    400080: pTorus11 3
+    400082: pTorus12
+    400084: pTorus12 1
+    400086: pTorus12 2
+    400088: pTorus12 3
+    400090: pTorus13
+    400092: pTorus13 1
+    400094: pTorus13 2
+    400096: pTorus13 3
+    400098: pTorus14
+    400100: pTorus14 1
+    400102: pTorus14 2
+    400104: pTorus14 3
+    400106: pTorus15
+    400108: pTorus15 1
+    400110: pTorus15 2
+    400112: pTorus15 3
+    400114: pTorus16
+    400116: pTorus17
+    400118: pTorus18
+    400120: pTorus19
+    400122: pTorus2
+    400124: pTorus2 1
+    400126: pTorus2 2
+    400128: pTorus2 3
+    400130: pTorus20
+    400132: pTorus21
+    400134: pTorus22
+    400136: pTorus23
+    400138: pTorus24
+    400140: pTorus25
+    400142: pTorus3
+    400144: pTorus3 1
+    400146: pTorus3 2
+    400148: pTorus3 3
+    400150: pTorus4
+    400152: pTorus4 1
+    400154: pTorus4 2
+    400156: pTorus4 3
+    400158: pTorus5
+    400160: pTorus5 1
+    400162: pTorus5 2
+    400164: pTorus5 3
+    400166: pTorus6
+    400168: pTorus6 1
+    400170: pTorus6 2
+    400172: pTorus6 3
+    400174: pTorus7
+    400176: pTorus7 1
+    400178: pTorus7 2
+    400180: pTorus7 3
+    400182: pTorus8
+    400184: pTorus8 1
+    400186: pTorus8 2
+    400188: pTorus8 3
+    400190: pTorus9
+    400192: pTorus9 1
+    400194: pTorus9 2
+    400196: pTorus9 3
+    400198: transform1
+    400200: transform10
+    400202: transform11
+    400204: transform12
+    400206: transform13
+    400208: transform14
+    400210: transform15
+    400212: transform16
+    400214: transform17
+    400216: transform18
+    400218: transform19
+    400220: transform2
+    400222: transform20
+    400224: transform21
+    400226: transform22
+    400228: transform23
+    400230: transform24
+    400232: transform25
+    400234: transform26
+    400236: transform27
+    400238: transform28
+    400240: transform29
+    400242: transform3
+    400244: transform30
+    400246: transform31
+    400248: transform32
+    400250: transform33
+    400252: transform34
+    400254: transform35
+    400256: transform36
+    400258: transform37
+    400260: transform38
+    400262: transform39
+    400264: transform4
+    400266: transform40
+    400268: transform41
+    400270: transform42
+    400272: transform43
+    400274: transform44
+    400276: transform45
+    400278: transform46
+    400280: transform47
+    400282: transform48
+    400284: transform49
+    400286: transform5
+    400288: transform50
+    400290: transform51
+    400292: transform52
+    400294: transform53
+    400296: transform54
+    400298: transform55
+    400300: transform56
+    400302: transform57
+    400304: transform58
+    400306: transform59
+    400308: transform6
+    400310: transform60
+    400312: transform61
+    400314: transform62
+    400316: transform63
+    400318: transform64
+    400320: transform65
+    400322: transform66
+    400324: transform67
+    400326: transform68
+    400328: transform69
+    400330: transform7
+    400332: transform70
+    400334: transform71
+    400336: transform72
+    400338: transform73
+    400340: transform74
+    400342: transform75
+    400344: transform76
+    400346: transform77
+    400348: transform78
+    400350: transform79
+    400352: transform8
+    400354: transform80
+    400356: transform81
+    400358: transform82
+    400360: transform83
+    400362: transform84
+    400364: transform9
+    2100000: lambert1
+    2300000: Oil_lamp2_pPipe1
+    3300000: Oil_lamp2_pPipe1
+    4300000: Oil_lamp2_pPipe1
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 7
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 0
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

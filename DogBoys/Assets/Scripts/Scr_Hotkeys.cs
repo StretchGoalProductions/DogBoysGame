@@ -53,10 +53,5 @@ public class Scr_Hotkeys : MonoBehaviour {
         {
             dogScr.SkipTurn();
         }
-
-        else if (Input.GetKeyDown(KeyCode.Tab))
-        {
-            Scr_GameController.Instance.selectNextDog();
-        }
     }
 }

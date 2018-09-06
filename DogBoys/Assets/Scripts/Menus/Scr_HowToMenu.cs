@@ -9,10 +9,11 @@ public class Scr_HowToMenu : MonoBehaviour {
 
     public List<string> bodyText;
     public List<string> subtitlesText;
+    public List<Sprite> screenshots;
 
     public GameObject subtitle;
     public GameObject body;
-    //need gameobject & list for images
+    public GameObject pic;
 
     public GameObject nextButton;
     public GameObject lastButton;
@@ -22,7 +23,7 @@ public class Scr_HowToMenu : MonoBehaviour {
         index = 0;
         subtitle.GetComponent<Text>().text = subtitlesText[index];
         body.GetComponent<Text>().text = bodyText[index];
-        //image
+        pic.GetComponent<Image>().sprite = screenshots[index];
 	}
 
     void Update()
@@ -43,7 +44,7 @@ public class Scr_HowToMenu : MonoBehaviour {
             index += 1;
             subtitle.GetComponent<Text>().text = subtitlesText[index];
             body.GetComponent<Text>().text = bodyText[index];
-            //image
+            pic.GetComponent<Image>().sprite = screenshots[index];
         }
     }
 
@@ -54,7 +55,7 @@ public class Scr_HowToMenu : MonoBehaviour {
             index -= 1;
             subtitle.GetComponent<Text>().text = subtitlesText[index];
             body.GetComponent<Text>().text = bodyText[index];
-            //image
+            pic.GetComponent<Image>().sprite = screenshots[index];
         }
     }
 }

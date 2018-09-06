@@ -1,0 +1,615 @@
+fileFormatVersion: 2
+guid: 3dbe0aaeda3cc54418600bc1e88859bb
+ModelImporter:
+  serializedVersion: 22
+  fileIDToRecycleName:
+    100000: barktender
+    100002: Barktender_Mesh
+    100004: //RootNode
+    100006: BowlerHat
+    100008: Character 1_Ctrl:ChestEndEffector
+    100010: Character 1_Ctrl:ChestOriginEffector
+    100012: Character 1_Ctrl:Head
+    100014: Character 1_Ctrl:HeadEffector
+    100016: Character 1_Ctrl:Hips
+    100018: Character 1_Ctrl:HipsEffector
+    100020: Character 1_Ctrl:LeftAnkleEffector
+    100022: Character 1_Ctrl:LeftArm
+    100024: Character 1_Ctrl:LeftElbowEffector
+    100026: Character 1_Ctrl:LeftFoot
+    100028: Character 1_Ctrl:LeftFootEffector
+    100030: Character 1_Ctrl:LeftForeArm
+    100032: Character 1_Ctrl:LeftHand
+    100034: Character 1_Ctrl:LeftHandIndex1
+    100036: Character 1_Ctrl:LeftHandIndex2
+    100038: Character 1_Ctrl:LeftHandIndex3
+    100040: Character 1_Ctrl:LeftHandIndex4
+    100042: Character 1_Ctrl:LeftHandIndexEffector
+    100044: Character 1_Ctrl:LeftHandMiddle1
+    100046: Character 1_Ctrl:LeftHandMiddle2
+    100048: Character 1_Ctrl:LeftHandMiddle3
+    100050: Character 1_Ctrl:LeftHandMiddle4
+    100052: Character 1_Ctrl:LeftHandMiddleEffector
+    100054: Character 1_Ctrl:LeftHandRing1
+    100056: Character 1_Ctrl:LeftHandRing2
+    100058: Character 1_Ctrl:LeftHandRing3
+    100060: Character 1_Ctrl:LeftHandRing4
+    100062: Character 1_Ctrl:LeftHandRingEffector
+    100064: Character 1_Ctrl:LeftHandThumb1
+    100066: Character 1_Ctrl:LeftHandThumb2
+    100068: Character 1_Ctrl:LeftHandThumb3
+    100070: Character 1_Ctrl:LeftHandThumbEffector
+    100072: Character 1_Ctrl:LeftHipEffector
+    100074: Character 1_Ctrl:LeftKneeEffector
+    100076: Character 1_Ctrl:LeftLeg
+    100078: Character 1_Ctrl:LeftShoulder
+    100080: Character 1_Ctrl:LeftShoulderEffector
+    100082: Character 1_Ctrl:LeftToeBase
+    100084: Character 1_Ctrl:LeftUpLeg
+    100086: Character 1_Ctrl:LeftWristEffector
+    100088: Character 1_Ctrl:Neck
+    100090: Character 1_Ctrl:Reference
+    100092: Character 1_Ctrl:RightAnkleEffector
+    100094: Character 1_Ctrl:RightArm
+    100096: Character 1_Ctrl:RightElbowEffector
+    100098: Character 1_Ctrl:RightFoot
+    100100: Character 1_Ctrl:RightFootEffector
+    100102: Character 1_Ctrl:RightForeArm
+    100104: Character 1_Ctrl:RightHand
+    100106: Character 1_Ctrl:RightHandIndex1
+    100108: Character 1_Ctrl:RightHandIndex2
+    100110: Character 1_Ctrl:RightHandIndex3
+    100112: Character 1_Ctrl:RightHandIndex4
+    100114: Character 1_Ctrl:RightHandIndexEffector
+    100116: Character 1_Ctrl:RightHandMiddle1
+    100118: Character 1_Ctrl:RightHandMiddle2
+    100120: Character 1_Ctrl:RightHandMiddle3
+    100122: Character 1_Ctrl:RightHandMiddle4
+    100124: Character 1_Ctrl:RightHandMiddleEffector
+    100126: Character 1_Ctrl:RightHandRing1
+    100128: Character 1_Ctrl:RightHandRing2
+    100130: Character 1_Ctrl:RightHandRing3
+    100132: Character 1_Ctrl:RightHandRing4
+    100134: Character 1_Ctrl:RightHandRingEffector
+    100136: Character 1_Ctrl:RightHandThumb1
+    100138: Character 1_Ctrl:RightHandThumb2
+    100140: Character 1_Ctrl:RightHandThumb3
+    100142: Character 1_Ctrl:RightHandThumbEffector
+    100144: Character 1_Ctrl:RightHipEffector
+    100146: Character 1_Ctrl:RightKneeEffector
+    100148: Character 1_Ctrl:RightLeg
+    100150: Character 1_Ctrl:RightShoulder
+    100152: Character 1_Ctrl:RightShoulderEffector
+    100154: Character 1_Ctrl:RightToeBase
+    100156: Character 1_Ctrl:RightUpLeg
+    100158: Character 1_Ctrl:RightWristEffector
+    100160: Character 1_Ctrl:Spine
+    100162: Character 1_Ctrl:Spine1
+    100164: Character 1_Ctrl:Spine2
+    100166: Character1_Head
+    100168: Character1_Hips
+    100170: Character1_LeftArm
+    100172: Character1_LeftFoot
+    100174: Character1_LeftForeArm
+    100176: Character1_LeftHand
+    100178: Character1_LeftHandIndex1
+    100180: Character1_LeftHandIndex2
+    100182: Character1_LeftHandIndex3
+    100184: Character1_LeftHandIndex4
+    100186: Character1_LeftHandMiddle1
+    100188: Character1_LeftHandMiddle2
+    100190: Character1_LeftHandMiddle3
+    100192: Character1_LeftHandMiddle4
+    100194: Character1_LeftHandRing1
+    100196: Character1_LeftHandRing2
+    100198: Character1_LeftHandRing3
+    100200: Character1_LeftHandRing4
+    100202: Character1_LeftHandThumb1
+    100204: Character1_LeftHandThumb2
+    100206: Character1_LeftHandThumb3
+    100208: Character1_LeftLeg
+    100210: Character1_LeftShoulder
+    100212: Character1_LeftToeBase
+    100214: Character1_LeftUpLeg
+    100216: Character1_Neck
+    100218: Character1_Reference
+    100220: Character1_RightArm
+    100222: Character1_RightFoot
+    100224: Character1_RightForeArm
+    100226: Character1_RightHand
+    100228: Character1_RightHandIndex1
+    100230: Character1_RightHandIndex2
+    100232: Character1_RightHandIndex3
+    100234: Character1_RightHandIndex4
+    100236: Character1_RightHandMiddle1
+    100238: Character1_RightHandMiddle2
+    100240: Character1_RightHandMiddle3
+    100242: Character1_RightHandMiddle4
+    100244: Character1_RightHandRing1
+    100246: Character1_RightHandRing2
+    100248: Character1_RightHandRing3
+    100250: Character1_RightHandRing4
+    100252: Character1_RightHandThumb1
+    100254: Character1_RightHandThumb2
+    100256: Character1_RightHandThumb3
+    100258: Character1_RightLeg
+    100260: Character1_RightShoulder
+    100262: Character1_RightToeBase
+    100264: Character1_RightUpLeg
+    100266: Character1_Spine
+    100268: Character1_Spine1
+    100270: Character1_Spine2
+    100272: cloth1
+    100274: Cup
+    100276: Dogbowl
+    100278: group1
+    100280: group2
+    100282: group3
+    100284: group4
+    100286: group5
+    100288: group6
+    100290: group7
+    100292: group8
+    100294: group9
+    100296: pCube1
+    100298: pCube10
+    100300: pCube11
+    100302: pCube2
+    100304: pCube3
+    100306: pCube5
+    100308: pCube6
+    100310: pCube7
+    100312: pCube8
+    100314: pCube9
+    100316: pCylinder10
+    100318: pCylinder11
+    100320: pCylinder12
+    100322: pCylinder13
+    100324: pCylinder2
+    100326: pCylinder3
+    100328: pCylinder4
+    100330: pCylinder5
+    100332: pCylinder6
+    100334: pCylinder7
+    100336: pCylinder8
+    100338: pCylinder9
+    100340: pPipe1
+    100342: pPipe2
+    100344: pPipe3
+    100346: pPipe5
+    100348: pPipe6
+    100350: pPipe7
+    100352: pPipe8
+    100354: pSphere1
+    100356: pSphere2
+    100358: transform1
+    100360: transform10
+    100362: transform11
+    100364: transform12
+    100366: transform13
+    100368: transform14
+    100370: transform15
+    100372: transform16
+    100374: transform17
+    100376: transform18
+    100378: transform19
+    100380: transform2
+    100382: transform20
+    100384: transform21
+    100386: transform22
+    100388: transform23
+    100390: transform24
+    100392: transform25
+    100394: transform26
+    100396: transform27
+    100398: transform28
+    100400: transform29
+    100402: transform3
+    100404: transform30
+    100406: transform31
+    100408: transform4
+    100410: transform5
+    100412: transform6
+    100414: transform7
+    100416: transform8
+    100418: transform9
+    400000: barktender
+    400002: Barktender_Mesh
+    400004: //RootNode
+    400006: BowlerHat
+    400008: Character 1_Ctrl:ChestEndEffector
+    400010: Character 1_Ctrl:ChestOriginEffector
+    400012: Character 1_Ctrl:Head
+    400014: Character 1_Ctrl:HeadEffector
+    400016: Character 1_Ctrl:Hips
+    400018: Character 1_Ctrl:HipsEffector
+    400020: Character 1_Ctrl:LeftAnkleEffector
+    400022: Character 1_Ctrl:LeftArm
+    400024: Character 1_Ctrl:LeftElbowEffector
+    400026: Character 1_Ctrl:LeftFoot
+    400028: Character 1_Ctrl:LeftFootEffector
+    400030: Character 1_Ctrl:LeftForeArm
+    400032: Character 1_Ctrl:LeftHand
+    400034: Character 1_Ctrl:LeftHandIndex1
+    400036: Character 1_Ctrl:LeftHandIndex2
+    400038: Character 1_Ctrl:LeftHandIndex3
+    400040: Character 1_Ctrl:LeftHandIndex4
+    400042: Character 1_Ctrl:LeftHandIndexEffector
+    400044: Character 1_Ctrl:LeftHandMiddle1
+    400046: Character 1_Ctrl:LeftHandMiddle2
+    400048: Character 1_Ctrl:LeftHandMiddle3
+    400050: Character 1_Ctrl:LeftHandMiddle4
+    400052: Character 1_Ctrl:LeftHandMiddleEffector
+    400054: Character 1_Ctrl:LeftHandRing1
+    400056: Character 1_Ctrl:LeftHandRing2
+    400058: Character 1_Ctrl:LeftHandRing3
+    400060: Character 1_Ctrl:LeftHandRing4
+    400062: Character 1_Ctrl:LeftHandRingEffector
+    400064: Character 1_Ctrl:LeftHandThumb1
+    400066: Character 1_Ctrl:LeftHandThumb2
+    400068: Character 1_Ctrl:LeftHandThumb3
+    400070: Character 1_Ctrl:LeftHandThumbEffector
+    400072: Character 1_Ctrl:LeftHipEffector
+    400074: Character 1_Ctrl:LeftKneeEffector
+    400076: Character 1_Ctrl:LeftLeg
+    400078: Character 1_Ctrl:LeftShoulder
+    400080: Character 1_Ctrl:LeftShoulderEffector
+    400082: Character 1_Ctrl:LeftToeBase
+    400084: Character 1_Ctrl:LeftUpLeg
+    400086: Character 1_Ctrl:LeftWristEffector
+    400088: Character 1_Ctrl:Neck
+    400090: Character 1_Ctrl:Reference
+    400092: Character 1_Ctrl:RightAnkleEffector
+    400094: Character 1_Ctrl:RightArm
+    400096: Character 1_Ctrl:RightElbowEffector
+    400098: Character 1_Ctrl:RightFoot
+    400100: Character 1_Ctrl:RightFootEffector
+    400102: Character 1_Ctrl:RightForeArm
+    400104: Character 1_Ctrl:RightHand
+    400106: Character 1_Ctrl:RightHandIndex1
+    400108: Character 1_Ctrl:RightHandIndex2
+    400110: Character 1_Ctrl:RightHandIndex3
+    400112: Character 1_Ctrl:RightHandIndex4
+    400114: Character 1_Ctrl:RightHandIndexEffector
+    400116: Character 1_Ctrl:RightHandMiddle1
+    400118: Character 1_Ctrl:RightHandMiddle2
+    400120: Character 1_Ctrl:RightHandMiddle3
+    400122: Character 1_Ctrl:RightHandMiddle4
+    400124: Character 1_Ctrl:RightHandMiddleEffector
+    400126: Character 1_Ctrl:RightHandRing1
+    400128: Character 1_Ctrl:RightHandRing2
+    400130: Character 1_Ctrl:RightHandRing3
+    400132: Character 1_Ctrl:RightHandRing4
+    400134: Character 1_Ctrl:RightHandRingEffector
+    400136: Character 1_Ctrl:RightHandThumb1
+    400138: Character 1_Ctrl:RightHandThumb2
+    400140: Character 1_Ctrl:RightHandThumb3
+    400142: Character 1_Ctrl:RightHandThumbEffector
+    400144: Character 1_Ctrl:RightHipEffector
+    400146: Character 1_Ctrl:RightKneeEffector
+    400148: Character 1_Ctrl:RightLeg
+    400150: Character 1_Ctrl:RightShoulder
+    400152: Character 1_Ctrl:RightShoulderEffector
+    400154: Character 1_Ctrl:RightToeBase
+    400156: Character 1_Ctrl:RightUpLeg
+    400158: Character 1_Ctrl:RightWristEffector
+    400160: Character 1_Ctrl:Spine
+    400162: Character 1_Ctrl:Spine1
+    400164: Character 1_Ctrl:Spine2
+    400166: Character1_Head
+    400168: Character1_Hips
+    400170: Character1_LeftArm
+    400172: Character1_LeftFoot
+    400174: Character1_LeftForeArm
+    400176: Character1_LeftHand
+    400178: Character1_LeftHandIndex1
+    400180: Character1_LeftHandIndex2
+    400182: Character1_LeftHandIndex3
+    400184: Character1_LeftHandIndex4
+    400186: Character1_LeftHandMiddle1
+    400188: Character1_LeftHandMiddle2
+    400190: Character1_LeftHandMiddle3
+    400192: Character1_LeftHandMiddle4
+    400194: Character1_LeftHandRing1
+    400196: Character1_LeftHandRing2
+    400198: Character1_LeftHandRing3
+    400200: Character1_LeftHandRing4
+    400202: Character1_LeftHandThumb1
+    400204: Character1_LeftHandThumb2
+    400206: Character1_LeftHandThumb3
+    400208: Character1_LeftLeg
+    400210: Character1_LeftShoulder
+    400212: Character1_LeftToeBase
+    400214: Character1_LeftUpLeg
+    400216: Character1_Neck
+    400218: Character1_Reference
+    400220: Character1_RightArm
+    400222: Character1_RightFoot
+    400224: Character1_RightForeArm
+    400226: Character1_RightHand
+    400228: Character1_RightHandIndex1
+    400230: Character1_RightHandIndex2
+    400232: Character1_RightHandIndex3
+    400234: Character1_RightHandIndex4
+    400236: Character1_RightHandMiddle1
+    400238: Character1_RightHandMiddle2
+    400240: Character1_RightHandMiddle3
+    400242: Character1_RightHandMiddle4
+    400244: Character1_RightHandRing1
+    400246: Character1_RightHandRing2
+    400248: Character1_RightHandRing3
+    400250: Character1_RightHandRing4
+    400252: Character1_RightHandThumb1
+    400254: Character1_RightHandThumb2
+    400256: Character1_RightHandThumb3
+    400258: Character1_RightLeg
+    400260: Character1_RightShoulder
+    400262: Character1_RightToeBase
+    400264: Character1_RightUpLeg
+    400266: Character1_Spine
+    400268: Character1_Spine1
+    400270: Character1_Spine2
+    400272: cloth1
+    400274: Cup
+    400276: Dogbowl
+    400278: group1
+    400280: group2
+    400282: group3
+    400284: group4
+    400286: group5
+    400288: group6
+    400290: group7
+    400292: group8
+    400294: group9
+    400296: pCube1
+    400298: pCube10
+    400300: pCube11
+    400302: pCube2
+    400304: pCube3
+    400306: pCube5
+    400308: pCube6
+    400310: pCube7
+    400312: pCube8
+    400314: pCube9
+    400316: pCylinder10
+    400318: pCylinder11
+    400320: pCylinder12
+    400322: pCylinder13
+    400324: pCylinder2
+    400326: pCylinder3
+    400328: pCylinder4
+    400330: pCylinder5
+    400332: pCylinder6
+    400334: pCylinder7
+    400336: pCylinder8
+    400338: pCylinder9
+    400340: pPipe1
+    400342: pPipe2
+    400344: pPipe3
+    400346: pPipe5
+    400348: pPipe6
+    400350: pPipe7
+    400352: pPipe8
+    400354: pSphere1
+    400356: pSphere2
+    400358: transform1
+    400360: transform10
+    400362: transform11
+    400364: transform12
+    400366: transform13
+    400368: transform14
+    400370: transform15
+    400372: transform16
+    400374: transform17
+    400376: transform18
+    400378: transform19
+    400380: transform2
+    400382: transform20
+    400384: transform21
+    400386: transform22
+    400388: transform23
+    400390: transform24
+    400392: transform25
+    400394: transform26
+    400396: transform27
+    400398: transform28
+    400400: transform29
+    400402: transform3
+    400404: transform30
+    400406: transform31
+    400408: transform4
+    400410: transform5
+    400412: transform6
+    400414: transform7
+    400416: transform8
+    400418: transform9
+    2100000: BarktenderMat
+    2100002: lambert1
+    2100004: blinn1
+    2100006: cloth
+    2300000: BowlerHat
+    2300002: cloth1
+    2300004: Cup
+    2300006: Dogbowl
+    2300008: pCube11
+    3300000: BowlerHat
+    3300002: cloth1
+    3300004: Cup
+    3300006: Dogbowl
+    3300008: pCube11
+    4300000: BowlerHat
+    4300002: Barktender_Mesh
+    4300004: Cup
+    4300006: pCube11
+    4300008: Dogbowl
+    4300010: cloth1
+    7400000: barscene_mainLoop
+    7400002: barscene_SecondaryLoop
+    7400004: barscene_start
+    9500000: //RootNode
+    13700000: Barktender_Mesh
+  externalObjects: {}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: barscene_mainLoop
+      takeName: barscene
+      firstFrame: 153
+      lastFrame: 1504
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: barscene_SecondaryLoop
+      takeName: barscene
+      firstFrame: 153
+      lastFrame: 1504
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: barscene_start
+      takeName: barscene
+      firstFrame: 80
+      lastFrame: 1504
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask: []
+      maskType: 3
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 5
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
