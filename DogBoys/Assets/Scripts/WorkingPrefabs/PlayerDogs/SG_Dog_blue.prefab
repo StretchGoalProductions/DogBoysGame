@@ -1336,9 +1336,11 @@ MonoBehaviour:
   falloffCircle: {fileID: 120131105961572258}
   spreadMeshFilter: {fileID: 33565208798668484}
   grenadesHeld: 0
+  grenadeThrowRange: 10
   squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
     type: 2}
   guardDogOn_: 0
+  moveScript: {fileID: 0}
 --- !u!114 &114275511773897860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1786,7 +1788,7 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.01
-  m_Speed: 4
+  m_Speed: 2
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 300
