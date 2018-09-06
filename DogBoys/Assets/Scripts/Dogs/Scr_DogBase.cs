@@ -44,6 +44,8 @@ public class Scr_DogBase : MonoBehaviour {
 
     public Scr_DogMovement moveScript;
 
+    public GameObject heavenlyDog;
+
     void Start() {
 		health = 100;
 		movesLeft = 2;
@@ -517,7 +519,7 @@ public class Scr_DogBase : MonoBehaviour {
 		animator.SetBool ("a_isDead", true);
         Scr_GameController.WinGameCheck();
 
-        Instantiate(Resources.Load("HeavenlyDog"), transform.position, transform.rotation);
+        Instantiate(heavenlyDog, transform.position, transform.rotation);
 
 		Destroy(gameObject);
     }

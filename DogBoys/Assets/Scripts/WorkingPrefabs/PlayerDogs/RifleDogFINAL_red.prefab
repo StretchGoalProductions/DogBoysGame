@@ -2144,7 +2144,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1309380784855858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.0467033, y: 0.0002746582, z: 5.358551}
+  m_LocalPosition: {x: 2.9118195, y: 0.0002746582, z: -3.5750504}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4068904614677768}
@@ -2978,6 +2978,8 @@ MonoBehaviour:
     type: 2}
   guardDogOn_: 0
   moveScript: {fileID: 0}
+  heavenlyDog: {fileID: 1851807080016238, guid: 7690148b91102ef428d4ee63521c9b51,
+    type: 2}
 --- !u!114 &114334995207863630
 MonoBehaviour:
   m_ObjectHideFlags: 1
