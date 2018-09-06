@@ -20,7 +20,9 @@ public class Scr_Grid : MonoBehaviour {
 	public static List<Cls_Node> finalPath;
 
 	private float nodeDiameter;
-	private static int gridSizeX, gridSizeY;
+	public static int gridSizeX, gridSizeY;
+
+	public static int MaxSize { get { return gridSizeX * gridSizeY; } }
 
 	private void Awake() {
 		wallMask = LayerMask.GetMask("Wall");

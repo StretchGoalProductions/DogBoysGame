@@ -514,6 +514,9 @@ public class Scr_DogBase : MonoBehaviour {
 		else if (Scr_TeamController.blueTeam.Contains(gameObject)) {
 			Scr_TeamController.blueTeam.Remove(gameObject);
 		}
+
+        currentNode.dog = null;
+        currentNode.currentState = Cls_Node.nodeState.empty;
 		
 		animator.SetBool ("a_isAlive", false);
 		animator.SetBool ("a_isDead", true);
@@ -635,7 +638,7 @@ public class Scr_DogBase : MonoBehaviour {
         Scr_UIController.updateCurrentHealthBar(health, MAX_HEALTH);
 		selectParticles.Play();
 		selectCooldown = 0.2f;
-		GetComponent<Scr_Pathfinding>().enabled = true;
+		//GetComponent<Scr_Pathfinding>().enabled = true;
 	}
 	
 	public void SkipTurn() {
@@ -676,7 +679,7 @@ public class Scr_DogBase : MonoBehaviour {
 		Scr_GameController.attackMode_ = false;
         Scr_GameController.grenadeMode_ = false;
 		Scr_GameController.CheckTurn();
-		GetComponent<Scr_Pathfinding>().enabled = false;
+		//GetComponent<Scr_Pathfinding>().enabled = false;
 	}
 
     public void lineOfSight()

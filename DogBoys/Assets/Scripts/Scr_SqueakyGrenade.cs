@@ -71,6 +71,8 @@ public class Scr_SqueakyGrenade : MonoBehaviour {
 			}
 		}
 
+		currentNode.currentState = Cls_Node.nodeState.empty;
+
 		Instantiate(spawnEffect, transform.position - new Vector3(0f, -0.5f, 0f), Quaternion.identity);
 		Destroy(gameObject);
 	}

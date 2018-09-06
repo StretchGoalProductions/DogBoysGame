@@ -30,7 +30,7 @@ public class Scr_DogMovement : MonoBehaviour {
 		hitLayers = LayerMask.GetMask("Environment");
 		
 		pathfinder.maxMoveRange = maxMoveRange;
-		pathfinder.enabled = false;
+		//pathfinder.enabled = false;
 	}
 	
 	void Update () {

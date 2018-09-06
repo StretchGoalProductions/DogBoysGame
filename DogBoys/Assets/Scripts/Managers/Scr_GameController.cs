@@ -19,6 +19,10 @@ public class Scr_GameController : MonoBehaviour
     public GameObject winInfoPrefab;
     public static GameObject winInfo_;
 	private static GunEffects fx;
+
+    public GameObject squeakyPickUp;
+    private static GameObject _squeakyPickUp;
+    private static bool shouldSpawnPickup = false;
     #endregion
 
 	private void Start(){
@@ -27,6 +31,7 @@ public class Scr_GameController : MonoBehaviour
 
     private void Awake()
     {
+        _squeakyPickUp = squeakyPickUp;
         Instance = this;
         teamInfo_ = this.gameObject.GetComponent<Scr_TeamController>();
         cameraPivot_ = Camera.main.transform.parent.GetComponent<Camera_Movement>();
@@ -121,6 +126,31 @@ public class Scr_GameController : MonoBehaviour
             displayTeamName_ = "Red Rovers";
         }
         Scr_TurnText.updateText();
+
+        if (shouldSpawnPickup) {
+            int x = Random.Range(0, Scr_Grid.gridSizeX - 1);
+            int y = Random.Range(0, Scr_Grid.gridSizeY - 1);
+
+            if (Scr_Grid.grid[x,y].currentState == Cls_Node.nodeState.empty) {
+                Vector3 spawnPos = new Vector3(Scr_Grid.grid[x,y].position.x, 0.2f, Scr_Grid.grid[x,y].position.z);
+                Instantiate(_squeakyPickUp, spawnPos, Quaternion.identity);
+                //Scr_Grid.grid[x,y].grenadePickup.GetComponent<AudioSource>().Play();
+                shouldSpawnPickup = false;
+            }
+        }
+        else if (roundCount_ % 5 == 0) {
+            shouldSpawnPickup = true;
+
+            int x = Random.Range(0, Scr_Grid.gridSizeX - 1);
+            int y = Random.Range(0, Scr_Grid.gridSizeY - 1);
+
+            if (Scr_Grid.grid[x,y].currentState == Cls_Node.nodeState.empty) {
+                Vector3 spawnPos = new Vector3(Scr_Grid.grid[x,y].position.x, 0.2f, Scr_Grid.grid[x,y].position.z);
+                Instantiate(_squeakyPickUp, spawnPos, Quaternion.identity);
+                //Scr_Grid.grid[x,y].grenadePickup.GetComponent<AudioSource>().Play();
+                shouldSpawnPickup = false;
+            }
+        }
     }
 
     //On new round, reset the dogs available actions back to 2
