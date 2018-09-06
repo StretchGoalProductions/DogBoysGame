@@ -82,6 +82,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4993832038415492}
+  - component: {fileID: 33565208798668484}
+  - component: {fileID: 23185016759677738}
+  - component: {fileID: 120209182566525070}
   - component: {fileID: 95801056049718294}
   - component: {fileID: 136673254634361208}
   - component: {fileID: 195461440145882676}
@@ -90,9 +93,6 @@ GameObject:
   - component: {fileID: 114343863425615880}
   - component: {fileID: 114458874680557370}
   - component: {fileID: 114344442954668796}
-  - component: {fileID: 120209182566525070}
-  - component: {fileID: 33565208798668484}
-  - component: {fileID: 23185016759677738}
   m_Layer: 8
   m_Name: SG_Dog_blue
   m_TagString: Blue_Team
@@ -1336,9 +1336,11 @@ MonoBehaviour:
   falloffCircle: {fileID: 120131105961572258}
   spreadMeshFilter: {fileID: 33565208798668484}
   grenadesHeld: 0
+  grenadeThrowRange: 10
   squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
     type: 2}
   guardDogOn_: 0
+  moveScript: {fileID: 0}
 --- !u!114 &114275511773897860
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1785,8 +1787,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 1143490122008102}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 4
+  m_Radius: 0.01
+  m_Speed: 2
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 300

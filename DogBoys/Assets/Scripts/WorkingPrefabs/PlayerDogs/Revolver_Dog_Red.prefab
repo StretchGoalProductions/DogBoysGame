@@ -1053,6 +1053,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4002043865807620}
+  - component: {fileID: 120547507945995026}
   - component: {fileID: 95448719327785678}
   - component: {fileID: 136186503627774428}
   - component: {fileID: 195654410156793588}
@@ -1061,7 +1062,6 @@ GameObject:
   - component: {fileID: 114022526861466930}
   - component: {fileID: 114195355911403242}
   - component: {fileID: 114945796392693744}
-  - component: {fileID: 120547507945995026}
   - component: {fileID: 114924393739336090}
   - component: {fileID: 33173304770533276}
   - component: {fileID: 23624746442585822}
@@ -2529,9 +2529,11 @@ MonoBehaviour:
   falloffCircle: {fileID: 120680071092278740}
   spreadMeshFilter: {fileID: 33173304770533276}
   grenadesHeld: 0
+  grenadeThrowRange: 10
   squeakyGrenade: {fileID: 1841676779352970, guid: 937baa2b2c987df40bb79c0cf84abe36,
     type: 2}
   guardDogOn_: 0
+  moveScript: {fileID: 0}
 --- !u!114 &114107471378459018
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3099,8 +3101,8 @@ NavMeshAgent:
   m_GameObject: {fileID: 1811122993782190}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 4
+  m_Radius: 0.01
+  m_Speed: 2
   m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 300
