@@ -39,10 +39,16 @@ public class Scr_WinScene : MonoBehaviour {
             redWinImageDisplay_.SetActive(false);
             blueWinImageDisplay_.SetActive(true);
         }
+
+        Destroy(cls_Win_Screne_Info.Instance);
+        Destroy(Scr_TeamController.Instance);
     }
 
     public void returnToDogHouse()
     {
+        Destroy(cls_Win_Screne_Info.Instance);
+        Destroy(Scr_TeamController.Instance);
+
         SceneManager.LoadScene(0);
     }
 }
