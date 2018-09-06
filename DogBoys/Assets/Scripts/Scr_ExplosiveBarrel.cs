@@ -33,13 +33,23 @@ public class Scr_ExplosiveBarrel : MonoBehaviour {
 		//explosionNodes = Scr_Grid.GetNeighboringNodes(currentNode);
 		NodesInRange(range);
 		
+		StartCoroutine(WaitThenExplode());
+	}
+
+	public IEnumerator WaitThenExplode() {
+		yield return new WaitForSeconds(0.4f);
+
 		foreach(Cls_Node node in explosionNodes) {
 			if (node.dog != null) {
 				node.dog.TakeDamage(damage);
 			}
+			else if (node.explosiveBarrel != null && node.explosiveBarrel != this) {
+				node.explosiveBarrel.Explode();
+			}
 		}
 
 		currentNode.currentState = Cls_Node.nodeState.empty;
+		currentNode.explosiveBarrel = null;
 
         Instantiate(spawnEffect, transform.position - new Vector3(0f, -0.5f, 0f), Quaternion.identity);
 		Destroy(transform.parent.gameObject);

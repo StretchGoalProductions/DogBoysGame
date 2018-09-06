@@ -348,6 +348,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4963494622003222}
+  - component: {fileID: 33185500716387558}
+  - component: {fileID: 23893863857179670}
+  - component: {fileID: 120225734574573742}
   - component: {fileID: 95409648947958214}
   - component: {fileID: 136569450619913954}
   - component: {fileID: 195096245716713858}
@@ -356,9 +359,6 @@ GameObject:
   - component: {fileID: 114707580211209704}
   - component: {fileID: 114085232730755140}
   - component: {fileID: 114802524711384882}
-  - component: {fileID: 120225734574573742}
-  - component: {fileID: 33185500716387558}
-  - component: {fileID: 23893863857179670}
   m_Layer: 8
   m_Name: RifleDogFINAL_red
   m_TagString: Red_Team
@@ -2144,7 +2144,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1309380784855858}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.4648514, y: 0.0002746582, z: -8.4700775}
+  m_LocalPosition: {x: -1.0467033, y: 0.0002746582, z: 5.358551}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4068904614677768}
@@ -3418,7 +3418,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1309380784855858}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.01
   m_Speed: 4
   m_Acceleration: 100
   avoidancePriority: 50

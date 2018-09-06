@@ -1022,6 +1022,9 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4682006118428720}
+  - component: {fileID: 33363251506452826}
+  - component: {fileID: 23772267699341692}
+  - component: {fileID: 120559585195934360}
   - component: {fileID: 95668186986884516}
   - component: {fileID: 136955054779506292}
   - component: {fileID: 195857139482666134}
@@ -1030,9 +1033,6 @@ GameObject:
   - component: {fileID: 114809400707659988}
   - component: {fileID: 114234993310194924}
   - component: {fileID: 114640865021454420}
-  - component: {fileID: 120559585195934360}
-  - component: {fileID: 33363251506452826}
-  - component: {fileID: 23772267699341692}
   m_Layer: 8
   m_Name: RifleDogFINAL_blue
   m_TagString: Blue_Team
@@ -3418,7 +3418,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1811864234466744}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.01
   m_Speed: 4
   m_Acceleration: 100
   avoidancePriority: 50

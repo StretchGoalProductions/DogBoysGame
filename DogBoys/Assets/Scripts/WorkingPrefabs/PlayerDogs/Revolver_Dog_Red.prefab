@@ -1053,6 +1053,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4002043865807620}
+  - component: {fileID: 120547507945995026}
   - component: {fileID: 95448719327785678}
   - component: {fileID: 136186503627774428}
   - component: {fileID: 195654410156793588}
@@ -1061,7 +1062,6 @@ GameObject:
   - component: {fileID: 114022526861466930}
   - component: {fileID: 114195355911403242}
   - component: {fileID: 114945796392693744}
-  - component: {fileID: 120547507945995026}
   - component: {fileID: 114924393739336090}
   - component: {fileID: 33173304770533276}
   - component: {fileID: 23624746442585822}
@@ -3099,7 +3099,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 1811122993782190}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
+  m_Radius: 0.01
   m_Speed: 4
   m_Acceleration: 100
   avoidancePriority: 50

@@ -74,9 +74,11 @@ public class Scr_UIController : MonoBehaviour
             if (dog.grenadesHeld >= 1) {
                 // Set grenade button to interactable
                 grenade_.interactable = true;
+                grenade_.gameObject.SetActive(true);
             }
             else {
                 grenade_.interactable = false;
+                grenade_.gameObject.SetActive(false);
             }
         }
 
@@ -123,6 +125,14 @@ public class Scr_UIController : MonoBehaviour
             attack_.SetActive(true);
             cancel_.SetActive(false);
         }
+
+        if (dog.grenadesHeld > 0) {
+            grenade_.gameObject.SetActive(true);
+
+        }
+        else {
+            grenade_.gameObject.SetActive(false);
+        }
     }
 
     public void OnClickAttackButton() {
@@ -148,6 +158,7 @@ public class Scr_UIController : MonoBehaviour
             {
                 Scr_GameController.attackMode_ = !Scr_GameController.attackMode_;
                 dog.currentState = Scr_DogBase.dogState.selected;
+                dog.moveScript.displayRange(dog.moveScript.maxMoveRange);
                 currentplayerState_Moving.SetActive(true);
                 currentplayerState_Attacking.SetActive(false);
             }
@@ -183,12 +194,17 @@ public class Scr_UIController : MonoBehaviour
         if (!Scr_GameController.attackMode_) {
             dog = Scr_GameController.selectedDog_.GetComponent<Scr_DogBase>();
 
+            dog.moveScript.removeRange();
+            dog.moveScript.displayRange(dog.grenadeThrowRange);
+
             Scr_GameController.grenadeMode_ = !Scr_GameController.grenadeMode_;
             if(Scr_GameController.grenadeMode_) {
                 dog.currentState = Scr_DogBase.dogState.attack;
             }
             else {
                 dog.currentState = Scr_DogBase.dogState.selected;
+                dog.moveScript.removeRange();
+                dog.moveScript.displayRange(dog.moveScript.maxMoveRange);
             }
         }
     }

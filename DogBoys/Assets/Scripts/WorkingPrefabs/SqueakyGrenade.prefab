@@ -95,4 +95,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bc3a86227baf18c4a9feeb3c5dd9166f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 2
+  damage: 40
+  dogEffectRange: 4
+  explosionRange: 3
+  spawnEffect: {fileID: 1645238055840466, guid: 2a6a4eacd1289b4459f7ed02e61f439b,
+    type: 2}

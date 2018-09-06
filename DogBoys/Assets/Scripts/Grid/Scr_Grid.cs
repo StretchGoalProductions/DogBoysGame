@@ -55,6 +55,11 @@ public class Scr_Grid : MonoBehaviour {
 				else if (isCover) {
 					currentState = Cls_Node.nodeState.cover;
 					grid[x,y] = new Cls_Node(currentState, worldPoint, x, y);
+
+					Scr_ExplosiveBarrel checkBarrel = Physics.OverlapSphere(worldPoint, nodeRadius, coverMask)[0].gameObject.GetComponent<Scr_ExplosiveBarrel>();
+					if (checkBarrel != null) {
+						grid[x,y].explosiveBarrel = checkBarrel;
+					}
 				}
 				else if (isPickUp) {
 					currentState = Cls_Node.nodeState.pickup;
