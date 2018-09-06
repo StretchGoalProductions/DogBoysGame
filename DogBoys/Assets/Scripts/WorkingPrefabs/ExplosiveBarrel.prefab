@@ -38,6 +38,7 @@ GameObject:
   - component: {fileID: 4289560875853776}
   - component: {fileID: 33369349475999622}
   - component: {fileID: 23650137343671090}
+  - component: {fileID: 111700519175484656}
   m_Layer: 11
   m_Name: ExplosiveBarrel
   m_TagString: Barrel
@@ -52,7 +53,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1762387488535376}
   m_LocalRotation: {x: -0, y: 0.8628906, z: -0, w: 0.50539076}
-  m_LocalPosition: {x: 10.894, y: 0.864, z: 8.412}
+  m_LocalPosition: {x: 10.934, y: 0.871, z: 11.603}
   m_LocalScale: {x: 1.0000002, y: 1, z: 1.0000002}
   m_Children:
   - {fileID: 4710135063844758}
@@ -127,6 +128,21 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!111 &111700519175484656
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1762387488535376}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 9178af47e89db1b4e9118aedd6c87e60, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 9178af47e89db1b4e9118aedd6c87e60, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &114048568852101330
 MonoBehaviour:
   m_ObjectHideFlags: 1

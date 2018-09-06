@@ -26,7 +26,7 @@ public class Scr_SqueakyGrenade : MonoBehaviour {
 
 		EffectDogs();
 
-		StartCoroutine(WaitSeconds(2));
+		StartCoroutine(WaitSeconds(3.5f));
 	}
 
 	public void EffectDogs() {
