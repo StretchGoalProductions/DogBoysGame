@@ -217,7 +217,7 @@ public class camera_movement : MonoBehaviour
 
     void moveHowTo(Vector3 from, Vector3 to, float maxTime)
     {
-        Quaternion toHow = Quaternion.Euler(0f, 180f, 0f);
+        Quaternion toHow = Quaternion.Euler(0f, 30f, 0f);
         Quaternion fromHow = setLastR(previous);
         currentLerpTime += Time.deltaTime;
         if (currentLerpTime >= maxTime)
