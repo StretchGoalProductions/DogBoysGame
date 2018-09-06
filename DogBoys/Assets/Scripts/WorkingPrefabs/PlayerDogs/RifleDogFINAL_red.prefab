@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 114707580211209704}
   - component: {fileID: 114085232730755140}
   - component: {fileID: 114802524711384882}
+  - component: {fileID: 114152415582510070}
   m_Layer: 8
   m_Name: RifleDogFINAL_red
   m_TagString: Red_Team
@@ -651,6 +652,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4843806043928352}
+  - component: {fileID: 137637065879697312}
   m_Layer: 0
   m_Name: barktender
   m_TagString: Untagged
@@ -2886,6 +2888,22 @@ MonoBehaviour:
     type: 2}
   cantMoveIndicator: {fileID: 1246477681252418, guid: 65181435a46500840ab3937ca4023ad7,
     type: 2}
+--- !u!114 &114152415582510070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1309380784855858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a50cc58ef1f5647b99c5bc0cefc72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skins:
+  - {fileID: 2800000, guid: 42c9fcc9ffd4a624196c9b43a4ab9826, type: 3}
+  - {fileID: 2800000, guid: c238a1d0e16152448b37f25cbc5cec96, type: 3}
+  - {fileID: 2800000, guid: 319a591d87ef1ba418fd73eee6b3cc46, type: 3}
+  thisDog: {fileID: 1548724805144612}
 --- !u!114 &114155419166365812
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3414,6 +3432,53 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000038921833, y: 0.15254238, z: -0.00307554}
     m_Extent: {x: 1.0822937, y: 0.74301124, z: 0.27493262}
   m_DirtyAABB: 0
+--- !u!137 &137637065879697312
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1548724805144612}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 4294967295
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 0}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
 --- !u!195 &195096245716713858
 NavMeshAgent:
   m_ObjectHideFlags: 1

@@ -93,6 +93,7 @@ GameObject:
   - component: {fileID: 114343863425615880}
   - component: {fileID: 114458874680557370}
   - component: {fileID: 114344442954668796}
+  - component: {fileID: 114255422879726552}
   m_Layer: 8
   m_Name: SG_Dog_blue
   m_TagString: Blue_Team
@@ -1343,6 +1344,22 @@ MonoBehaviour:
   moveScript: {fileID: 0}
   heavenlyDog: {fileID: 1740948911016872, guid: 8487b54f330e23240a58e7c53ba0a073,
     type: 2}
+--- !u!114 &114255422879726552
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1143490122008102}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36a50cc58ef1f5647b99c5bc0cefc72b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skins:
+  - {fileID: 2800000, guid: 0e1337752f3d6614bbe2e2c26fe7f975, type: 3}
+  - {fileID: 2800000, guid: 98a56cd120e296b42b65ba88033c4590, type: 3}
+  - {fileID: 2800000, guid: 3122be37d8eb0914491cba2f5b4ad061, type: 3}
+  thisDog: {fileID: 1134496871327538}
 --- !u!114 &114275511773897860
 MonoBehaviour:
   m_ObjectHideFlags: 1
