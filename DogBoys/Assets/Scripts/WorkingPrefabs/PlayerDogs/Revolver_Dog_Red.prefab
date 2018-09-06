@@ -2764,7 +2764,7 @@ MonoBehaviour:
   shootFalloff: 16
   shootDamage: 20
   movesUsed: 1
-  shootAngle: 1
+  shootAngle: 0
 --- !u!114 &114924393739336090
 MonoBehaviour:
   m_ObjectHideFlags: 1
